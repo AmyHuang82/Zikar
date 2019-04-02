@@ -1,0 +1,119 @@
+@import "./basic.css";
+
+/* ----------- Header ---------- */
+header {
+    width: 100%;
+    height: 55px;
+    background-color: #7BCEFF;
+    box-shadow: 0 5px 5px #dbdbdb;
+    z-index: 10;
+}
+
+.container, .search_bar, .add_card {
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+header > .container {
+    width: 98%;
+    margin: 0 auto;
+}
+
+header > .container *{
+    padding: 0 10px;
+}
+
+header > .container p {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+}
+
+header > .container > img {
+    height: 45px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+header > .container .icon {
+    height: 45px;
+    cursor: pointer;
+}
+
+header > .container > .add_card {
+    margin-right: auto;
+}
+
+header > .container > .search_bar {
+    background-color: white;
+    height: 60%;
+    border-radius: 50px;
+    padding: 0;
+    padding-left: 10px;
+}
+
+header > .container > .search_bar *{
+    padding: 0 3px;
+}
+
+header > .container > .search_bar > input {
+    font-size: 16px;
+}
+
+header > .container > .search_bar_mobile {
+    display: none;
+}
+
+/* ----------- Header Mobile ---------- */
+@media screen and (max-width: 650px) {
+    header > .container {
+        width: 100%;
+    }
+
+    header > .container *{
+        padding: 0;
+    }
+
+    header > .container .icon,
+    header > .container img {
+        height: 40px;
+    }
+
+    header > .container > .add_card > p{
+        display: none;
+    }
+
+    header > .container > .search_bar {
+        display: none;
+    }
+
+    header > .container > .search_bar_mobile {
+        display: flex;
+    }
+
+    header > .container > .search_bar_mobile > .search_bar_mobile_input {
+        z-index: 10;
+        position: fixed;
+        top: 55px;
+        left: 0;
+        width: 100vw;
+        height: 55px;
+        background-color: white;
+        box-shadow: 0 5px 5px #dbdbdb;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+
+    .search_bar_mobile_input > input {
+        border-bottom: 2px solid rgb(181, 228, 255);
+        font-size: 14px;
+        padding: 5px;
+        width: calc(95vw - 40px);
+    }
+
+}
