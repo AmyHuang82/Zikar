@@ -1,20 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Redux
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import AppReducer from './controller/reducers';
 
 // Component
 import Header from './components/Header';
 import Background from './components/Background';
 import LoginPopup from './components/LoginPopup';
 
+// 建立 store，把 reducer 傳進去
+let store = createStore(AppReducer);
+
 class Main extends React.Component {
     render() {
         return (
-            <div>
+            <Provider store={store}>
                 <Header />
-                <LoginPopup />
+                {/* <LoginPopup /> */}
                 <Background />
-            </div>
+            </Provider>
         );
     }
 }
