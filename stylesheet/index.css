@@ -115,6 +115,7 @@ header > .container > .search_bar_mobile {
         font-size: 14px;
         padding: 5px;
         width: calc(95vw - 40px);
+        border-radius: 0;
     }
 
 }

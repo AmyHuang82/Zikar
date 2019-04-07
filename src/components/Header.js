@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchBarOpenToggle } from '../controller/actions';
+import { searchBarOpenToggle } from '../reducer/actions';
 
 class Header extends React.Component {
     constructor(props) {
@@ -14,13 +14,6 @@ class Header extends React.Component {
     }
 
     render() {
-        let sorceIcon;
-        if (this.props.searchBarOpen) {
-            sorceIcon = '../../image/close.svg';
-        } else {
-            sorceIcon = '../../image/search_mobile.svg';
-        }
-
         return (
             <header>
                 <div className='container'>
@@ -34,7 +27,8 @@ class Header extends React.Component {
                         <img className='search_btn icon' src='../../image/search.svg' />
                     </form>
                     <div className='search_bar_mobile'>
-                        <img className='search_btn_top icon' src={sorceIcon} onClick={this.openSearchBarToggle} />
+                        <img className='search_btn_top icon' src='../../image/search_mobile.svg' onClick={this.openSearchBarToggle} style={{ display: this.props.searchBarOpen ? 'none' : 'block' }} />
+                        <img className='search_btn_top icon' src='../../image/close.svg' onClick={this.openSearchBarToggle} style={{ display: this.props.searchBarOpen ? 'flex' : 'none' }} />
                         <form className='search_bar_mobile_input' style={{ display: this.props.searchBarOpen ? 'flex' : 'none' }}>
                             <input className='search_input'></input>
                             <img className='search_btn_down icon' src='../../image/search.svg' />

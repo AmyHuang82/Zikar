@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 // Redux
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import AppReducer from './controller/reducers';
+import AppReducer from './reducer/reducers';
 
 // Component
 import Header from './components/Header';
@@ -19,7 +19,7 @@ class Main extends React.Component {
         return (
             <Provider store={store}>
                 <Header />
-                {/* <LoginPopup /> */}
+                <LoginPopup />
                 <Background />
             </Provider>
         );

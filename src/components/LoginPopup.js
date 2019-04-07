@@ -1,51 +1,42 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { loginToWeb } from '../reducer/actions';
 
 class LoginPopup extends React.Component {
-    loginFacebook(e) {
-        var provider = new firebase.auth.FacebookAuthProvider();
+    constructor(props) {
+        super(props);
 
-        // 登入方法都一樣(redux可以寫一種function)google還有提供redirect的方法
+        this.login = this.login.bind(this);
+    }
+
+    login(e) {
+        let provider;
+        if (e.target.textContent === '使用 Facebook 登入') {
+            provider = new firebase.auth.FacebookAuthProvider();
+        } else {
+            provider = new firebase.auth.GoogleAuthProvider();
+        }
+
         firebase.auth().signInWithPopup(provider).then(function (result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-            // ...
+            let token = result.credential.accessToken;
+            let user = result.user;
         }).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
+            console.log(error);
         });
     }
 
-    loginGoogle(e) {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-            // ...
-        }).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
+    componentDidMount() {
+        // 登入狀態改變成功，呼叫dispatch改變loginState
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user !== null) {
+                this.props.login_reducer(user.uid);
+            }
         });
     }
 
     render() {
         return (
-            <div className="popup-overlay">
+            <div className="popup-overlay" style={{ display: this.props.loginState.login ? 'none' : 'flex' }}>
                 <div className="popup-content">
                     <div className="modal">
                         <div className="header">
@@ -56,7 +47,7 @@ class LoginPopup extends React.Component {
                         <div className="actions">
                             <button
                                 className="button"
-                                onClick={this.loginFacebook.bind(this)}
+                                onClick={this.login}
                             >
                                 <img src="../../image/facebook.svg" />
                                 使用 Facebook 登入
@@ -64,7 +55,7 @@ class LoginPopup extends React.Component {
 
                             <button
                                 className="button"
-                                onClick={this.loginGoogle.bind(this)}
+                                onClick={this.login}
                             >
                                 <img src="../../image/google.svg" />
                                 使用 Google 登入
@@ -77,4 +68,18 @@ class LoginPopup extends React.Component {
     }
 }
 
-export default LoginPopup;
+const mapStateToProps = (state) => {
+    return {
+        loginState: state.login_reducer.loginState
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login_reducer: (user_id) => {
+            dispatch(loginToWeb(user_id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPopup);
