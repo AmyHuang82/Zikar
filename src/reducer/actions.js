@@ -7,6 +7,6 @@ export function searchBarOpenToggle() {
     return { type: SEARCH_BAR_TOGGLE }
 }
 
-export function loginToWeb(user_id) {
-    return { type: LOGIN_TO_WEB, user_id }
+export function loginToWeb(user) {
+    return { type: LOGIN_TO_WEB, user }
 }

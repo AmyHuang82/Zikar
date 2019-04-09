@@ -6,7 +6,8 @@ const defaultState = {
     mobileSearchBarOpen: false,
     loginState: {
         login: false,
-        user_id: ''
+        user_id: '',
+        user_photo: ''
     }
 }
 
@@ -33,7 +34,8 @@ function login_reducer(state = defaultState, action) {
                 ...state,
                 loginState: {
                     login: true,
-                    user_id: action.user_id
+                    user_id: action.user.uid,
+                    user_photo: action.user.photoURL
                 }
             }
 

@@ -1,4 +1,5 @@
 @import "./basic.css";
+@import "./making_cards.css";
 
 /* ----------- Header ---------- */
 header {
@@ -22,7 +23,7 @@ header > .container {
 }
 
 header > .container *{
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 header > .container p {
@@ -42,6 +43,19 @@ header > .container > img {
 header > .container .icon {
     height: 40px;
     cursor: pointer;
+}
+
+
+header .logo {
+    height: 40px;
+}
+
+header > .container > .member {
+    height: 35px;
+    width: 35px;
+    background-size: cover;
+    margin: 0 5px 0 15px;
+    border-radius: 50%;
 }
 
 header > .container > .add_card {
@@ -76,11 +90,15 @@ header > .container > .search_bar_mobile {
     }
 
     header > .container *{
-        padding: 0;
+        padding: 0 5px;
     }
 
     header > .container img {
         height: 40px;
+    }
+
+    header > .container > .member {
+        margin-right: 15px;  
     }
 
     header > .container > .add_card > p{

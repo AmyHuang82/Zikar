@@ -1,11 +1,14 @@
 //引用path模組
 const path = require('path');
 module.exports = {
+    mode: 'production',
     //如果有一個以上的檔案需要打包，可以傳陣列給entry
-    entry: ['./src/index.js', './stylesheet/index.css'],
+    entry: {
+        index: ['./src/index.js', './stylesheet/index.css']
+    },
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './'),
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, './dist'),
     },
     //將loader的設定寫在module的rules屬性中
     module: {

@@ -18,8 +18,8 @@ class LoginPopup extends React.Component {
         }
 
         firebase.auth().signInWithPopup(provider).then(function (result) {
-            let token = result.credential.accessToken;
-            let user = result.user;
+            // let token = result.credential.accessToken;
+            // let user = result.user;
         }).catch(function (error) {
             console.log(error);
         });
@@ -29,7 +29,7 @@ class LoginPopup extends React.Component {
         // 登入狀態改變成功，呼叫dispatch改變loginState
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
-                this.props.login_reducer(user.uid);
+                this.props.login_reducer(user);
             }
         });
     }
@@ -76,8 +76,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login_reducer: (user_id) => {
-            dispatch(loginToWeb(user_id));
+        login_reducer: (user) => {
+            dispatch(loginToWeb(user));
         }
     }
 }
