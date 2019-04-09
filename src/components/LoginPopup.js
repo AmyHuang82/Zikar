@@ -69,6 +69,7 @@ class LoginPopup extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         loginState: state.login_reducer.loginState
     }

@@ -11,7 +11,9 @@ import AppReducer from './reducer/reducers';
 import Header from './components/Header';
 import Background from './components/Background';
 import LoginPopup from './components/LoginPopup';
-import MakingCollection from './components/MakingCollection';
+import Dashboard from './components/Dashboard';
+import CollectionDetail from './components/collection/CollectionDetail';
+import MakingCollection from './components/collection/MakingCollection';
 
 // 建立 store，把 reducer 傳進去
 let store = createStore(AppReducer);
@@ -24,6 +26,8 @@ class Main extends React.Component {
                     <Header />
                     <LoginPopup />
                     <Background />
+                    <Route path="/" exact component={Dashboard} />
+                    <Route path="/Collection/:id" exact component={CollectionDetail} />
                     <Route path="/MakingCards" exact component={MakingCollection} />
                 </Router>
             </Provider>

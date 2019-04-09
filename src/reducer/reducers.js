@@ -5,7 +5,7 @@ import { SEARCH_BAR_TOGGLE, LOGIN_TO_WEB } from './actions';
 const defaultState = {
     mobileSearchBarOpen: false,
     loginState: {
-        login: false,
+        login: true,
         user_id: '',
         user_photo: ''
     }
