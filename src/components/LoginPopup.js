@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loginToWeb } from '../reducer/actions';
+import { loginToWeb } from '../store/actions/loginActions';
 
 class LoginPopup extends React.Component {
     constructor(props) {
@@ -10,28 +10,28 @@ class LoginPopup extends React.Component {
     }
 
     login(e) {
-        let provider;
-        if (e.target.textContent === '使用 Facebook 登入') {
-            provider = new firebase.auth.FacebookAuthProvider();
-        } else {
-            provider = new firebase.auth.GoogleAuthProvider();
-        }
+        // let provider;
+        // if (e.target.textContent === '使用 Facebook 登入') {
+        //     provider = new firebase.auth.FacebookAuthProvider();
+        // } else {
+        //     provider = new firebase.auth.GoogleAuthProvider();
+        // }
 
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            // let token = result.credential.accessToken;
-            // let user = result.user;
-        }).catch(function (error) {
-            console.log(error);
-        });
+        // firebase.auth().signInWithPopup(provider).then(function (result) {
+        //     // let token = result.credential.accessToken;
+        //     // let user = result.user;
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
     }
 
     componentDidMount() {
-        // 登入狀態改變成功，呼叫dispatch改變loginState
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user !== null) {
-                this.props.login_reducer(user);
-            }
-        });
+        // // 登入狀態改變成功，呼叫dispatch改變loginState
+        // firebase.auth().onAuthStateChanged((user) => {
+        //     if (user !== null) {
+        //         this.props.login_reducer(user);
+        //     }
+        // });
     }
 
     render() {
@@ -69,9 +69,8 @@ class LoginPopup extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        loginState: state.login_reducer.loginState
+        loginState: state.login.loginState
     }
 }
 

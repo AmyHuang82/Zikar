@@ -1,6 +1,6 @@
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/database';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 // Initialize Firebase
 var config = {
@@ -11,6 +11,7 @@ var config = {
     storageBucket: "soy-transducer-236303.appspot.com",
     messagingSenderId: "890374072270"
 };
+
 firebase.initializeApp(config);
 
-// export default firebase;
+export default firebase;

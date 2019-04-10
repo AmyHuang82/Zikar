@@ -48,21 +48,15 @@ input {
     position: relative;
     height: 100%;
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 85px);
 }
 
 .content {
     width: 90%;
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 85px auto 30px auto;
     display: flex;
     flex-flow: row wrap;
-}
-
-@media screen and (max-width: 650px) {
-    .content {
-        margin: 20px auto;
-    }
 }
 
 /* ---------- input通用css設定 ---------- */
@@ -70,7 +64,7 @@ input {
     font-weight: 300;
     margin: 10px 0;
     padding: 10px 0;
-    color: gray;
+    color: #333333;
     border-bottom: 2px solid #979797;
 }
 

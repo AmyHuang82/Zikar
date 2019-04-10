@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { searchBarOpenToggle } from '../reducer/actions';
+import { searchBarOpenToggle } from '../store/actions/searchBarActions';
 
 class Header extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Header extends React.Component {
     }
 
     openSearchBarToggle(e) {
-        this.props.searchBarOpen_reducer();
+        this.props.searchBarOpen();
     }
 
     render() {
@@ -34,15 +34,15 @@ class Header extends React.Component {
                         <img className='search_btn_top icon'
                             src='../../image/search_mobile.svg'
                             onClick={this.openSearchBarToggle}
-                            style={{ display: this.props.searchBarOpen ? 'none' : 'block' }}
+                            style={{ display: this.props.searchBarToggle ? 'none' : 'block' }}
                         />
                         <img className='search_btn_top icon'
                             src='../../image/close.svg'
                             onClick={this.openSearchBarToggle}
-                            style={{ display: this.props.searchBarOpen ? 'flex' : 'none' }}
+                            style={{ display: this.props.searchBarToggle ? 'flex' : 'none' }}
                         />
                         <form className='search_bar_mobile_input'
-                            style={{ display: this.props.searchBarOpen ? 'flex' : 'none' }}
+                            style={{ display: this.props.searchBarToggle ? 'flex' : 'none' }}
                         >
                             <input className='search_input'></input>
                             <img className='search_btn_down icon' src='../../image/search.svg' />
@@ -60,15 +60,15 @@ class Header extends React.Component {
 // 把reducer的state傳入component中
 const mapStateToProps = (state) => {
     return {
-        searchBarOpen: state.searchBarOpen_reducer.mobileSearchBarOpen,
-        loginState: state.login_reducer.loginState
+        searchBarToggle: state.mobileSearchBar.mobileSearchBarOpen,
+        loginState: state.login.loginState
     }
 }
 
 // 把action的function傳入component中並使用dispatch去reducer處理
 const mapDispatchToProps = (dispatch) => {
     return {
-        searchBarOpen_reducer: () => {
+        searchBarOpen: () => {
             dispatch(searchBarOpenToggle());
         }
     }

@@ -63,7 +63,8 @@
 }
 
 .making_card > input {
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: 300;
     width: 40%;
     margin: 0 10px 0 10px;
 }
@@ -74,6 +75,7 @@
 
 .making_card img {
     height: 40px;
+    cursor: pointer;
 }
 
 .content > .card_info .add_card {

@@ -9,6 +9,8 @@ header {
     background-color: #7BCEFF;
     box-shadow: 0 5px 5px #dbdbdb;
     z-index: 10;
+    position: fixed;
+    top: 0;
 }
 
 .container, .search_bar, .add_card {
@@ -98,8 +100,12 @@ header > .container > .search_bar_mobile {
         height: 40px;
     }
 
+    header .logo {
+        margin-left: 5px;
+    }
+
     header > .container > .member {
-        margin-right: 15px;  
+        margin: 0 15px 0 0;
     }
 
     header > .container > .add_card > p{

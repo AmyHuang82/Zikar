@@ -30,6 +30,18 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    name: 'vendor',
+                    chunks: 'initial',
+                    enforce: true
+                }
+            }
+        }
+    },
     //增加一個給devserver的設定
     devServer: {
         //指定開啟port為9000
