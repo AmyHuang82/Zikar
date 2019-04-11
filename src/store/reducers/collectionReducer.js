@@ -1,6 +1,8 @@
-import { ADD_NEW_COLLECTION } from '../actions/collectionActions';
+import { ADD_NEW_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION } from '../actions/collectionActions';
 
 const defaultState = {
+    collectionEmpty: true,
+    getCollection: false,
     collection: {
         user_id: '',
         author: '',
@@ -19,6 +21,18 @@ function collectionReducer(state = defaultState, action) {
         case ADD_NEW_COLLECTION:
             console.log(action.collection);
             return state;
+
+        case ALREADY_HAD_COLLECTION:
+            return {
+                ...state,
+                collectionEmpty: action.status
+            }
+
+        case GET_COLLECTION:
+            return {
+                ...state,
+                getCollection: true
+            }
 
         default:
             return state;

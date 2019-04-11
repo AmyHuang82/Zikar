@@ -27,7 +27,32 @@ module.exports = {
                     "style-loader",
                     "css-loader"
                 ]
-            }
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: { limit: 8192 }
+                    }
+                ]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name].[ext]',
+                    publicPath: '/'
+                },
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: 'img/[name].[ext]',
+                    publicPath: '/'
+                },
+            },
         ]
     },
     optimization: {

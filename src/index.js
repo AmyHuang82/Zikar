@@ -5,7 +5,8 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 // Redux
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/rootReducer';
 
@@ -24,7 +25,7 @@ import MakingCollection from './components/collection/MakingCollection';
 
 // 建立 store，把 reducer 傳進去
 let store = createStore(rootReducer,
-    compose(
+    composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(firebase),
         reactReduxFirebase(firebase)

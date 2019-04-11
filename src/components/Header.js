@@ -18,7 +18,7 @@ class Header extends React.Component {
         return (
             <header>
                 <div className='container'>
-                    <Link to='./' exact style={{ padding: 0 }}>
+                    <Link to='/' exact style={{ padding: 0 }}>
                         <img src={'../../image/Logo.svg'} className='logo' />
                     </Link>
                     <Link to='/MakingCards' exact className='add_card'>

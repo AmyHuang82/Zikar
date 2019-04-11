@@ -26,8 +26,8 @@ class MakingCard extends React.Component {
             <div className='making_card'>
                 <input placeholder='詞語' onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
                 <input placeholder='定義' onChange={this.defInputHandler} value={this.props.definition} style={{ borderBottom: this.props.empty }} />
-                <img className='add_image' src='../../image/pic.svg' />
-                <img onClick={this.deleteHandler} className='delet_card' src='../../image/trash.svg' />
+                <div className='add_image'></div>
+                <div onClick={this.deleteHandler} className='delete_card'></div>
             </div>
         )
     }

@@ -25,3 +25,15 @@ export function addNewCollection(collection) {
 
     }
 }
+
+export const ALREADY_HAD_COLLECTION = 'ALREADY_HAD_COLLECTION';
+
+export function alreadyHadCollection(status) {
+    return { type: ALREADY_HAD_COLLECTION, status }
+}
+
+export const GET_COLLECTION = 'GET_COLLECTION';
+
+export function getCollection() {
+    return { type: GET_COLLECTION }
+}

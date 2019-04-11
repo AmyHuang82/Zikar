@@ -11,6 +11,7 @@
 
 .collection_info select {
     width: 95%;
+    font-size: 14px;
 }
 
 .collection_info > .select-box {
@@ -47,6 +48,7 @@
 
 .content > .card_info .select-box select {
     width: 95%;
+    font-size: 14px;
 }
 
 .making_card {
@@ -73,9 +75,27 @@
     font-size: 15px;
 }
 
-.making_card img {
+.making_card .delete_card,
+.making_card .add_image {
+    width: 40px;
     height: 40px;
     cursor: pointer;
+}
+
+.making_card .delete_card {
+    background-image: url('/image/trash.svg');
+}
+
+.making_card .delete_card:hover {
+    background-image: url('/image/trash_hover.svg');
+}
+
+.making_card .add_image {
+    background-image: url('/image/pic.svg');
+}
+
+.making_card .add_image:hover {
+    background-image: url('/image/pic_hover.svg');
 }
 
 .content > .card_info .add_card {

@@ -11,8 +11,8 @@ class MakingCollection extends React.Component {
             collection: {
                 title: '',
                 public: true,
-                word_lan: 'english',
-                definition_lan: 'english',
+                word_lan: '英文',
+                definition_lan: '英文',
                 content: [{
                     word: '',
                     definition: '',
@@ -201,15 +201,15 @@ class MakingCollection extends React.Component {
                 <div className='card_info'>
                     <div className='select-box'>
                         <select onChange={this.changeWordLan}>
-                            <option value='english'>英文</option>
-                            <option value='chinese'>中文</option>
+                            <option value='英文'>英文</option>
+                            <option value='中文'>中文</option>
                         </select>
                         <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                     <div className='select-box'>
                         <select onChange={this.changeDefinitionLan}>
-                            <option value='english'>英文</option>
-                            <option value='chinese'>中文</option>
+                            <option value='英文'>英文</option>
+                            <option value='中文'>中文</option>
                         </select>
                         <img className='arrow' src='../../image/arrow.svg' />
                     </div>
