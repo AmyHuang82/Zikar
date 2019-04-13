@@ -29,7 +29,7 @@ class Card extends React.Component {
     render() {
         return (
             <div className={`show_card ${this.state.open} ${this.props.nextAnimation}`} onClick={this.flipCard} >
-                <p>{this.state.showing}</p>
+                <p className='text-align-center'>{this.state.showing}</p>
                 <div className='paging'>{this.props.currentIndex + 1}/{this.props.length}</div>
                 <div className='show_card_hover'>熟悉程度：0% (透過考試增加熟悉程度)</div>
             </div>

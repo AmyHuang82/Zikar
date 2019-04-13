@@ -59,6 +59,11 @@
     cursor: pointer;
     position: relative;
     margin:auto;
+    padding: 10px;
+}
+
+.text-align-center {
+    text-align: center;
 }
 
 .deletecheck-popup {
@@ -186,7 +191,7 @@
 
 @media screen and (max-width: 550px) {
     .content .show_card {
-        height: 50vh;
+        height: 40vh;
         max-height: 300px;
     }  
 }
