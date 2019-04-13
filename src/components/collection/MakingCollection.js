@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { addNewCollection } from '../../store/actions/collectionActions';
+import { addNewCollection, updateCollection } from '../../store/actions/collectionActions';
 import MakingCard from './MakingCard';
 
 class MakingCollection extends React.Component {
@@ -44,7 +44,7 @@ class MakingCollection extends React.Component {
         this.definitionChange = this.definitionChange.bind(this);
         this.addNewCard = this.addNewCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
-        this.addNewCollection = this.addNewCollection.bind(this);
+        this.submitCollection = this.submitCollection.bind(this);
     }
 
     changeTitle(e) {
@@ -156,7 +156,7 @@ class MakingCollection extends React.Component {
         }
     }
 
-    addNewCollection(e) {
+    submitCollection(e) {
         let content = this.state.collection.content.slice();
         let flag = false;
 
@@ -178,8 +178,11 @@ class MakingCollection extends React.Component {
             this.setState({ borderBottom: '3px solid red' });
         } else if (flag) {
             return;
-        } else {
+        } else if (e.target.textContent === '建立') {
             this.props.addNewCollection(this.state.collection);
+        } else if (e.target.textContent === '更新') {
+            let id = this.props.match.params.id;
+            this.props.updateCollection(this.state.collection, id);
         }
     }
 
@@ -228,12 +231,19 @@ class MakingCollection extends React.Component {
             flag = false;
         }
 
+        let publicState = this.state.collection.public;
+        if (publicState) {
+            publicState = 'open';
+        } else {
+            publicState = 'close';
+        }
+
         return (
             <div className='content'>
                 <div className='collection_info'>
                     <input placeholder='字卡集標題' onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
                     <div className='select-box'>
-                        <select onChange={this.changePublicState} value={this.state.collection.public}>
+                        <select onChange={this.changePublicState} value={publicState}>
                             <option value='open'>公開</option>
                             <option value='close'>不公開</option>
                         </select>
@@ -272,8 +282,8 @@ class MakingCollection extends React.Component {
                     }
                     <div className='add_card' onClick={this.addNewCard}><span> + 新增單詞卡</span></div>
                 </div>
-                <button onClick={this.addNewCollection} style={{ display: flag ? 'block' : 'none' }}>建立</button>
-                <button style={{ display: flag ? 'none' : 'block' }}>更新</button>
+                <button onClick={this.submitCollection} style={{ display: flag ? 'block' : 'none' }}>建立</button>
+                <button onClick={this.submitCollection} style={{ display: flag ? 'none' : 'block' }}>更新</button>
             </div>
         )
     }
@@ -292,6 +302,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addNewCollection: (collection) => {
             dispatch(addNewCollection(collection));
+        },
+        updateCollection: (collection, id) => {
+            dispatch(updateCollection(collection, id));
         }
     }
 }

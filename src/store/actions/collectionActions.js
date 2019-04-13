@@ -1,5 +1,4 @@
 export const ADD_NEW_COLLECTION = 'ADD_NEW_COLLECTION';
-
 export function addNewCollection(collection) {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
 
@@ -26,14 +25,28 @@ export function addNewCollection(collection) {
     }
 }
 
-export const ALREADY_HAD_COLLECTION = 'ALREADY_HAD_COLLECTION';
+export const UPDATE_COLLECTION = 'UPDATE_COLLECTION';
+export function updateCollection(collection, id) {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
 
+        const firestore = getFirestore();
+        firestore.collection('collection').doc(id).set({
+            ...collection
+        }).then(() => {
+            dispatch({ type: UPDATE_COLLECTION, collection });
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    }
+}
+
+export const ALREADY_HAD_COLLECTION = 'ALREADY_HAD_COLLECTION';
 export function alreadyHadCollection(status) {
     return { type: ALREADY_HAD_COLLECTION, status }
 }
 
 export const GET_COLLECTION = 'GET_COLLECTION';
-
 export function getCollection() {
     return { type: GET_COLLECTION }
 }

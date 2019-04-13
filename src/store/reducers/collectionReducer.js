@@ -1,4 +1,4 @@
-import { ADD_NEW_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION } from '../actions/collectionActions';
+import { ADD_NEW_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION, UPDATE_COLLECTION } from '../actions/collectionActions';
 
 const defaultState = {
     collectionEmpty: true,
@@ -19,6 +19,10 @@ function collectionReducer(state = defaultState, action) {
     switch (action.type) {
 
         case ADD_NEW_COLLECTION:
+            console.log(action.collection);
+            return state;
+
+        case UPDATE_COLLECTION:
             console.log(action.collection);
             return state;
 
