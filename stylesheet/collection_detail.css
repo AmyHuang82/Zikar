@@ -1,0 +1,141 @@
+
+.content .arrows {
+    width: 100%;
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.left-arrow {
+    background-image: url('/image/left.svg');
+}
+
+.left-arrow:hover {
+    background-image: url('/image/left_hover.svg');
+}
+
+.right-arrow {
+    background-image: url('/image/right.svg');
+}
+
+.right-arrow:hover {
+    background-image: url('/image/right_hover.svg');
+}
+
+.left-arrow, .right-arrow {
+    border: 1px solid silver;
+    border-radius: 50%;
+    background-size: cover;
+    background-color: white;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin: 0 30px;
+}
+
+.content .cards_content {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.content .paging {
+    font-size: 20px;
+    color: silver;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.content .show_card {
+    border: 1px solid silver;
+    width: 100%;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 550px) {
+    .content .show_card {
+        height: 210px;
+    }  
+}
+
+.content .show_card p {
+    font-size: 30px;
+    color: #333333;
+}
+
+.content .show_card_hover {
+    background-color: rgba(71, 71, 71, 0.322);
+    color: white;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    padding-right: 10px;
+    position: absolute;
+    bottom: 0;
+    visibility: hidden;
+}
+
+.content .show_card:hover .show_card_hover {
+    visibility: visible;
+}
+
+/* ---------- animation ---------- */
+.open {
+    animation-name: flipInX;
+    animation-duration: .5s;
+}
+
+@keyframes flipInX {
+    from {
+        transform: perspective(600px) rotate3d(1, 0, 0, 90deg);
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+
+    40% {
+        transform: perspective(600px) rotate3d(1, 0, 0, -3deg);
+        animation-timing-function: ease-in;
+    }
+
+    60% {
+        transform: perspective(600px) rotate3d(1, 0, 0, 3deg);
+        opacity: 1;
+    }
+
+    80% {
+        transform: perspective(600px) rotate3d(1, 0, 0, 0deg);
+    }
+
+    to {
+        transform: perspective(600px);
+    }
+}
+
+.ease {
+    animation-name: ease-in-out;
+    animation-duration: .25s;
+}
+
+@keyframes ease-in-out {
+    from {
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
                     <img className='loading' src='../../image/loading.gif' />
                 </div>
                 <div className="white-overlay" style={{ display: this.props.hadCollection ? 'none' : 'flex' }}>
-                    <Link to='/MakingCards' className='new_card' exact></Link>
+                    <Link to='/MakingCards/new' className='new_card' exact></Link>
                 </div>
 
                 {

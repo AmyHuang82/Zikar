@@ -1,20 +1,78 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import Card from './Card';
 
-function CollectionDetail(props) {
-    const id = props.match.params.id;
-    return (
-        <div className="content">
-            <h1>我是{id}的detail</h1>
-        </div>
-    );
+class CollectionDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentIndex: 0,
+            nextAnimation: ''
+        }
+        this.changeCard = this.changeCard.bind(this);
+    }
+
+    changeCard(e) {
+        let currentIndex = this.state.currentIndex;
+        if (e.target.title === '前一個') {
+            currentIndex = currentIndex - 1;
+        } else {
+            currentIndex = currentIndex + 1;
+        }
+        if (currentIndex < this.props.collection.content.length && currentIndex >= 0) {
+            this.setState({
+                currentIndex: currentIndex,
+                nextAnimation: 'ease'
+            });
+            setTimeout(() => {
+                this.setState({ nextAnimation: '' });
+            }, 500);
+        }
+    }
+
+    render() {
+        let card;
+        let currentIndex = this.state.currentIndex;
+        if (this.props.collection !== null) {
+            card = [this.props.collection.content[currentIndex]];
+        }
+
+        return (
+            <div className="content">
+                <Link to={'/MakingCards/' + this.props.match.params.id}>編輯</Link>
+                <div className="cards_content">
+                    {
+                        this.props.collection && card.map((card, index) => {
+                            return <Card
+                                key={index}
+                                label={index}
+                                word={card.word}
+                                definition={card.definition}
+                                currentIndex={currentIndex}
+                                length={this.props.collection.content.length}
+                                nextAnimation={this.state.nextAnimation}
+                            />
+                        })
+                    }
+                </div>
+                <div className='arrows'>
+                    <div className='left-arrow' onClick={this.changeCard} title='前一個' ></div>
+                    <div className='right-arrow' onClick={this.changeCard} title='下一個' ></div>
+                </div>
+            </div>
+        )
+    }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+    const id = ownProps.match.params.id;
+    const collections = state.firestore.data.collection;
+    const collection = collections ? collections[id] : null;
     return {
-
+        collection: collection
     }
 }
 

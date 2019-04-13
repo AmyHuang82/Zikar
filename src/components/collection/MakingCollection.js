@@ -1,6 +1,7 @@
 import React from 'react';
-import ShortUniqueId from 'short-unique-id';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import { addNewCollection } from '../../store/actions/collectionActions';
 import MakingCard from './MakingCard';
 
@@ -182,15 +183,57 @@ class MakingCollection extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.match.params.id !== 'new') {
+            this.setState({ collection: this.props.editCollection });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.match.params.id === 'new') {
+            this.setState({
+                collection: {
+                    title: '',
+                    public: true,
+                    word_lan: '英文',
+                    definition_lan: '英文',
+                    content: [{
+                        word: '',
+                        definition: '',
+                        correct_times: 0,
+                        wrong_times: 0,
+                        highlight: false,
+                        picture: '',
+                        empty: ''
+                    },
+                    {
+                        word: '',
+                        definition: '',
+                        correct_times: 0,
+                        wrong_times: 0,
+                        highlight: false,
+                        picture: '',
+                        empty: ''
+                    }]
+                }
+            });
+        }
+    }
+
     render() {
-        const uid = new ShortUniqueId();
+        let flag;
+        if (this.props.match.params.id === 'new') {
+            flag = true;
+        } else {
+            flag = false;
+        }
 
         return (
             <div className='content'>
                 <div className='collection_info'>
-                    <input placeholder='字卡集標題' onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} />
+                    <input placeholder='字卡集標題' onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
                     <div className='select-box'>
-                        <select onChange={this.changePublicState}>
+                        <select onChange={this.changePublicState} value={this.state.collection.public}>
                             <option value='open'>公開</option>
                             <option value='close'>不公開</option>
                         </select>
@@ -200,14 +243,14 @@ class MakingCollection extends React.Component {
                 <div className='add-from-file'><span> + 從檔案匯入</span></div>
                 <div className='card_info'>
                     <div className='select-box'>
-                        <select onChange={this.changeWordLan}>
+                        <select onChange={this.changeWordLan} value={this.state.collection.word_lan}>
                             <option value='英文'>英文</option>
                             <option value='中文'>中文</option>
                         </select>
                         <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                     <div className='select-box'>
-                        <select onChange={this.changeDefinitionLan}>
+                        <select onChange={this.changeDefinitionLan} value={this.state.collection.definition_lan}>
                             <option value='英文'>英文</option>
                             <option value='中文'>中文</option>
                         </select>
@@ -229,9 +272,19 @@ class MakingCollection extends React.Component {
                     }
                     <div className='add_card' onClick={this.addNewCard}><span> + 新增單詞卡</span></div>
                 </div>
-                <button onClick={this.addNewCollection}>建立</button>
+                <button onClick={this.addNewCollection} style={{ display: flag ? 'block' : 'none' }}>建立</button>
+                <button style={{ display: flag ? 'none' : 'block' }}>更新</button>
             </div>
         )
+    }
+}
+
+const mapStateToProps = (state, ownProps) => {
+    const id = ownProps.match.params.id;
+    const collections = state.firestore.data.collection;
+    const collection = collections ? collections[id] : null;
+    return {
+        editCollection: collection
     }
 }
 
@@ -243,4 +296,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(MakingCollection);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        { collection: 'collection' }
+    ])
+)(MakingCollection);

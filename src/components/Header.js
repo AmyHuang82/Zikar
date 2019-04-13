@@ -21,7 +21,7 @@ class Header extends React.Component {
                     <Link to='/' exact style={{ padding: 0 }}>
                         <img src={'../../image/Logo.svg'} className='logo' />
                     </Link>
-                    <Link to='/MakingCards' exact className='add_card'>
+                    <Link to='/MakingCards/new' exact className='add_card'>
                         <img className='add_card icon' src='../../image/add card.svg' />
                         <p>建立字卡</p>
                     </Link>

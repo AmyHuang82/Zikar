@@ -41,7 +41,7 @@ class Main extends React.Component {
                     <Background />
                     <Route path="/" exact component={Dashboard} />
                     <Route path="/Collection/:id" exact component={CollectionDetail} />
-                    <Route path="/MakingCards" exact component={MakingCollection} />
+                    <Route path="/MakingCards/:id" exact component={MakingCollection} />
                 </Router>
             </Provider>
         );

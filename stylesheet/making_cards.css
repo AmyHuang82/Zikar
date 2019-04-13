@@ -116,6 +116,10 @@
     border-bottom: 2px solid rgb(1, 192, 192);
 }
 
+.content > .card_info .add_card:hover > span {
+    border-bottom: 2px solid #FFE20E;
+}
+
 .content > button {
     background-color:  rgb(1, 192, 192);
     color: white;

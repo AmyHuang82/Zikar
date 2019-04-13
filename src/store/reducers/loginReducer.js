@@ -2,7 +2,7 @@ import { LOGIN_TO_WEB } from '../actions/loginActions';
 
 const defaultState = {
     loginState: {
-        // login: true,
+        // login: false,
         // user_id: '',
         // user_photo: ''
         login: true,

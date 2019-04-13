@@ -23,7 +23,6 @@
     "redux": "^4.0.1",
     "redux-firestore": "^0.7.3",
     "redux-thunk": "^2.3.0",
-    "short-unique-id": "^1.1.1",
     "url-loader": "^1.1.2"
   },
   "devDependencies": {

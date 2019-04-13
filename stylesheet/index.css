@@ -1,6 +1,7 @@
 @import "./basic.css";
 @import "./making_cards.css";
 @import "./dashboard.css";
+@import "./collection_detail.css";
 
 /* ----------- Header ---------- */
 header {
