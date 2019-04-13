@@ -12,9 +12,11 @@ class CollectionDetail extends React.Component {
         this.state = {
             currentIndex: 0,
             nextAnimation: '',
-            deleteState: false
+            deleteState: false,
+            deleteCheck: false
         }
         this.changeCard = this.changeCard.bind(this);
+        this.deleteCheckHandler = this.deleteCheckHandler.bind(this);
         this.deleteCollection = this.deleteCollection.bind(this);
     }
 
@@ -36,8 +38,16 @@ class CollectionDetail extends React.Component {
         }
     }
 
+    deleteCheckHandler(e) {
+        if (e.target.textContent === '刪除') {
+            this.setState({ deleteCheck: true });
+        } else {
+            this.setState({ deleteCheck: false });
+        }
+    }
+
     deleteCollection(e) {
-        this.setState({ deleteState: true });
+        this.setState({ deleteState: true, deleteCheck: false });
         let id = this.props.match.params.id;
         this.props.deleteCollection(id);
     }
@@ -54,26 +64,46 @@ class CollectionDetail extends React.Component {
                 <div className="white-overlay-cover" style={{ display: this.state.deleteState ? 'flex' : 'none' }} >
                     <img className='loading' src='../../image/loading.gif' />
                 </div>
-                <Link to={'/MakingCards/' + this.props.match.params.id}>編輯</Link>
-                <div onClick={this.deleteCollection}>刪除</div>
-                <div className="cards_content">
-                    {
-                        this.props.collection && card.map((card, index) => {
-                            return <Card
-                                key={index}
-                                label={index}
-                                word={card.word}
-                                definition={card.definition}
-                                currentIndex={currentIndex}
-                                length={this.props.collection.content.length}
-                                nextAnimation={this.state.nextAnimation}
-                            />
-                        })
-                    }
+
+                <div className="popup-overlay" style={{ display: this.state.deleteCheck ? 'flex' : 'none' }}>
+                    <div className="deletecheck-popup">
+                        確定要刪除此字卡集嗎？
+                        <button className='cancel' onClick={this.deleteCheckHandler}>取消</button>
+                        <button className='confirm' onClick={this.deleteCollection}>確定</button>
+                        <div className='deletecheck-popup-background'></div>
+                    </div>
                 </div>
-                <div className='arrows'>
-                    <div className='left-arrow' onClick={this.changeCard} title='前一個' ></div>
-                    <div className='right-arrow' onClick={this.changeCard} title='下一個' ></div>
+                <div className="wrap">
+                    <div className='features'>
+                        <Link className='feature_block' to={'/MakingCards/' + this.props.match.params.id}>
+                            <div className='edit_collection block_img'></div>
+                            <div>編輯</div>
+                        </Link>
+                        <div className='feature_block' onClick={this.deleteCheckHandler}>
+                            <div className='delete_collection block_img'>刪除</div>
+                            <div>刪除</div>
+                        </div>
+                    </div>
+
+                    <div className="cards_content">
+                        {
+                            this.props.collection && card.map((card, index) => {
+                                return <Card
+                                    key={index}
+                                    label={index}
+                                    word={card.word}
+                                    definition={card.definition}
+                                    currentIndex={currentIndex}
+                                    length={this.props.collection.content.length}
+                                    nextAnimation={this.state.nextAnimation}
+                                />
+                            })
+                        }
+                        <div className='arrows'>
+                            <div className='left-arrow' onClick={this.changeCard} title='前一個' ></div>
+                            <div className='right-arrow' onClick={this.changeCard} title='下一個' ></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
