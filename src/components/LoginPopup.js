@@ -10,28 +10,13 @@ class LoginPopup extends React.Component {
     }
 
     login(e) {
-        // let provider;
-        // if (e.target.textContent === '使用 Facebook 登入') {
-        //     provider = new firebase.auth.FacebookAuthProvider();
-        // } else {
-        //     provider = new firebase.auth.GoogleAuthProvider();
-        // }
-
-        // firebase.auth().signInWithPopup(provider).then(function (result) {
-        //     // let token = result.credential.accessToken;
-        //     // let user = result.user;
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
-    }
-
-    componentDidMount() {
-        // // 登入狀態改變成功，呼叫dispatch改變loginState
-        // firebase.auth().onAuthStateChanged((user) => {
-        //     if (user !== null) {
-        //         this.props.login_reducer(user);
-        //     }
-        // });
+        let provider;
+        if (e.target.textContent === '使用 Facebook 登入') {
+            provider = 'facebook';
+        } else {
+            provider = 'google';
+        }
+        this.props.login_reducer(provider);
     }
 
     render() {
@@ -76,8 +61,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login_reducer: (user) => {
-            dispatch(loginToWeb(user));
+        login_reducer: (provider) => {
+            dispatch(loginToWeb(provider));
         }
     }
 }

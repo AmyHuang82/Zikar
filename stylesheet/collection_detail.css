@@ -88,6 +88,23 @@
     visibility: visible;
 }
 
+.white-overlay-cover {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: white;
+    z-index: 5;
+}
+
+.white-overlay-cover .loading {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+}
+
 /* ---------- animation ---------- */
 .open {
     animation-name: flipInX;

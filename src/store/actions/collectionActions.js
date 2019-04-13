@@ -3,21 +3,31 @@ export function addNewCollection(collection) {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
 
         let currentdate = new Date();
+        let hour, minute;
+        if (currentdate.getHours() < 10) {
+            hour = `0${currentdate.getHours()}`;
+        } else {
+            hour = currentdate.getHours();
+        }
+        if (currentdate.getMinutes() < 10) {
+            minute = `0${currentdate.getMinutes()}`;
+        } else {
+            minute = currentdate.getMinutes();
+        }
         let datetime = currentdate.getFullYear() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getDate() + " "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes();
+            + hour + ":"
+            + minute;
 
         const firestore = getFirestore();
         firestore.collection('collection').add({
             ...collection,
-            user_id: '62aZObMlvFX35VJ8t8Vg1BfLedi1',
-            author: 'Amy Huang',
             important: false,
             timestamp: datetime
         }).then(() => {
             dispatch({ type: ADD_NEW_COLLECTION, collection });
+            window.location.href = '/';
         }).catch((error) => {
             console.log(error);
         });
@@ -34,10 +44,25 @@ export function updateCollection(collection, id) {
             ...collection
         }).then(() => {
             dispatch({ type: UPDATE_COLLECTION, collection });
+            window.location.href = '/';
         }).catch((error) => {
             console.log(error);
         });
 
+    }
+}
+
+export const DELETE_COLLECTION = 'DELETE_COLLECTION';
+export function deleteCollection(id) {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        const firestore = getFirestore();
+        firestore.collection('collection').doc(id).delete().then(() => {
+            dispatch({ type: DELETE_COLLECTION });
+            window.location.href = '/';
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 }
 

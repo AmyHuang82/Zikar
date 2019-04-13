@@ -4,15 +4,18 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import Card from './Card';
+import { deleteCollection } from '../../store/actions/collectionActions';
 
 class CollectionDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentIndex: 0,
-            nextAnimation: ''
+            nextAnimation: '',
+            deleteState: false
         }
         this.changeCard = this.changeCard.bind(this);
+        this.deleteCollection = this.deleteCollection.bind(this);
     }
 
     changeCard(e) {
@@ -33,6 +36,12 @@ class CollectionDetail extends React.Component {
         }
     }
 
+    deleteCollection(e) {
+        this.setState({ deleteState: true });
+        let id = this.props.match.params.id;
+        this.props.deleteCollection(id);
+    }
+
     render() {
         let card;
         let currentIndex = this.state.currentIndex;
@@ -42,7 +51,11 @@ class CollectionDetail extends React.Component {
 
         return (
             <div className="content">
+                <div className="white-overlay-cover" style={{ display: this.state.deleteState ? 'flex' : 'none' }} >
+                    <img className='loading' src='../../image/loading.gif' />
+                </div>
                 <Link to={'/MakingCards/' + this.props.match.params.id}>編輯</Link>
+                <div onClick={this.deleteCollection}>刪除</div>
                 <div className="cards_content">
                     {
                         this.props.collection && card.map((card, index) => {
@@ -76,8 +89,16 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteCollection: (id) => {
+            dispatch(deleteCollection(id));
+        }
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
         { collection: 'collection' }
     ])

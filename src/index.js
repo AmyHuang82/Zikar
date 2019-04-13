@@ -37,9 +37,17 @@ class Main extends React.Component {
             <Provider store={store}>
                 <Router>
                     <Header />
-                    <LoginPopup />
                     <Background />
-                    <Route path="/" exact component={Dashboard} />
+                    <Route path="/" exact render={
+                        () => {
+                            return (
+                                <div>
+                                    <LoginPopup />
+                                    <Dashboard />
+                                </div>
+                            )
+                        }
+                    } />
                     <Route path="/Collection/:id" exact component={CollectionDetail} />
                     <Route path="/MakingCards/:id" exact component={MakingCollection} />
                 </Router>

@@ -14,6 +14,9 @@ class MakingCollection extends React.Component {
                 public: true,
                 word_lan: '英文',
                 definition_lan: '英文',
+                user_id: props.login.user_id,
+                author: props.login.user_name,
+
                 content: [{
                     word: '',
                     definition: '',
@@ -294,7 +297,8 @@ const mapStateToProps = (state, ownProps) => {
     const collections = state.firestore.data.collection;
     const collection = collections ? collections[id] : null;
     return {
-        editCollection: collection
+        editCollection: collection,
+        login: state.login.loginState
     }
 }
 

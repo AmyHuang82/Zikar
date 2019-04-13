@@ -11,15 +11,22 @@ class Dashboard extends React.Component {
         super(props);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps() {
         this.props.getCollection();
-
-        if (nextProps.collectionInfo.length === 0) {
-            this.props.alreadyHadCollection(false);
-        }
     }
 
     render() {
+        let user_uid = this.props.login.user_id;
+        let collectionInfo = this.props.collectionInfo;
+        if (collectionInfo !== undefined) {
+            collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
+            if (collectionInfo.length === 0) {
+                this.props.alreadyHadCollection(false);
+            } else {
+                this.props.alreadyHadCollection(true);
+            }
+        }
+
         return (
             <div className='content'>
                 <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'flex' }} >
@@ -30,7 +37,7 @@ class Dashboard extends React.Component {
                 </div>
 
                 {
-                    this.props.collectionInfo && this.props.collectionInfo.map((collection, index) => {
+                    collectionInfo && collectionInfo.map((collection, index) => {
                         return <Collection
                             key={index}
                             label={index}
@@ -53,7 +60,8 @@ const mapStateToProps = (state) => {
     return {
         hadCollection: state.collection.collectionEmpty,
         getData: state.collection.getCollection,
-        collectionInfo: state.firestore.ordered.collection
+        collectionInfo: state.firestore.ordered.collection,
+        login: state.login.loginState
     }
 }
 

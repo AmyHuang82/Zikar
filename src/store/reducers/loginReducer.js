@@ -3,6 +3,7 @@ import { LOGIN_TO_WEB } from '../actions/loginActions';
 const defaultState = {
     loginState: {
         // login: false,
+        // user_name: '',
         // user_id: '',
         // user_photo: ''
         login: true,
@@ -16,11 +17,11 @@ function loginReducer(state = defaultState, action) {
     switch (action.type) {
 
         case LOGIN_TO_WEB:
-
             return {
                 ...state,
                 loginState: {
                     login: true,
+                    user_name: action.user.displayName,
                     user_id: action.user.uid,
                     user_photo: action.user.photoURL
                 }
