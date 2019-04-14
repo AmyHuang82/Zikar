@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -10,12 +10,14 @@ class CollectionDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            collection: this.props.collection,
             currentIndex: 0,
             nextAnimation: '',
             deleteState: false,
             deleteCheck: false
         }
         this.changeCard = this.changeCard.bind(this);
+        this.shuffleCards = this.shuffleCards.bind(this);
         this.deleteCheckHandler = this.deleteCheckHandler.bind(this);
         this.deleteCollection = this.deleteCollection.bind(this);
     }
@@ -52,18 +54,40 @@ class CollectionDetail extends React.Component {
         this.props.deleteCollection(id);
     }
 
+    shuffleCards(e) {
+        let newData = this.state.collection.content.slice();
+        let temporaryValue, randomIndex;
+        for (let i = 0; i < newData.length; i++) {
+            // 讓random數字不超過陣列長度
+            randomIndex = Math.floor(Math.random() * newData.length);
+            // 儲存現在陣列位置的值，將現在陣列的位置改到random的位置並把原本的值放進random的位置裡
+            temporaryValue = newData[i];
+            newData[i] = newData[randomIndex];
+            newData[randomIndex] = temporaryValue;
+        }
+        this.setState({
+            collection: {
+                ...this.state.collection,
+                content: newData
+            },
+            currentIndex: 0
+        });
+    }
+
     render() {
         let card;
         let currentIndex = this.state.currentIndex;
-        if (this.props.collection !== null) {
-            card = [this.props.collection.content[currentIndex]];
+        if (this.state.collection !== undefined) {
+            card = [this.state.collection.content[currentIndex]];
         }
+
+        if (this.state.deleteState) return <Redirect to='/' />
 
         return (
             <div className="content">
-                <div className="white-overlay-cover" style={{ display: this.state.deleteState ? 'flex' : 'none' }} >
+                {/* <div className="white-overlay-cover" style={{ display: this.state.deleteState ? 'flex' : 'none' }} >
                     <img className='loading' src='../../image/loading.gif' />
-                </div>
+                </div> */}
 
                 <div className="popup-overlay" style={{ display: this.state.deleteCheck ? 'flex' : 'none' }}>
                     <div className="deletecheck-popup">
@@ -73,8 +97,13 @@ class CollectionDetail extends React.Component {
                         <div className='deletecheck-popup-background'></div>
                     </div>
                 </div>
+
                 <div className="wrap">
                     <div className='features'>
+                        <div className='feature_block' onClick={this.shuffleCards}>
+                            <div className='shuffle_cards block_img'></div>
+                            <div>隨機順序</div>
+                        </div>
                         <Link className='feature_block' to={'/MakingCards/' + this.props.match.params.id}>
                             <div className='edit_collection block_img'></div>
                             <div>編輯</div>
@@ -87,7 +116,7 @@ class CollectionDetail extends React.Component {
 
                     <div className="cards_content">
                         {
-                            this.props.collection && card.map((card, index) => {
+                            this.state.collection && card.map((card, index) => {
                                 return <Card
                                     key={index}
                                     label={index}

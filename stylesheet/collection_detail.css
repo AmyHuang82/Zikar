@@ -156,6 +156,14 @@
     font-size: 0;
 }
 
+.feature_block .shuffle_cards {
+    background-image: url('/image/shuffle.svg');
+}
+
+.feature_block:hover .shuffle_cards {
+    background-image: url('/image/shuffle_hover.svg');
+}
+
 .feature_block .edit_collection {
     background-image: url('/image/edit.svg');
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { searchBarOpenToggle } from '../store/actions/searchBarActions';
 import { logout } from '../store/actions/loginActions';
@@ -8,7 +8,8 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            logoutBlock: false
+            logoutBlock: false,
+            logoutState: false
         }
         this.openSearchBarToggle = this.openSearchBarToggle.bind(this);
         this.logoutBlockToggle = this.logoutBlockToggle.bind(this);
@@ -24,10 +25,13 @@ class Header extends React.Component {
     }
 
     logout(e) {
+        this.setState({ logoutState: true });
         this.props.logout();
     }
 
     render() {
+        if (this.state.logoutState) return <Redirect to='/' />
+
         return (
             <header>
                 <div className='container'>

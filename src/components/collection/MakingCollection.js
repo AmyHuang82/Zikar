@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -36,7 +37,8 @@ class MakingCollection extends React.Component {
                     empty: ''
                 }]
             },
-            borderBottom: ''
+            borderBottom: '',
+            submitOK: false
         }
 
         this.changeTitle = this.changeTitle.bind(this);
@@ -183,9 +185,11 @@ class MakingCollection extends React.Component {
             return;
         } else if (e.target.textContent === '建立') {
             this.props.addNewCollection(this.state.collection);
+            this.setState({ submitOK: true });
         } else if (e.target.textContent === '更新') {
             let id = this.props.match.params.id;
             this.props.updateCollection(this.state.collection, id);
+            this.setState({ submitOK: true });
         }
     }
 
@@ -240,6 +244,8 @@ class MakingCollection extends React.Component {
         } else {
             publicState = 'close';
         }
+
+        if (this.state.submitOK) return <Redirect to='/' />
 
         return (
             <div className='content'>

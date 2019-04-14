@@ -24,10 +24,10 @@ export function addNewCollection(collection) {
         firestore.collection('collection').add({
             ...collection,
             important: false,
-            timestamp: datetime
+            timestamp: datetime,
+            copyFromOther: false
         }).then(() => {
             dispatch({ type: ADD_NEW_COLLECTION, collection });
-            window.location.href = '/';
         }).catch((error) => {
             console.log(error);
         });
@@ -44,7 +44,6 @@ export function updateCollection(collection, id) {
             ...collection
         }).then(() => {
             dispatch({ type: UPDATE_COLLECTION, collection });
-            window.location.href = '/';
         }).catch((error) => {
             console.log(error);
         });
@@ -59,7 +58,6 @@ export function deleteCollection(id) {
         const firestore = getFirestore();
         firestore.collection('collection').doc(id).delete().then(() => {
             dispatch({ type: DELETE_COLLECTION });
-            window.location.href = '/';
         }).catch((error) => {
             console.log(error);
         });
