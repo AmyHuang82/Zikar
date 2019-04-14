@@ -2,16 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { searchBarOpenToggle } from '../store/actions/searchBarActions';
+import { logout } from '../store/actions/loginActions';
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            logoutBlock: false
+        }
         this.openSearchBarToggle = this.openSearchBarToggle.bind(this);
+        this.logoutBlockToggle = this.logoutBlockToggle.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     openSearchBarToggle(e) {
         this.props.searchBarOpen();
+    }
+
+    logoutBlockToggle(e) {
+        this.setState({ logoutBlock: !this.state.logoutBlock });
+    }
+
+    logout(e) {
+        this.props.logout();
     }
 
     render() {
@@ -48,8 +61,10 @@ class Header extends React.Component {
                             <img className='search_btn_down icon' src='../../image/search.svg' />
                         </form>
                     </div>
+                    <div className='log_out' style={{ display: this.state.logoutBlock ? 'block' : 'none' }} onClick={this.logout}>登 出</div>
                     <div className='member icon'
                         style={{ backgroundImage: this.props.loginState.login ? `url(${this.props.loginState.user_photo})` : `url('../../image/user.svg')` }}
+                        onClick={this.logoutBlockToggle}
                     ></div>
                 </div>
             </header>
@@ -70,6 +85,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         searchBarOpen: () => {
             dispatch(searchBarOpenToggle());
+        },
+        logout: () => {
+            dispatch(logout());
         }
     }
 }

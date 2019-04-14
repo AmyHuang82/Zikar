@@ -58,8 +58,18 @@ header > .container > .member {
     height: 35px;
     width: 35px;
     background-size: cover;
-    margin: 0 5px 0 15px;
+    margin: 0 5px 0 0;
     border-radius: 50%;
+}
+
+header > .container > .log_out {
+    color: white;
+    cursor: pointer;
+}
+
+header > .container > .log_out:hover {
+    color: #FFE20E;
+    font-weight: 700;
 }
 
 header > .container > .add_card {
@@ -72,6 +82,7 @@ header > .container > .search_bar {
     border-radius: 50px;
     padding: 0;
     padding-left: 10px;
+    margin-right: 15px;
 }
 
 header > .container > .search_bar *{
@@ -107,6 +118,10 @@ header > .container > .search_bar_mobile {
 
     header > .container > .member {
         margin: 0 15px 0 0;
+    }
+
+    header > .container > .log_out {
+        margin-left: 0;
     }
 
     header > .container > .add_card > p{

@@ -28,7 +28,7 @@ let store = createStore(rootReducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(firebase),
-        reactReduxFirebase(firebase)
+        reactReduxFirebase(firebase, { attachAuthIsReady: true })
     ));
 
 class Main extends React.Component {
@@ -37,17 +37,9 @@ class Main extends React.Component {
             <Provider store={store}>
                 <Router>
                     <Header />
+                    <LoginPopup />
                     <Background />
-                    <Route path="/" exact render={
-                        () => {
-                            return (
-                                <div>
-                                    <LoginPopup />
-                                    <Dashboard />
-                                </div>
-                            )
-                        }
-                    } />
+                    <Route path="/" exact component={Dashboard} />
                     <Route path="/Collection/:id" exact component={CollectionDetail} />
                     <Route path="/MakingCards/:id" exact component={MakingCollection} />
                 </Router>
@@ -56,6 +48,6 @@ class Main extends React.Component {
     }
 }
 
-window.addEventListener('load', () => {
+store.firebaseAuthIsReady.then(() => {
     ReactDOM.render(<Main />, document.getElementById('root'));
 });

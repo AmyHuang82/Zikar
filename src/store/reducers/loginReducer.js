@@ -1,15 +1,15 @@
-import { LOGIN_TO_WEB } from '../actions/loginActions';
+import { LOGIN_TO_WEB, LOGOUT } from '../actions/loginActions';
 
 const defaultState = {
     loginState: {
-        // login: false,
-        // user_name: '',
-        // user_id: '',
-        // user_photo: ''
-        login: true,
-        user_name: 'Amy Huang',
-        user_id: "62aZObMlvFX35VJ8t8Vg1BfLedi1",
-        user_photo: "https://graph.facebook.com/2213110725441835/picture"
+        login: false,
+        user_name: '',
+        user_id: '',
+        user_photo: ''
+        // login: true,
+        // user_name: 'Amy Huang',
+        // user_id: "62aZObMlvFX35VJ8t8Vg1BfLedi1",
+        // user_photo: "https://graph.facebook.com/2213110725441835/picture"
     }
 }
 
@@ -24,6 +24,17 @@ function loginReducer(state = defaultState, action) {
                     user_name: action.user.displayName,
                     user_id: action.user.uid,
                     user_photo: action.user.photoURL
+                }
+            }
+
+        case LOGOUT:
+            return {
+                ...state,
+                loginState: {
+                    login: false,
+                    user_name: '',
+                    user_id: '',
+                    user_photo: ''
                 }
             }
 

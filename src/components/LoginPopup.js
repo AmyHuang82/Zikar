@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loginToWeb } from '../store/actions/loginActions';
+import { loginToWeb, loginCheck } from '../store/actions/loginActions';
 
 class LoginPopup extends React.Component {
     constructor(props) {
@@ -19,9 +19,13 @@ class LoginPopup extends React.Component {
         this.props.login_reducer(provider);
     }
 
+    componentWillMount() {
+        this.props.loginCheck();
+    }
+
     render() {
         return (
-            <div className="popup-overlay" style={{ display: this.props.loginState.login ? 'none' : 'flex' }}>
+            <div className="popup-overlay" style={{ display: this.props.loginState.isEmpty ? 'flex' : 'none' }}>
                 <div className="popup-content">
                     <div className="modal">
                         <div className="header">
@@ -55,7 +59,7 @@ class LoginPopup extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loginState: state.login.loginState
+        loginState: state.firebase.auth
     }
 }
 
@@ -63,6 +67,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         login_reducer: (provider) => {
             dispatch(loginToWeb(provider));
+        },
+        loginCheck: () => {
+            dispatch(loginCheck());
         }
     }
 }

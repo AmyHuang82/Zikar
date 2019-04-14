@@ -18,3 +18,33 @@ export function loginToWeb(provider) {
         });
     }
 }
+
+export function loginCheck() {
+    return (dispatch, getState, { getFirebase }) => {
+
+        const firebase = getFirebase();
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                dispatch({ type: LOGIN_TO_WEB, user });
+            } else {
+                return
+            }
+        });
+    }
+}
+
+export const LOGOUT = 'LOGOUT';
+export function logout(provider) {
+    return (dispatch, getState, { getFirebase }) => {
+
+        const firebase = getFirebase();
+
+        firebase.auth().signOut().then(function () {
+            dispatch({ type: LOGOUT });
+            window.location.href = '/';
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+}
