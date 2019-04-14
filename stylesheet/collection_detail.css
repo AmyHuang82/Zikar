@@ -204,6 +204,19 @@
     }  
 }
 
+@media screen and (max-width: 450px) {
+    .content .feature_block {
+        margin: 5px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .feature_block .block_img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
 .content .show_card p {
     font-size: 30px;
     color: #333333;

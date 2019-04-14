@@ -74,10 +74,14 @@ class CollectionDetail extends React.Component {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({ collection: nextProps.collection });
+    }
+
     render() {
         let card;
         let currentIndex = this.state.currentIndex;
-        if (this.state.collection !== undefined) {
+        if (this.state.collection !== null) {
             card = [this.state.collection.content[currentIndex]];
         }
 

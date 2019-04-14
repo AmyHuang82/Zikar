@@ -25,7 +25,7 @@ class LoginPopup extends React.Component {
 
     render() {
         return (
-            <div className="popup-overlay" style={{ display: this.props.loginState.isEmpty ? 'flex' : 'none' }}>
+            <div className="popup-overlay" style={{ display: this.props.loginState.login ? 'none' : 'flex' }}>
                 <div className="popup-content">
                     <div className="modal">
                         <div className="header">
@@ -59,7 +59,7 @@ class LoginPopup extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loginState: state.firebase.auth
+        loginState: state.login.loginState
     }
 }
 
