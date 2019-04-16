@@ -82,20 +82,24 @@
     cursor: pointer;
 }
 
-.making_card .delete_card {
-    background-image: url('/image/trash.svg');
-}
-
-.making_card .delete_card:hover {
-    background-image: url('/image/trash_hover.svg');
-}
-
 .making_card .add_image {
-    background-image: url('/image/pic.svg');
+    background: url('/image/make_card_sprite.svg') 0 0;
+    background-size: 80px;
 }
 
 .making_card .add_image:hover {
-    background-image: url('/image/pic_hover.svg');
+    background: url('/image/make_card_sprite.svg') -40px 0;
+    background-size: 80px;
+}
+
+.making_card .delete_card {
+    background: url('/image/make_card_sprite.svg') 0 -40px;
+    background-size: 80px;
+}
+
+.making_card .delete_card:hover {
+    background: url('/image/make_card_sprite.svg') -40px -40px;
+    background-size: 80px;
 }
 
 .content > .card_info .add_card {
@@ -120,7 +124,7 @@
     border-bottom: 2px solid #FFE20E;
 }
 
-.content > button {
+.content button {
     background-color:  rgb(1, 192, 192);
     color: white;
     width: 100%;
@@ -146,7 +150,7 @@
         width: 100%;
     }
 
-    .content > button {
+    .content button {
         max-width: 100%;
     }
 

@@ -52,13 +52,14 @@
 .white-overlay .new_card {
     width: 200px;
     height: 200px;
-    background-image: url('/image/new_card.svg');
-    background-size: cover;
     margin: auto;
+    background: url('/image/new_card_sprite.svg') 0 0;
+    background-size: 400px 200px;
 }
 
 .white-overlay .new_card:hover {
-    background-image: url('/image/new_card_hover.svg');
+    background: url('/image/new_card_sprite.svg') -200px 0;
+    background-size: 400px 200px;
 }
 
 @media screen and (max-width: 800px) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 class Card extends React.Component {
     constructor(props) {
@@ -27,11 +28,21 @@ class Card extends React.Component {
     }
 
     render() {
+        let color;
+        if (this.props.familiarity === 0) {
+            color = 'silver';
+        } else if (this.props.familiarity < 60) {
+            color = 'red';
+        } else {
+            color = 'green';
+        }
+
         return (
             <div className={`show_card ${this.state.open} ${this.props.nextAnimation}`} onClick={this.flipCard} >
+                <KeyboardEventHandler handleKeys={['up']} onKeyEvent={this.flipCard} />
                 <p className='text-align-center'>{this.state.showing}</p>
                 <div className='paging'>{this.props.currentIndex + 1}/{this.props.length}</div>
-                <div className='show_card_hover'>熟悉程度：0% (透過考試增加熟悉程度)</div>
+                <div className='show_card_hover' style={{ color: color }}>熟悉程度：{this.props.familiarity}%</div>
             </div>
         )
     }

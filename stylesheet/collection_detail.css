@@ -6,26 +6,37 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 700px) {
+    .content .arrows {
+        margin: 10px 0;
+    }
+}
+
 .left-arrow {
-    background-image: url('/image/left.svg');
+    background: url('/image/arrow_sprite.svg') 0 0;
+    background-size: 80px;
 }
 
 .left-arrow:hover {
-    background-image: url('/image/left_hover.svg');
+    background: url('/image/arrow_sprite.svg') -40px 0;
+    background-size: 80px;
+    background-color: white;
 }
 
 .right-arrow {
-    background-image: url('/image/right.svg');
+    background: url('/image/arrow_sprite.svg') 0 -40px;
+    background-size: 80px;
 }
 
 .right-arrow:hover {
-    background-image: url('/image/right_hover.svg');
+    background: url('/image/arrow_sprite.svg') -40px -40px;
+    background-size: 80px;
+    background-color: white;
 }
 
 .left-arrow, .right-arrow {
     border: 1px solid silver;
     border-radius: 50%;
-    background-size: cover;
     background-color: white;
     cursor: pointer;
     height: 40px;
@@ -35,8 +46,27 @@
 
 .content .cards_content {
     overflow: hidden;
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
+    position: relative;
+}
+
+@media screen and (max-width: 1000px){
+    .content .cards_content {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 880px){
+    .content .cards_content {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 830px){
+    .content .cards_content {
+        width: 100%;
+    }
 }
 
 .content .paging {
@@ -156,28 +186,119 @@
     font-size: 0;
 }
 
-.feature_block .shuffle_cards {
-    background-image: url('/image/shuffle.svg');
+.feature_block .card_test {
+    background: url('/image/feature_sprite.svg') 0 0;
+    background-size: 130px 195px;
 }
 
-.feature_block:hover .shuffle_cards {
-    background-image: url('/image/shuffle_hover.svg');
+.feature_block:hover .card_test {
+    background: url('/image/feature_sprite.svg') -65px 0; 
+    background-size: 130px 195px;
 }
 
-.feature_block .edit_collection {
-    background-image: url('/image/edit.svg');
+.feature_block .match_game {
+    background: url('/image/feature_sprite.svg') 0 -65px;
+    background-size: 130px 195px;
 }
 
-.feature_block:hover .edit_collection {
-    background-image: url('/image/edit_hover.svg');
+.feature_block:hover .match_game {
+    background: url('/image/feature_sprite.svg') -65px -65px;
+    background-size: 130px 195px;
 }
 
-.feature_block .delete_collection {
-    background-image: url('/image/trash.svg');
+.feature_block .star_learning {
+    background: url('/image/feature_sprite.svg') 0 -130px;
+    background-size: 130px 195px;
 }
 
-.feature_block:hover .delete_collection {
-    background-image: url('/image/trash_hover.svg');
+.feature_block:hover .star_learning {
+    background: url('/image/feature_sprite.svg') -65px -130px;
+    background-size: 130px 195px;
+}
+
+.content .edit-feature {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+@media screen and (max-width: 700px){
+    .content .edit-feature {
+       position: relative;
+       flex-flow: row;
+       justify-content: flex-end;
+       margin-bottom: 10px;
+    }
+}
+
+.content .edit-feature_block {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 5px silver;
+    background-color: white;
+    margin: 5px 5px 10px 5px;
+}
+
+.content .edit-feature_block .block_img {
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    border-radius: 50%;
+}
+
+.edit-feature_block .shuffle_cards {
+    background: url('/image/card_feature_sprite.svg') 0 0;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+
+.edit-feature_block:hover .shuffle_cards {
+    background: url('/image/card_feature_sprite.svg') -45px 0;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+.edit-feature_block .exchange_cards {
+    background: url('/image/card_feature_sprite.svg') 0 -45px;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+
+.edit-feature_block:hover .exchange_cards {
+    background: url('/image/card_feature_sprite.svg') -45px -45px;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+.edit-feature_block .edit_collection {
+    background: url('/image/card_feature_sprite.svg') 0 -90px;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+.edit-feature_block:hover .edit_collection {
+    background: url('/image/card_feature_sprite.svg') -45px -90px;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+.edit-feature_block .delete_collection {
+    background: url('/image/card_feature_sprite.svg') 0 -135px;
+    background-size: 90px 180px;
+    background-color: white;
+}
+
+.edit-feature_block:hover .delete_collection {
+    background: url('/image/card_feature_sprite.svg') -45px -135px;
+    background-size: 90px 180px;
+    background-color: white;
 }
 
 @media screen and (max-width: 850px) {
@@ -204,6 +325,64 @@
     }  
 }
 
+@media screen and (max-width: 500px){
+    .content .edit-feature_block {
+       width: 40px;
+       height: 40px;
+       margin-bottom: 0;
+    }
+
+    .edit-feature_block .shuffle_cards {
+        background: url('/image/card_feature_sprite.svg') 0 0;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    
+    .edit-feature_block:hover .shuffle_cards {
+        background: url('/image/card_feature_sprite.svg') -40px 0;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    .edit-feature_block .exchange_cards {
+        background: url('/image/card_feature_sprite.svg') 0 -40px;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    
+    .edit-feature_block:hover .exchange_cards {
+        background: url('/image/card_feature_sprite.svg') -40px -40px;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    .edit-feature_block .edit_collection {
+        background: url('/image/card_feature_sprite.svg') 0 -80px;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    .edit-feature_block:hover .edit_collection {
+        background: url('/image/card_feature_sprite.svg') -40px -80px;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    .edit-feature_block .delete_collection {
+        background: url('/image/card_feature_sprite.svg') 0 -120px;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+    
+    .edit-feature_block:hover .delete_collection {
+        background: url('/image/card_feature_sprite.svg') -40px -120px;
+        background-size: 80px 160px;
+        background-color: white;
+    }
+}
+
 @media screen and (max-width: 450px) {
     .content .feature_block {
         margin: 5px;
@@ -215,6 +394,36 @@
         width: 45px;
         height: 45px;
     }
+
+    .feature_block .card_test {
+        background: url('/image/feature_sprite.svg') 0 0;
+        background-size: 90px 135px;
+    }
+    
+    .feature_block:hover .card_test {
+        background: url('/image/feature_sprite.svg') -45px 0; 
+        background-size: 90px 135px;
+    }
+    
+    .feature_block .match_game {
+        background: url('/image/feature_sprite.svg') 0 -45px;
+        background-size: 90px 135px;
+    }
+    
+    .feature_block:hover .match_game {
+        background: url('/image/feature_sprite.svg') -45px -45px;
+        background-size: 90px 135px;
+    }
+    
+    .feature_block .star_learning {
+        background: url('/image/feature_sprite.svg') 0 -90px;
+        background-size: 90px 135px;
+    }
+    
+    .feature_block:hover .star_learning {
+        background: url('/image/feature_sprite.svg') -45px -90px;
+        background-size: 90px 135px;
+    }
 }
 
 .content .show_card p {
@@ -223,7 +432,6 @@
 }
 
 .content .show_card_hover {
-    background-color: rgba(71, 71, 71, 0.322);
     color: white;
     width: 100%;
     height: 40px;

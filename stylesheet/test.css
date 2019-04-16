@@ -1,0 +1,52 @@
+.test_area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.test_area button {
+    width: 200px;
+    max-width: none;
+    margin: 20px auto 0 auto;
+}
+
+.test_guide, .continue_test, .test {
+    text-align: center;
+    line-height: 30px;
+}
+
+.test_area h1 {
+    color: rgb(1, 192, 192);
+    border-bottom: 3px solid #FFE20E;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 60px;
+}
+
+.test h1 {
+    border-bottom: none;
+}
+
+.test input {
+    font-size: 20px;
+}
+
+.back_to_collection {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px silver;
+    background: url('/image/back_arrow_sprite.svg') 0 0;
+    background-size: 100px 50px;
+    background-color: white;
+}
+
+.back_to_collection:hover {
+    background: url('/image/back_arrow_sprite.svg') -50px 0;
+    background-size: 100px 50px;
+    background-color: white;
+}
+

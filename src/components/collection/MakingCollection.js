@@ -21,8 +21,7 @@ class MakingCollection extends React.Component {
                 content: [{
                     word: '',
                     definition: '',
-                    correct_times: 0,
-                    wrong_times: 0,
+                    familiarity: 0,
                     highlight: false,
                     picture: '',
                     empty: ''
@@ -30,15 +29,14 @@ class MakingCollection extends React.Component {
                 {
                     word: '',
                     definition: '',
-                    correct_times: 0,
-                    wrong_times: 0,
+                    familiarity: 0,
                     highlight: false,
                     picture: '',
                     empty: ''
                 }]
             },
             borderBottom: '',
-            submitOK: false
+            submitOK: ''
         }
 
         this.changeTitle = this.changeTitle.bind(this);
@@ -137,8 +135,8 @@ class MakingCollection extends React.Component {
                     {
                         word: '',
                         definition: '',
-                        correct_times: 0,
-                        wrong_times: 0,
+
+                        familiarity: 0,
                         highlight: false,
                         picture: '',
                         empty: ''
@@ -185,11 +183,11 @@ class MakingCollection extends React.Component {
             return;
         } else if (e.target.textContent === '建立') {
             this.props.addNewCollection(this.state.collection);
-            this.setState({ submitOK: true });
+            this.setState({ submitOK: '建立' });
         } else if (e.target.textContent === '更新') {
             let id = this.props.match.params.id;
             this.props.updateCollection(this.state.collection, id);
-            this.setState({ submitOK: true });
+            this.setState({ submitOK: '更新' });
         }
     }
 
@@ -210,8 +208,8 @@ class MakingCollection extends React.Component {
                     content: [{
                         word: '',
                         definition: '',
-                        correct_times: 0,
-                        wrong_times: 0,
+
+                        familiarity: 0,
                         highlight: false,
                         picture: '',
                         empty: ''
@@ -219,8 +217,8 @@ class MakingCollection extends React.Component {
                     {
                         word: '',
                         definition: '',
-                        correct_times: 0,
-                        wrong_times: 0,
+
+                        familiarity: 0,
                         highlight: false,
                         picture: '',
                         empty: ''
@@ -245,7 +243,11 @@ class MakingCollection extends React.Component {
             publicState = 'close';
         }
 
-        if (this.state.submitOK) return <Redirect to='/' />
+        if (this.state.submitOK === '建立') {
+            return <Redirect to='/' />
+        } else if (this.state.submitOK === '更新') {
+            return <Redirect to={'/Collection/' + this.props.match.params.id} />
+        }
 
         return (
             <div className='content'>

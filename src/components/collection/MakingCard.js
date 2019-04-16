@@ -22,7 +22,7 @@ class MakingCard extends React.Component {
 
     render() {
         return (
-            <div className='making_card'>
+            <div className='making_card ease'>
                 <input placeholder='詞語' onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
                 <input placeholder='定義' onChange={this.defInputHandler} value={this.props.definition} style={{ borderBottom: this.props.empty }} />
                 <div className='add_image'></div>
