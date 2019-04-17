@@ -23,6 +23,7 @@ import Dashboard from './components/Dashboard';
 import CollectionDetail from './components/collection/CollectionDetail';
 import MakingCollection from './components/collection/MakingCollection';
 import Test from './components/Test';
+import MatchGame from './components/MatchGame';
 
 // 建立 store，把 reducer 傳進去
 let store = createStore(rootReducer,
@@ -44,6 +45,7 @@ class Main extends React.Component {
                     <Route path="/Collection/:id" exact component={CollectionDetail} />
                     <Route path="/MakingCards/:id" exact component={MakingCollection} />
                     <Route path="/Test/:id" exact component={Test} />
+                    <Route path="/MatchGame/:id" exact component={MatchGame} />
                 </Router>
             </Provider>
         );

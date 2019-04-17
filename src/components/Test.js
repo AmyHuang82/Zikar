@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { updateCollection } from '../store/actions/collectionActions';
 
 class Test extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             output: '',
             allNewRound: this.props.allNewRound,
@@ -19,11 +17,20 @@ class Test extends React.Component {
             roundStart: false,
             doneTest: this.props.doneTest
         }
+        // 創建一個ref來儲存textInput的DOM元素
+        this.textInput = React.createRef();
+        this.focusTextInput = this.focusTextInput.bind(this);
+
         this.changeAnswer = this.changeAnswer.bind(this);
         this.testStart = this.testStart.bind(this);
         this.checkAnswer = this.checkAnswer.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.restartTest = this.restartTest.bind(this);
+    }
+
+    focusTextInput() {
+        console.log(this.textInput.current);
+        this.textInput.current.focus();
     }
 
     changeAnswer(e) {
@@ -63,6 +70,9 @@ class Test extends React.Component {
                 roundStart: true
             });
         }
+
+        // focus input
+        this.focusTextInput();
     }
 
     checkAnswer(e) {
@@ -102,6 +112,9 @@ class Test extends React.Component {
         } else {
             this.setState({ roundStart: false, answer: '', output: '' });
         }
+
+        // focus input
+        this.focusTextInput();
     }
 
     restartTest(e) {
@@ -156,9 +169,9 @@ class Test extends React.Component {
                 <div className='test_area'>
                     <div className='test_guide' style={{ display: this.state.allNewRound ? 'block' : 'none' }}>
                         <h1>測驗說明</h1>
-                        <p>每次測驗將隨機出現1-5題</p>
-                        <p>每答對一題熟悉程度<span style={{ color: 'green' }}>+20%</span></p>
-                        <p>每答錯一題熟悉程度<span style={{ color: 'red' }}>-20%</span></p>
+                        <p>每次測驗將隨機出現 1-5 題</p>
+                        <p>每答對一題熟悉程度<span style={{ color: 'green' }}> +20%</span></p>
+                        <p>每答錯一題熟悉程度<span style={{ color: 'red' }}>  -20%</span></p>
                         <button onClick={this.testStart}>開始測驗</button>
                     </div>
 
@@ -179,17 +192,16 @@ class Test extends React.Component {
 
                     <div className='test'>
                         <div style={{ display: this.state.roundStart ? 'block' : 'none' }} >
-                            <div style={{ display: ouputDiasplay ? 'none' : 'block' }}>
+                            <div>
                                 <h1>{definition && definition}</h1>
                                 <form onSubmit={this.checkAnswer}>
-                                    <input name='answer' autocomplete="off" autofocus="true" value={this.state.answer} onChange={this.changeAnswer} />
+                                    <input name='answer' autocomplete="off" autofocus="true" ref={this.textInput} value={this.state.answer} onChange={this.changeAnswer} />
                                 </form>
                             </div>
                         </div>
                         <div style={{ display: ouputDiasplay ? 'block' : 'none' }}>
                             <h1 style={{ color: outputColor }}>{this.state.output}</h1>
                             <button onClick={this.nextQuestion}>點擊繼續</button>
-                            <KeyboardEventHandler handleKeys={['alt+/']} onKeyEvent={this.nextQuestion} />
                         </div>
                     </div>
                 </div>

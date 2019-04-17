@@ -143,9 +143,9 @@ class CollectionDetail extends React.Component {
                             <div className='card_test block_img'></div>
                             <div>字卡測驗</div>
                         </Link>
-                        <Link className='feature_block'>
+                        <Link className='feature_block' to={'/MatchGame/' + this.props.match.params.id}>
                             <div className='match_game block_img'></div>
-                            <div>記憶遊戲</div>
+                            <div>配對遊戲</div>
                         </Link>
                         <Link className='feature_block'>
                             <div className='star_learning block_img'></div>
