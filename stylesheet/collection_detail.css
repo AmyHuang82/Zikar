@@ -114,7 +114,7 @@
     overflow: hidden;
 }
 
-.deletecheck-popup button {
+.deletecheck-popup .cancel, .deletecheck-popup .confirm{
     width: 30%;
     margin: 10px 10% 0 10%;
     padding: 3px;
@@ -123,8 +123,10 @@
     border: none;
     font-size: 15px;
     color: white;
-    font-weight: 700;
     z-index: 5;
+    text-align: center;
+    height: 34px;
+    line-height: 29px;
 }
 
 .deletecheck-popup > .cancel {

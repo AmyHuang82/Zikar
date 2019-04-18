@@ -24,7 +24,9 @@ class Card extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ showing: nextProps.word });
+        if (this.props !== nextProps) {
+            this.setState({ showing: nextProps.word });
+        }
     }
 
     render() {

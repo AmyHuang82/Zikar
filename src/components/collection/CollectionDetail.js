@@ -112,7 +112,9 @@ class CollectionDetail extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ collection: nextProps.collection });
+        if (this.props !== nextProps) {
+            this.setState({ collection: nextProps.collection });
+        }
     }
 
     render() {
