@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Background(props) {
+function Background() {
     return (
         <div className="background">
             <div className="background_triangle"></div>

@@ -61,13 +61,13 @@ class CollectionDetail extends React.Component {
         }
     }
 
-    deleteCollection(e) {
+    deleteCollection() {
         this.setState({ deleteState: true, deleteCheck: false });
         let id = this.props.match.params.id;
         this.props.deleteCollection(id);
     }
 
-    shuffleCards(e) {
+    shuffleCards() {
         let newData = this.state.collection.content.slice();
         let temporaryValue, randomIndex;
         for (let i = 0; i < newData.length; i++) {
@@ -91,7 +91,7 @@ class CollectionDetail extends React.Component {
         }, 500);
     }
 
-    exchangeWordDef(e) {
+    exchangeWordDef() {
         let exchangeData = this.state.collection.content.slice();
         let currentWord;
         for (let i = 0; i < exchangeData.length; i++) {
@@ -111,9 +111,9 @@ class CollectionDetail extends React.Component {
         }, 500);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props !== nextProps) {
-            this.setState({ collection: nextProps.collection });
+    componentDidUpdate(prevProps) {
+        if (this.props.collection !== prevProps.collection) {
+            this.setState({ collection: this.props.collection });
         }
     }
 

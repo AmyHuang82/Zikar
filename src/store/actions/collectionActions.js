@@ -1,6 +1,6 @@
 export const ADD_NEW_COLLECTION = 'ADD_NEW_COLLECTION';
 export function addNewCollection(collection) {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch, getState, { getFirestore }) => {
 
         let currentdate = new Date();
         let hour, minute;
@@ -37,7 +37,7 @@ export function addNewCollection(collection) {
 
 export const UPDATE_COLLECTION = 'UPDATE_COLLECTION';
 export function updateCollection(collection, id) {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch, getState, { getFirestore }) => {
 
         const firestore = getFirestore();
         firestore.collection('collection').doc(id).set({
@@ -53,7 +53,7 @@ export function updateCollection(collection, id) {
 
 export const DELETE_COLLECTION = 'DELETE_COLLECTION';
 export function deleteCollection(id) {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch, getState, { getFirestore }) => {
 
         const firestore = getFirestore();
         firestore.collection('collection').doc(id).delete().then(() => {

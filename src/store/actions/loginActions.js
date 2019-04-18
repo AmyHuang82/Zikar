@@ -35,7 +35,7 @@ export function loginCheck() {
 }
 
 export const LOGOUT = 'LOGOUT';
-export function logout(provider) {
+export function logout() {
     return (dispatch, getState, { getFirebase }) => {
 
         const firebase = getFirebase();

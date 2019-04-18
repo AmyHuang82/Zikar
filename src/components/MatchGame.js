@@ -76,7 +76,7 @@ class MatchGame extends React.Component {
         this.startTimer(0, 1);
     }
 
-    startTimer(minute, second, e) {
+    startTimer(minute, second) {
         let timer;
 
         let intervalTimer = setInterval(() => {
@@ -101,7 +101,7 @@ class MatchGame extends React.Component {
         }, 1000);
     }
 
-    pickCard(card, e) {
+    pickCard(card) {
 
         let cardsArray = this.state.cardsArray.slice();
         let count = this.state.count;
@@ -135,7 +135,7 @@ class MatchGame extends React.Component {
         }
     }
 
-    deleteBorder(e) {
+    deleteBorder() {
         let cardsArray = this.state.cardsArray.slice();
         let newArray = cardsArray.filter(item => item.border === 'wrong');
         delete cardsArray[newArray[0].label].border;
@@ -143,22 +143,22 @@ class MatchGame extends React.Component {
         this.setState({ cardsArray: cardsArray, count: 0 });
     }
 
-    checkRoundOver(e) {
+    checkRoundOver() {
         let checkArray = this.state.cardsArray.filter(item => item.border === 'correct');
         if (checkArray.length === 8) {
             this.setState({ roundOver: true, roundOverTime: this.state.gameTime });
-        };
+        }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.collectionContent !== null) {
             this.gameStart(this.props.collectionContent);
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props !== nextProps) {
-            this.gameStart(nextProps.collectionContent);
+    componentDidUpdate(prevProps) {
+        if (this.props.collectionContent !== prevProps.collectionContent) {
+            this.gameStart(this.props.collectionContent);
         }
     }
 

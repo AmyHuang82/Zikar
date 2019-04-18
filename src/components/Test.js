@@ -29,7 +29,6 @@ class Test extends React.Component {
     }
 
     focusTextInput() {
-        console.log(this.textInput.current);
         this.textInput.current.focus();
     }
 
@@ -37,7 +36,7 @@ class Test extends React.Component {
         this.setState({ answer: e.target.value });
     }
 
-    testStart(e) {
+    testStart() {
         this.setState({ allNewRound: false });
         // 紀錄正確的index，判斷熟悉度是不是100了，把熟悉度不是100的隨機放入長度為6的陣列裡
         let newArray = [];
@@ -98,7 +97,7 @@ class Test extends React.Component {
         this.props.updateCollection(newData, id);
     }
 
-    nextQuestion(e) {
+    nextQuestion() {
         // 當array長度不足5時，修改題目顯示的數量
         let numberOfQuestion;
         if (this.state.randomIndexArray.length < 5) {
@@ -117,7 +116,7 @@ class Test extends React.Component {
         this.focusTextInput();
     }
 
-    restartTest(e) {
+    restartTest() {
         let newData = this.props.collection;
         for (let i = 0; i < newData.content.length; i++) {
             newData.content[i].familiarity = 0;
@@ -129,14 +128,16 @@ class Test extends React.Component {
         this.props.updateCollection(newData, id);
     }
 
-    componentWillReceiveProps(nextProps) {
-        let arrayCheck = nextProps.collection.content.filter(item => item.familiarity === 0);
-        if (arrayCheck.length === nextProps.collection.content.length) {
-            this.setState({ allNewRound: true });
-        }
-        arrayCheck = nextProps.collection.content.filter(item => item.familiarity === 100);
-        if (arrayCheck.length === nextProps.collection.content.length) {
-            this.setState({ doneTest: true });
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            let arrayCheck = this.props.collection.content.filter(item => item.familiarity === 0);
+            if (arrayCheck.length === this.props.collection.content.length) {
+                this.setState({ allNewRound: true });
+            }
+            arrayCheck = this.props.collection.content.filter(item => item.familiarity === 100);
+            if (arrayCheck.length === this.props.collection.content.length) {
+                this.setState({ doneTest: true });
+            }
         }
     }
 
@@ -195,7 +196,7 @@ class Test extends React.Component {
                             <div>
                                 <h1>{definition && definition}</h1>
                                 <form onSubmit={this.checkAnswer}>
-                                    <input name='answer' autocomplete="off" autofocus="true" ref={this.textInput} value={this.state.answer} onChange={this.changeAnswer} />
+                                    <input name='answer' autoComplete="off" autoFocus="true" ref={this.textInput} value={this.state.answer} onChange={this.changeAnswer} />
                                 </form>
                             </div>
                         </div>

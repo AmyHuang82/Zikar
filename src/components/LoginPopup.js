@@ -19,7 +19,7 @@ class LoginPopup extends React.Component {
         this.props.login_reducer(provider);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.loginCheck();
     }
 

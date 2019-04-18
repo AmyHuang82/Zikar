@@ -11,8 +11,10 @@ class Dashboard extends React.Component {
         super(props);
     }
 
-    componentWillReceiveProps() {
-        this.props.getCollection();
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            this.props.getCollection();
+        }
     }
 
     render() {
@@ -29,7 +31,7 @@ class Dashboard extends React.Component {
 
         return (
             <div className='content'>
-                <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'flex' }} >
+                <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'none' }} >
                     <img className='loading' src='../../image/loading.gif' />
                 </div>
                 <div className="white-overlay" style={{ display: this.props.hadCollection ? 'none' : 'flex' }}>

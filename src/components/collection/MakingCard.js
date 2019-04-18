@@ -16,7 +16,7 @@ class MakingCard extends React.Component {
         this.props.definitionChange(this.props, e.target.value);
     }
 
-    deleteHandler(e) {
+    deleteHandler() {
         this.props.deleteCard(this.props);
     }
 

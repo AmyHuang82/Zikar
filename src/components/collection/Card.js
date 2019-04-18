@@ -11,7 +11,7 @@ class Card extends React.Component {
         this.flipCard = this.flipCard.bind(this);
     }
 
-    flipCard(e) {
+    flipCard() {
         if (this.state.showing === this.props.word) {
             this.setState({ showing: this.props.definition });
         } else {
@@ -23,9 +23,9 @@ class Card extends React.Component {
         }, 500);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props !== nextProps) {
-            this.setState({ showing: nextProps.word });
+    componentDidUpdate(prevProps) {
+        if (this.props.word !== prevProps.word) {
+            this.setState({ showing: this.props.word });
         }
     }
 

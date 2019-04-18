@@ -16,15 +16,15 @@ class Header extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
-    openSearchBarToggle(e) {
+    openSearchBarToggle() {
         this.props.searchBarOpen();
     }
 
-    logoutBlockToggle(e) {
+    logoutBlockToggle() {
         this.setState({ logoutBlock: !this.state.logoutBlock });
     }
 
-    logout(e) {
+    logout() {
         this.setState({ logoutState: true });
         this.props.logout();
     }

@@ -96,7 +96,7 @@ class MakingCollection extends React.Component {
         });
     }
 
-    wordChange(card, word, e) {
+    wordChange(card, word) {
         let newContentData = this.state.collection.content.slice();
         newContentData[card.label].word = word;
         if (newContentData[card.label].empty !== '') {
@@ -110,7 +110,7 @@ class MakingCollection extends React.Component {
         });
     }
 
-    definitionChange(card, definition, e) {
+    definitionChange(card, definition) {
         let newContentData = this.state.collection.content.slice();
         newContentData[card.label].definition = definition;
         if (newContentData[card.label].empty !== '') {
@@ -124,7 +124,7 @@ class MakingCollection extends React.Component {
         });
     }
 
-    addNewCard(e) {
+    addNewCard() {
         if (this.state.collection.content.length > 100) {
             alert('一個字卡集最多只能放置100個字');
         } else {
@@ -146,7 +146,7 @@ class MakingCollection extends React.Component {
         }
     }
 
-    deleteCard(card, e) {
+    deleteCard(card) {
         let newContentData = this.state.collection.content.slice();
         newContentData.splice(card.label, 1);
         if (newContentData.length >= 2) {
@@ -197,34 +197,36 @@ class MakingCollection extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.match.params.id === 'new') {
-            this.setState({
-                collection: {
-                    title: '',
-                    public: true,
-                    word_lan: '英文',
-                    definition_lan: '英文',
-                    content: [{
-                        word: '',
-                        definition: '',
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            if (this.props.match.params.id === 'new') {
+                this.setState({
+                    collection: {
+                        title: '',
+                        public: true,
+                        word_lan: '英文',
+                        definition_lan: '英文',
+                        content: [{
+                            word: '',
+                            definition: '',
 
-                        familiarity: 0,
-                        highlight: false,
-                        picture: '',
-                        empty: ''
-                    },
-                    {
-                        word: '',
-                        definition: '',
+                            familiarity: 0,
+                            highlight: false,
+                            picture: '',
+                            empty: ''
+                        },
+                        {
+                            word: '',
+                            definition: '',
 
-                        familiarity: 0,
-                        highlight: false,
-                        picture: '',
-                        empty: ''
-                    }]
-                }
-            });
+                            familiarity: 0,
+                            highlight: false,
+                            picture: '',
+                            empty: ''
+                        }]
+                    }
+                });
+            }
         }
     }
 
