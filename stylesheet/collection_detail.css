@@ -126,7 +126,8 @@
     z-index: 5;
     text-align: center;
     height: 34px;
-    line-height: 29px;
+    line-height: 28px;
+    font-weight: 700;
 }
 
 .deletecheck-popup > .cancel {

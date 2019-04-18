@@ -12,8 +12,7 @@ class MatchGame extends React.Component {
             count: 0,
             roundOver: '',
             roundOverTime: '',
-            gameTime: '',
-            firstClick: ''
+            gameTime: ''
         }
         this.gameStart = this.gameStart.bind(this);
         this.startTimer = this.startTimer.bind(this);
@@ -22,7 +21,8 @@ class MatchGame extends React.Component {
         this.checkRoundOver = this.checkRoundOver.bind(this);
     }
 
-    gameStart(collectionContent) {
+    gameStart(content) {
+        let collectionContent = content.slice();
         let passArray = [];
         if (collectionContent !== null) {
             let randomArray = [];
@@ -72,7 +72,8 @@ class MatchGame extends React.Component {
                 passArray[i] = { ...passArray[i], label: i };
             }
         }
-        this.setState({ cardsArray: passArray, roundOver: false, gameTime: '00:00', firstClick: true });
+        this.setState({ cardsArray: passArray, roundOver: false, gameTime: '00:00' });
+        this.startTimer(0, 1);
     }
 
     startTimer(minute, second, e) {
@@ -101,10 +102,6 @@ class MatchGame extends React.Component {
     }
 
     pickCard(card, e) {
-        if (this.state.firstClick) {
-            this.startTimer(0, 1);
-            this.setState({ firstClick: false });
-        }
 
         let cardsArray = this.state.cardsArray.slice();
         let count = this.state.count;
@@ -146,7 +143,7 @@ class MatchGame extends React.Component {
         this.setState({ cardsArray: cardsArray, count: 0 });
     }
 
-    checkRoundOver(intervalTimer, e) {
+    checkRoundOver(e) {
         let checkArray = this.state.cardsArray.filter(item => item.border === 'correct');
         if (checkArray.length === 8) {
             this.setState({ roundOver: true, roundOverTime: this.state.gameTime });
@@ -184,7 +181,7 @@ class MatchGame extends React.Component {
                 }
                 <div className="popup-overlay" style={{ display: this.state.roundOver ? 'flex' : 'none' }}>
                     <div className="deletecheck-popup">
-                        恭喜{this.state.roundOverTime}完成遊戲！
+                        你花了{this.state.roundOverTime}完成遊戲！
                         <button className='cancel' onClick={this.gameStart.bind(this, this.props.collectionContent)}>再玩一次</button>
                         <Link className='cancel' to={'/Collection/' + this.props.match.params.id}>繼續背誦</Link>
                         <div className='deletecheck-popup-background'></div>
@@ -200,7 +197,6 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const collections = state.firestore.data.collection;
     const collectionContent = collections ? collections[id].content : null;
-
     return {
         collectionContent: collectionContent
     }

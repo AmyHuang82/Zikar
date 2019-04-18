@@ -61,6 +61,9 @@
         padding-bottom: 29.333%;
         margin: 2%;
     }
+    .game_time {
+        margin-bottom: 10px;
+    }
     .show_word {
         font-size: 15px;
     }

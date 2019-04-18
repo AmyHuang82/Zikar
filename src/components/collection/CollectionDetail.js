@@ -202,6 +202,7 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const collections = state.firestore.data.collection;
     const collection = collections ? collections[id] : null;
+
     return {
         collection: collection
     }
