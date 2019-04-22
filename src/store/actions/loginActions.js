@@ -15,6 +15,7 @@ export function loginToWeb(provider) {
             dispatch({ type: LOGIN_TO_WEB, user });
         }).catch(function (error) {
             console.log(error);
+            alert('發生問題請再試一次');
         });
     }
 }
@@ -45,6 +46,7 @@ export function logout() {
             window.location.href = '/';
         }).catch(function (error) {
             console.log(error);
+            alert('發生問題請再試一次');
         });
     }
 }

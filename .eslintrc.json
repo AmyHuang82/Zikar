@@ -3,6 +3,11 @@
         "browser": true,
         "es6": true
     },
+    "settings": {
+        "react": {
+            "version": "require('./package.json').dependencies.react"
+        }
+    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { addNewCollection, updateCollection } from '../../store/actions/collectionActions';
+import { storage } from '../../firebase';
 import MakingCard from './MakingCard';
 
 class MakingCollection extends React.Component {
@@ -23,7 +24,8 @@ class MakingCollection extends React.Component {
                     definition: '',
                     familiarity: 0,
                     highlight: false,
-                    picture: '',
+                    pictureURL: '',
+                    pictureName: '',
                     empty: ''
                 },
                 {
@@ -31,7 +33,8 @@ class MakingCollection extends React.Component {
                     definition: '',
                     familiarity: 0,
                     highlight: false,
-                    picture: '',
+                    pictureURL: '',
+                    pictureName: '',
                     empty: ''
                 }]
             },
@@ -47,6 +50,8 @@ class MakingCollection extends React.Component {
         this.definitionChange = this.definitionChange.bind(this);
         this.addNewCard = this.addNewCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
+        this.uploadImg = this.uploadImg.bind(this);
+        this.deleteImg = this.deleteImg.bind(this);
         this.submitCollection = this.submitCollection.bind(this);
     }
 
@@ -135,15 +140,65 @@ class MakingCollection extends React.Component {
                     {
                         word: '',
                         definition: '',
-
                         familiarity: 0,
                         highlight: false,
-                        picture: '',
+                        pictureURL: '',
+                        pictureName: '',
                         empty: ''
                     }]
                 }
             });
         }
+    }
+
+    uploadImg(card, e) {
+        let newContentData = this.state.collection.content.slice();
+
+        if (e.target.files[0]) {
+            const image = (e.target.files[0]);
+            let name = new Date().getTime() + image.name;
+            const uplaodTask = storage.ref(`images/${name}`).put(image);
+            uplaodTask.on('state_changed',
+                () => {
+                    // console.log(snapshot);
+                },
+                (error) => {
+                    alert('圖片上傳發生問題請再試一次');
+                    console.log(error);
+                },
+                () => {
+                    storage.ref('images').child(name).getDownloadURL().then(url => {
+                        newContentData[card.label].pictureURL = url;
+                        newContentData[card.label].pictureName = name;
+                        this.setState({
+                            collection: {
+                                ...this.state.collection,
+                                content: newContentData
+                            }
+                        });
+                    })
+                }
+            )
+        }
+    }
+
+    deleteImg(card) {
+        let imageRef = storage.ref('images').child(card.pictureName);
+        let newContentData = this.state.collection.content.slice();
+        imageRef.delete().then(() => {
+            newContentData[card.label].pictureURL = '';
+            newContentData[card.label].pictureName = '';
+            this.setState({
+                collection: {
+                    ...this.state.collection,
+                    content: newContentData
+                }
+            });
+            alert('圖片刪除成功');
+        }).catch((error) => {
+            alert('發生問題請再試一次');
+            console.log(error);
+        });
     }
 
     deleteCard(card) {
@@ -209,19 +264,19 @@ class MakingCollection extends React.Component {
                         content: [{
                             word: '',
                             definition: '',
-
                             familiarity: 0,
                             highlight: false,
-                            picture: '',
+                            pictureURL: '',
+                            pictureName: '',
                             empty: ''
                         },
                         {
                             word: '',
                             definition: '',
-
                             familiarity: 0,
                             highlight: false,
-                            picture: '',
+                            pictureURL: '',
+                            pictureName: '',
                             empty: ''
                         }]
                     }
@@ -286,10 +341,13 @@ class MakingCollection extends React.Component {
                                 label={index}
                                 word={content.word}
                                 definition={content.definition}
+                                pictureName={content.pictureName}
                                 wordChange={this.wordChange}
                                 definitionChange={this.definitionChange}
                                 deleteCard={this.deleteCard}
                                 empty={content.empty}
+                                uploadImg={this.uploadImg}
+                                deleteImg={this.deleteImg}
                             />
                         })
                     }

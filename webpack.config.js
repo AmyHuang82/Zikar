@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 //引用path模組
 const path = require('path');
 module.exports = {

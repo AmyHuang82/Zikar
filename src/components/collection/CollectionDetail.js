@@ -179,6 +179,7 @@ class CollectionDetail extends React.Component {
                                     label={index}
                                     word={card.word}
                                     definition={card.definition}
+                                    picture={card.pictureURL}
                                     currentIndex={currentIndex}
                                     length={this.props.collection.content.length}
                                     nextAnimation={this.state.nextAnimation}

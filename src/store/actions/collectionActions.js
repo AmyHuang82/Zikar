@@ -30,6 +30,7 @@ export function addNewCollection(collection) {
             dispatch({ type: ADD_NEW_COLLECTION, collection });
         }).catch((error) => {
             console.log(error);
+            alert('發生問題請再試一次');
         });
 
     }
@@ -46,6 +47,7 @@ export function updateCollection(collection, id) {
             dispatch({ type: UPDATE_COLLECTION, collection });
         }).catch((error) => {
             console.log(error);
+            alert('發生問題請再試一次');
         });
 
     }
@@ -60,6 +62,7 @@ export function deleteCollection(id) {
             dispatch({ type: DELETE_COLLECTION });
         }).catch((error) => {
             console.log(error);
+            alert('發生問題請再試一次');
         });
     }
 }

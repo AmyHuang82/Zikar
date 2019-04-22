@@ -6,7 +6,8 @@ class Card extends React.Component {
         super(props);
         this.state = {
             showing: this.props.word,
-            open: ''
+            open: '',
+            pic_showing: false
         }
         this.flipCard = this.flipCard.bind(this);
     }
@@ -14,8 +15,11 @@ class Card extends React.Component {
     flipCard() {
         if (this.state.showing === this.props.word) {
             this.setState({ showing: this.props.definition });
+            if (this.props.picture !== '') {
+                this.setState({ pic_showing: true });
+            }
         } else {
-            this.setState({ showing: this.props.word });
+            this.setState({ showing: this.props.word, pic_showing: false });
         }
         this.setState({ open: 'open' });
         setTimeout(() => {
@@ -25,7 +29,7 @@ class Card extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.word !== prevProps.word) {
-            this.setState({ showing: this.props.word });
+            this.setState({ showing: this.props.word, pic_showing: '' });
         }
     }
 
@@ -42,9 +46,12 @@ class Card extends React.Component {
         return (
             <div className={`show_card ${this.state.open} ${this.props.nextAnimation}`} onClick={this.flipCard} >
                 <KeyboardEventHandler handleKeys={['up']} onKeyEvent={this.flipCard} />
+                <div style={{ display: this.state.pic_showing ? 'block' : 'none' }} className='img_wrap'>
+                    <img src={this.props.picture} />
+                </div>
                 <p className='text-align-center'>{this.state.showing}</p>
                 <div className='paging'>{this.props.currentIndex + 1}/{this.props.length}</div>
-                <div className='show_card_hover' style={{ color: color }}>熟悉程度：{this.props.familiarity}%</div>
+                <div className='show_card_hover' style={{ color: color }}><span>熟悉程度：</span>{this.props.familiarity}%</div>
             </div>
         )
     }
