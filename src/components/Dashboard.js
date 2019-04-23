@@ -45,8 +45,8 @@ class Dashboard extends React.Component {
                             label={index}
                             title={collection.title}
                             contentLength={collection.content.length}
-                            wordLan={collection.word_lan}
-                            defLan={collection.definition_lan}
+                            wordLan={collection.word_lan.text}
+                            defLan={collection.definition_lan.text}
                             author={collection.author}
                             time={collection.timestamp}
                             id={collection.id}
@@ -81,6 +81,6 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
-        { collection: 'collection' }
+        { collection: 'collection', orderBy: ['timestamp', 'desc'] }
     ])
 )(Dashboard);

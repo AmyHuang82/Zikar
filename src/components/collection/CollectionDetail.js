@@ -92,6 +92,7 @@ class CollectionDetail extends React.Component {
     }
 
     exchangeWordDef() {
+        // 把字交換
         let exchangeData = this.state.collection.content.slice();
         let currentWord;
         for (let i = 0; i < exchangeData.length; i++) {
@@ -99,9 +100,15 @@ class CollectionDetail extends React.Component {
             exchangeData[i].word = exchangeData[i].definition;
             exchangeData[i].definition = currentWord;
         }
+        // 把語言交換
+        let currentWordLan = this.state.collection.word_lan;
+        let currentDefLan = currentWordLan;
+        currentWordLan = this.state.collection.definition_lan;
         this.setState({
             collection: {
                 ...this.state.collection,
+                word_lan: currentWordLan,
+                definition_lan: currentDefLan,
                 content: exchangeData
             },
             nextAnimation: 'ease'
@@ -179,11 +186,14 @@ class CollectionDetail extends React.Component {
                                     label={index}
                                     word={card.word}
                                     definition={card.definition}
+                                    word_lan={this.state.collection.word_lan.lan}
+                                    definition_lan={this.state.collection.definition_lan.lan}
                                     picture={card.pictureURL}
                                     currentIndex={currentIndex}
                                     length={this.props.collection.content.length}
                                     nextAnimation={this.state.nextAnimation}
                                     familiarity={card.familiarity}
+                                    highlight={card.highlight}
                                 />
                             })
                         }

@@ -14,8 +14,8 @@ class MakingCollection extends React.Component {
             collection: {
                 title: '',
                 public: true,
-                word_lan: '英文',
-                definition_lan: '英文',
+                word_lan: { lan: 'en-US', text: '英文' },
+                definition_lan: { lan: 'en-US', text: '英文' },
                 user_id: props.login.user_id,
                 author: props.login.user_name,
 
@@ -39,7 +39,22 @@ class MakingCollection extends React.Component {
                 }]
             },
             borderBottom: '',
-            submitOK: ''
+            submitOK: '',
+            language: [
+                { lan: 'en-US', text: '英文' },
+                { lan: 'zh-TW', text: '中文' },
+                { lan: 'ja-JP', text: '日文' },
+                { lan: 'ko-KR', text: '韓文' },
+                { lan: 'fr-FR', text: '法文' },
+                { lan: 'hi-IN', text: '印度文' },
+                { lan: 'pl-PL', text: '波蘭文' },
+                { lan: 'id-ID', text: '印尼文' },
+                { lan: 'nl-NL', text: '荷蘭文' },
+                { lan: 'es-ES', text: '西班牙文' },
+                { lan: 'it-IT', text: '義大利文' },
+                { lan: 'pt-BR', text: '葡萄牙文' },
+                { lan: 'ru-RU', text: '俄羅斯文' }
+            ]
         }
 
         this.changeTitle = this.changeTitle.bind(this);
@@ -84,19 +99,31 @@ class MakingCollection extends React.Component {
     }
 
     changeWordLan(e) {
+        let text;
+        this.state.language.forEach(item => {
+            if (item.lan === e.target.value) {
+                text = item.text;
+            }
+        });
         this.setState({
             collection: {
                 ...this.state.collection,
-                word_lan: e.target.value
+                word_lan: { lan: e.target.value, text: text }
             }
         });
     }
 
     changeDefinitionLan(e) {
+        let text;
+        this.state.language.forEach(item => {
+            if (item.lan === e.target.value) {
+                text = item.text;
+            }
+        });
         this.setState({
             collection: {
                 ...this.state.collection,
-                definition_lan: e.target.value
+                definition_lan: { lan: e.target.value, text: text }
             }
         });
     }
@@ -161,6 +188,13 @@ class MakingCollection extends React.Component {
             uplaodTask.on('state_changed',
                 () => {
                     // console.log(snapshot);
+                    newContentData[card.label].pictureName = 'loading';
+                    this.setState({
+                        collection: {
+                            ...this.state.collection,
+                            content: newContentData
+                        }
+                    });
                 },
                 (error) => {
                     alert('圖片上傳發生問題請再試一次');
@@ -259,8 +293,8 @@ class MakingCollection extends React.Component {
                     collection: {
                         title: '',
                         public: true,
-                        word_lan: '英文',
-                        definition_lan: '英文',
+                        word_lan: { lan: 'en-US', text: '英文' },
+                        definition_lan: { lan: 'en-US', text: '英文' },
                         content: [{
                             word: '',
                             definition: '',
@@ -321,16 +355,22 @@ class MakingCollection extends React.Component {
                 <div className='add-from-file'><span> + 從檔案匯入</span></div>
                 <div className='card_info'>
                     <div className='select-box'>
-                        <select onChange={this.changeWordLan} value={this.state.collection.word_lan}>
-                            <option value='英文'>英文</option>
-                            <option value='中文'>中文</option>
+                        <select onChange={this.changeWordLan} value={this.state.collection.word_lan.lan}>
+                            {
+                                this.state.language.map((item, index) => {
+                                    return <option key={index} value={item.lan}>{item.text}</option>
+                                })
+                            }
                         </select>
                         <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                     <div className='select-box'>
-                        <select onChange={this.changeDefinitionLan} value={this.state.collection.definition_lan}>
-                            <option value='英文'>英文</option>
-                            <option value='中文'>中文</option>
+                        <select onChange={this.changeDefinitionLan} value={this.state.collection.definition_lan.lan}>
+                            {
+                                this.state.language.map((item, index) => {
+                                    return <option key={index} value={item.lan}>{item.text}</option>
+                                })
+                            }
                         </select>
                         <img className='arrow' src='../../image/arrow.svg' />
                     </div>

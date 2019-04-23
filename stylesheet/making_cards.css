@@ -83,6 +83,13 @@
     cursor: pointer;
 }
 
+.making_card .loading_image {
+    width: 38px;
+    height: 38px;
+    background-image: url(/image/loading.gif);
+    background-size: cover;
+}
+
 .making_card .delete_image {
     background: url('/image/make_card_sprite.svg') 0 -80px;
     background-size: 80px 120px;
