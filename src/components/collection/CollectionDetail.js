@@ -15,13 +15,17 @@ class CollectionDetail extends React.Component {
             currentIndex: 0,
             nextAnimation: '',
             deleteState: false,
-            deleteCheck: false
+            deleteCheck: false,
+            iOSdevice: false,
+            mobile: false,
+            showHotKeyHint: false
         }
         this.changeCard = this.changeCard.bind(this);
         this.shuffleCards = this.shuffleCards.bind(this);
         this.exchangeWordDef = this.exchangeWordDef.bind(this);
         this.deleteCheckHandler = this.deleteCheckHandler.bind(this);
         this.deleteCollection = this.deleteCollection.bind(this);
+        this.showKeyHint = this.showKeyHint.bind(this);
     }
 
     changeCard(e) {
@@ -118,9 +122,24 @@ class CollectionDetail extends React.Component {
         }, 500);
     }
 
+    showKeyHint() {
+        this.setState((prevState) => ({ showHotKeyHint: !prevState.showHotKeyHint }));
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.collection !== prevProps.collection) {
             this.setState({ collection: this.props.collection });
+        }
+    }
+
+    componentDidMount() {
+        let iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+        if (iOS) {
+            this.setState({ iOSdevice: true });
+        }
+        let mobile = !!navigator.userAgent && /(mobile)/i.test(navigator.userAgent);
+        if (mobile) {
+            this.setState({ mobile: true });
         }
     }
 
@@ -146,6 +165,17 @@ class CollectionDetail extends React.Component {
                     </div>
                 </div>
 
+                <div className="popup-overlay" style={{ display: this.state.showHotKeyHint ? 'flex' : 'none' }}>
+                    <div className="deletecheck-popup hot_key_popup">
+                        <div className='key_description'><div className='keyarrow'>←</div>前一個</div>
+                        <div className='key_description'><div className='keyarrow'>→</div>下一個</div>
+                        <div className='key_description'><div className='keyarrow'>↑</div>翻字卡</div>
+                        <div className='key_description'><div className='keyarrow'>↓</div>聽發音</div>
+                        <button className='cancel' onClick={this.showKeyHint}>知道了</button>
+                        <div className='deletecheck-popup-background'></div>
+                    </div>
+                </div>
+
                 <div className="wrap">
                     <div className='features'>
                         <Link className='feature_block' to={'/Test/' + this.props.match.params.id}>
@@ -156,17 +186,17 @@ class CollectionDetail extends React.Component {
                             <div className='match_game block_img'></div>
                             <div>配對遊戲</div>
                         </Link>
-                        <Link className='feature_block'>
-                            <div className='star_learning block_img'></div>
-                            <div>重點學習</div>
+                        <Link className='feature_block' onClick={this.shuffleCards}>
+                            <div className='shuffle_card block_img'></div>
+                            <div>隨機順序</div>
                         </Link>
                     </div>
 
                     <div className="cards_content">
 
                         <div className='edit-feature'>
-                            <div className='edit-feature_block' onClick={this.shuffleCards}>
-                                <div className='shuffle_cards block_img' title='隨機順序'></div>
+                            <div className='edit-feature_block' onClick={this.showKeyHint} style={{ display: this.state.mobile ? 'none' : 'block' }}>
+                                <div className='hot_key block_img' title='快捷鍵說明'></div>
                             </div>
                             <div className='edit-feature_block' onClick={this.exchangeWordDef}>
                                 <div className='exchange_cards block_img' title='詞語定義交換'></div>
@@ -184,16 +214,16 @@ class CollectionDetail extends React.Component {
                                 return <Card
                                     key={index}
                                     label={index}
+                                    currentIndex={currentIndex}
                                     word={card.word}
                                     definition={card.definition}
+                                    picture={card.pictureURL}
+                                    familiarity={card.familiarity}
                                     word_lan={this.state.collection.word_lan.lan}
                                     definition_lan={this.state.collection.definition_lan.lan}
-                                    picture={card.pictureURL}
-                                    currentIndex={currentIndex}
-                                    length={this.props.collection.content.length}
                                     nextAnimation={this.state.nextAnimation}
-                                    familiarity={card.familiarity}
-                                    highlight={card.highlight}
+                                    iOSdevice={this.state.iOSdevice}
+                                    length={this.props.collection.content.length}
                                 />
                             })
                         }

@@ -12,7 +12,6 @@ class Card extends React.Component {
             speakBackground: '0'
         }
         this.flipCard = this.flipCard.bind(this);
-        this.markWord = this.markWord.bind(this);
         this.speak = this.speak.bind(this);
     }
 
@@ -28,13 +27,14 @@ class Card extends React.Component {
         this.setState({ open: 'open' });
         setTimeout(() => {
             this.setState({ open: '' });
+            this.speak();
         }, 500);
     }
 
     speak() {
         const synth = window.speechSynthesis;
         if (synth.speaking) {
-            // 正在講話直接不執行
+            // 正在講話不重複執行
             return
         } else {
             this.setState({ speakBackground: '-35px' });
@@ -45,10 +45,6 @@ class Card extends React.Component {
                 this.setState({ speakBackground: '0' });
             }
         }
-    }
-
-    markWord() {
-        console.log('我被click了');
     }
 
     componentDidUpdate(prevProps) {
@@ -62,16 +58,9 @@ class Card extends React.Component {
         if (this.props.familiarity === 0) {
             color = 'silver';
         } else if (this.props.familiarity < 60) {
-            color = 'red';
+            color = 'rgb(252, 150, 150)';
         } else {
-            color = 'green';
-        }
-
-        let star;
-        if (this.props.highlight) {
-            star = 'star_card_mark';
-        } else {
-            star = 'star_card';
+            color = 'rgb(143, 204, 143)';
         }
 
         return (
@@ -87,8 +76,7 @@ class Card extends React.Component {
                     <div className='show_card_hover' style={{ color: color }}><span>熟悉程度：</span>{this.props.familiarity}%</div>
                 </div>
                 <div className='card_feature'>
-                    <div onClick={this.speak} className='speak' style={{ backgroundPositionX: this.state.speakBackground }}></div>
-                    <div onClick={this.markWord} className={star}></div>
+                    <div onClick={this.speak} className='speak' style={{ backgroundPositionX: this.state.speakBackground, display: this.props.iOSdevice ? 'none' : 'block' }}></div>
                 </div>
             </div>
         )

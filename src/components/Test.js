@@ -38,7 +38,7 @@ class Test extends React.Component {
 
     testStart() {
         this.setState({ allNewRound: false });
-        // 紀錄正確的index，判斷熟悉度是不是100了，把熟悉度不是100的隨機放入長度為6的陣列裡
+        // 紀錄正確的index與目前文字的熟悉度
         let newArray = [];
         for (let i = 0; i < this.props.collection.content.length; i++) {
             newArray.push({ index: i, familiarity: this.props.collection.content[i].familiarity });
@@ -55,6 +55,7 @@ class Test extends React.Component {
                 }
             }
         }
+        // 將array順序打亂
         let temporaryValue, randomIndex;
         for (let i = 0; i < randomArray.length; i++) {
             randomIndex = Math.floor(Math.random() * randomArray.length);
@@ -62,6 +63,11 @@ class Test extends React.Component {
             randomArray[i] = randomArray[randomIndex];
             randomArray[randomIndex] = temporaryValue;
         }
+        // 將熟悉度較低的字放在前面
+        randomArray = randomArray.sort((a, b) => {
+            return a.familiarity - b.familiarity;
+        });
+        // 判斷是否還有未考完的字
         if (randomArray.length > 0) {
             this.setState({
                 randomIndexArray: randomArray,
@@ -69,9 +75,6 @@ class Test extends React.Component {
                 roundStart: true
             });
         }
-
-        // focus input
-        this.focusTextInput();
     }
 
     checkAnswer(e) {
@@ -81,7 +84,7 @@ class Test extends React.Component {
         let newData = this.props.collection;
         let form = new FormData(e.target);
 
-        if (form.get('answer') === newData.content[index].word) {
+        if (form.get('answer').toUpperCase() === newData.content[index].word.toUpperCase()) {
             if (newData.content[index].familiarity < 100) {
                 newData.content[index].familiarity = newData.content[index].familiarity + 20;
             }

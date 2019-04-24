@@ -1,4 +1,3 @@
-
 .content .arrows {
     width: 100%;
     display: flex;
@@ -212,12 +211,12 @@
     background-size: 130px 195px;
 }
 
-.feature_block .star_learning {
+.feature_block .shuffle_card {
     background: url('/image/feature_sprite.svg') 0 -130px;
     background-size: 130px 195px;
 }
 
-.feature_block:hover .star_learning {
+.feature_block:hover .shuffle_card {
     background: url('/image/feature_sprite.svg') -65px -130px;
     background-size: 130px 195px;
 }
@@ -263,14 +262,14 @@
     border-radius: 50%;
 }
 
-.edit-feature_block .shuffle_cards {
+.edit-feature_block .hot_key {
     background: url('/image/card_feature_sprite.svg') 0 0;
     background-size: 90px 180px;
     background-color: white;
 }
 
 
-.edit-feature_block:hover .shuffle_cards {
+.edit-feature_block:hover .hot_key {
     background: url('/image/card_feature_sprite.svg') -45px 0;
     background-size: 90px 180px;
     background-color: white;
@@ -349,14 +348,14 @@
        margin-bottom: 0;
     }
 
-    .edit-feature_block .shuffle_cards {
+    .edit-feature_block .hot_key {
         background: url('/image/card_feature_sprite.svg') 0 0;
         background-size: 80px 160px;
         background-color: white;
     }
     
     
-    .edit-feature_block:hover .shuffle_cards {
+    .edit-feature_block:hover .hot_key {
         background: url('/image/card_feature_sprite.svg') -40px 0;
         background-size: 80px 160px;
         background-color: white;
@@ -432,12 +431,12 @@
         background-size: 90px 135px;
     }
     
-    .feature_block .star_learning {
+    .feature_block .shuffle_card {
         background: url('/image/feature_sprite.svg') 0 -90px;
         background-size: 90px 135px;
     }
     
-    .feature_block:hover .star_learning {
+    .feature_block:hover .shuffle_card {
         background: url('/image/feature_sprite.svg') -45px -90px;
         background-size: 90px 135px;
     }
@@ -468,7 +467,8 @@
     width: 100%;
     height: 40px;
     line-height: 40px;
-    padding-left: 10px;
+    padding-right: 10px;
+    text-align: right;
     position: absolute;
     bottom: 0;
     visibility: hidden;
@@ -532,6 +532,34 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
+}
+
+.hot_key_popup {
+    height: 170px;
+}
+
+.keyarrow, .key_description {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.key_description {
+    width: 50%;
+}
+
+.keyarrow {
+    width: 35px;
+    height: 35px;
+    color: rgb(255, 196, 0);
+    font-weight: 700;
+    border: 1px solid rgb(255, 196, 0);
+    box-shadow: 2px 2px 0 rgb(255, 196, 0);
+    background-color: white;
+    border-radius: 5px;
+    margin-right: 8px;
 }
 
 /* ---------- animation ---------- */

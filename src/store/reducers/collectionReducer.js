@@ -1,21 +1,32 @@
-import { ADD_NEW_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION, UPDATE_COLLECTION, DELETE_COLLECTION } from '../actions/collectionActions';
+import { ADD_NEW_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION, UPDATE_COLLECTION, RESET_SUBMIT_STATUS, DELETE_COLLECTION } from '../actions/collectionActions';
 
 const defaultState = {
     collectionEmpty: true,
     getCollection: false,
-    collection: {}
+    collection: {},
+    submitStatus: ''
 }
 
 function collectionReducer(state = defaultState, action) {
     switch (action.type) {
 
         case ADD_NEW_COLLECTION:
-            // console.log(action.collection);
-            return state;
+            return {
+                ...state,
+                submitStatus: action.typeStr
+            }
 
         case UPDATE_COLLECTION:
-            // console.log(action.collection);
-            return state;
+            return {
+                ...state,
+                submitStatus: action.typeStr
+            }
+
+        case RESET_SUBMIT_STATUS:
+            return {
+                ...state,
+                submitStatus: ''
+            }
 
         case DELETE_COLLECTION:
             // console.log('delete collection successful');

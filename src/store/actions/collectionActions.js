@@ -1,5 +1,5 @@
 export const ADD_NEW_COLLECTION = 'ADD_NEW_COLLECTION';
-export function addNewCollection(collection) {
+export function addNewCollection(collection, typeStr) {
     return (dispatch, getState, { getFirestore }) => {
 
         let currentdate = new Date();
@@ -20,14 +20,14 @@ export function addNewCollection(collection) {
             + hour + ":"
             + minute;
 
+
         const firestore = getFirestore();
         firestore.collection('collection').add({
             ...collection,
-            important: false,
             timestamp: datetime,
             copyFromOther: false
         }).then(() => {
-            dispatch({ type: ADD_NEW_COLLECTION, collection });
+            dispatch({ type: ADD_NEW_COLLECTION, typeStr });
         }).catch((error) => {
             console.log(error);
             alert('發生問題請再試一次');
@@ -37,20 +37,25 @@ export function addNewCollection(collection) {
 }
 
 export const UPDATE_COLLECTION = 'UPDATE_COLLECTION';
-export function updateCollection(collection, id) {
+export function updateCollection(collection, id, typeStr) {
     return (dispatch, getState, { getFirestore }) => {
 
         const firestore = getFirestore();
         firestore.collection('collection').doc(id).set({
             ...collection
         }).then(() => {
-            dispatch({ type: UPDATE_COLLECTION, collection });
+            dispatch({ type: UPDATE_COLLECTION, typeStr });
         }).catch((error) => {
             console.log(error);
             alert('發生問題請再試一次');
         });
 
     }
+}
+
+export const RESET_SUBMIT_STATUS = 'RESET_SUBMIT_STATUS';
+export function resetSubmitStatus() {
+    return { type: RESET_SUBMIT_STATUS }
 }
 
 export const DELETE_COLLECTION = 'DELETE_COLLECTION';

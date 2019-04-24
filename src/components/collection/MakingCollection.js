@@ -3,7 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { addNewCollection, updateCollection } from '../../store/actions/collectionActions';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { addNewCollection, updateCollection, resetSubmitStatus } from '../../store/actions/collectionActions';
 import { storage } from '../../firebase';
 import MakingCard from './MakingCard';
 
@@ -23,7 +24,6 @@ class MakingCollection extends React.Component {
                     word: '',
                     definition: '',
                     familiarity: 0,
-                    highlight: false,
                     pictureURL: '',
                     pictureName: '',
                     empty: ''
@@ -32,7 +32,6 @@ class MakingCollection extends React.Component {
                     word: '',
                     definition: '',
                     familiarity: 0,
-                    highlight: false,
                     pictureURL: '',
                     pictureName: '',
                     empty: ''
@@ -168,7 +167,6 @@ class MakingCollection extends React.Component {
                         word: '',
                         definition: '',
                         familiarity: 0,
-                        highlight: false,
                         pictureURL: '',
                         pictureName: '',
                         empty: ''
@@ -271,12 +269,10 @@ class MakingCollection extends React.Component {
         } else if (flag) {
             return;
         } else if (e.target.textContent === '建立') {
-            this.props.addNewCollection(this.state.collection);
-            this.setState({ submitOK: '建立' });
+            this.props.addNewCollection(this.state.collection, '建立');
         } else if (e.target.textContent === '更新') {
             let id = this.props.match.params.id;
-            this.props.updateCollection(this.state.collection, id);
-            this.setState({ submitOK: '更新' });
+            this.props.updateCollection(this.state.collection, id, '更新');
         }
     }
 
@@ -284,10 +280,12 @@ class MakingCollection extends React.Component {
         if (this.props.match.params.id !== 'new') {
             this.setState({ collection: this.props.editCollection });
         }
+        this.props.resetSubmitStatus();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.match.params.id !== prevProps.match.params.id) {
+        if (this.props !== prevProps) {
+            this.setState({ submitOK: this.props.submitStatus });
             if (this.props.match.params.id === 'new') {
                 this.setState({
                     collection: {
@@ -299,7 +297,6 @@ class MakingCollection extends React.Component {
                             word: '',
                             definition: '',
                             familiarity: 0,
-                            highlight: false,
                             pictureURL: '',
                             pictureName: '',
                             empty: ''
@@ -308,7 +305,6 @@ class MakingCollection extends React.Component {
                             word: '',
                             definition: '',
                             familiarity: 0,
-                            highlight: false,
                             pictureURL: '',
                             pictureName: '',
                             empty: ''
@@ -342,6 +338,7 @@ class MakingCollection extends React.Component {
 
         return (
             <div className='content'>
+                <KeyboardEventHandler handleKeys={['enter']} onKeyEvent={this.addNewCard} />
                 <div className='collection_info'>
                     <input placeholder='字卡集標題' onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
                     <div className='select-box'>
@@ -406,17 +403,21 @@ const mapStateToProps = (state, ownProps) => {
     const collection = collections ? collections[id] : null;
     return {
         editCollection: collection,
-        login: state.login.loginState
+        login: state.login.loginState,
+        submitStatus: state.collection.submitStatus
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewCollection: (collection) => {
-            dispatch(addNewCollection(collection));
+        addNewCollection: (collection, typeStr) => {
+            dispatch(addNewCollection(collection, typeStr));
         },
-        updateCollection: (collection, id) => {
-            dispatch(updateCollection(collection, id));
+        updateCollection: (collection, id, typeStr) => {
+            dispatch(updateCollection(collection, id, typeStr));
+        },
+        resetSubmitStatus: () => {
+            dispatch(resetSubmitStatus())
         }
     }
 }
