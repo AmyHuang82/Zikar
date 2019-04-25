@@ -562,6 +562,18 @@
     margin-right: 8px;
 }
 
+.continue_test .familiarity_description {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #5f5f5f;
+}
+
+.continue_test .average_percent {
+    font-size: 40px;
+    color: #333333;
+    margin-bottom: 40px;
+}
+
 /* ---------- animation ---------- */
 .open {
     animation-name: flipInX;

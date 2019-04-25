@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { addNewCollection, updateCollection, resetSubmitStatus } from '../../store/actions/collectionActions';
 import { storage } from '../../firebase';
 import MakingCard from './MakingCard';
@@ -338,7 +337,6 @@ class MakingCollection extends React.Component {
 
         return (
             <div className='content'>
-                <KeyboardEventHandler handleKeys={['enter']} onKeyEvent={this.addNewCard} />
                 <div className='collection_info'>
                     <input placeholder='字卡集標題' onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
                     <div className='select-box'>

@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 import Card from './Card';
 import { deleteCollection } from '../../store/actions/collectionActions';
 
@@ -26,22 +25,22 @@ class CollectionDetail extends React.Component {
         this.deleteCheckHandler = this.deleteCheckHandler.bind(this);
         this.deleteCollection = this.deleteCollection.bind(this);
         this.showKeyHint = this.showKeyHint.bind(this);
+        this.keyHandle = this.keyHandle.bind(this);
     }
 
     changeCard(e) {
-
         let currentIndex = this.state.currentIndex;
 
-        if (e.target !== undefined) {
+        if (e.key === undefined) {
             if (e.target.title === '前一個') {
                 currentIndex = currentIndex - 1;
             } else {
                 currentIndex = currentIndex + 1;
             }
         } else {
-            if (e === 'left') {
+            if (e.key === 'ArrowLeft') {
                 currentIndex = currentIndex - 1;
-            } else {
+            } else if (e.key === 'ArrowRight') {
                 currentIndex = currentIndex + 1;
             }
         }
@@ -126,6 +125,12 @@ class CollectionDetail extends React.Component {
         this.setState((prevState) => ({ showHotKeyHint: !prevState.showHotKeyHint }));
     }
 
+    keyHandle(e) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            this.changeCard(e);
+        }
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.collection !== prevProps.collection) {
             this.setState({ collection: this.props.collection });
@@ -141,6 +146,11 @@ class CollectionDetail extends React.Component {
         if (mobile) {
             this.setState({ mobile: true });
         }
+        document.body.addEventListener('keyup', this.keyHandle);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('keyup', this.keyHandle);
     }
 
     render() {
@@ -154,8 +164,6 @@ class CollectionDetail extends React.Component {
 
         return (
             <div className="content">
-                <KeyboardEventHandler handleKeys={['right', 'left']} onKeyEvent={this.changeCard} />
-
                 <div className="popup-overlay" style={{ display: this.state.deleteCheck ? 'flex' : 'none' }}>
                     <div className="deletecheck-popup">
                         確定要刪除此字卡集嗎？

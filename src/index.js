@@ -22,7 +22,7 @@ import LoginPopup from './components/LoginPopup';
 import Dashboard from './components/Dashboard';
 import CollectionDetail from './components/collection/CollectionDetail';
 import MakingCollection from './components/collection/MakingCollection';
-import Test from './components/Test';
+import Test from './components/test/Test';
 import MatchGame from './components/MatchGame';
 
 // 建立 store，把 reducer 傳進去

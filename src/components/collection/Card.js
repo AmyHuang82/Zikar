@@ -1,5 +1,4 @@
 import React from 'react';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 class Card extends React.Component {
     constructor(props) {
@@ -13,6 +12,7 @@ class Card extends React.Component {
         }
         this.flipCard = this.flipCard.bind(this);
         this.speak = this.speak.bind(this);
+        this.keyHandle = this.keyHandle.bind(this);
     }
 
     flipCard() {
@@ -47,10 +47,26 @@ class Card extends React.Component {
         }
     }
 
+    keyHandle(e) {
+        if (e.key === 'ArrowUp') {
+            this.flipCard();
+        } else if (e.key === 'ArrowDown') {
+            this.speak();
+        }
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.word !== prevProps.word) {
             this.setState({ showing: this.props.word, showing_lan: this.props.word_lan, pic_showing: '' });
         }
+    }
+
+    componentDidMount() {
+        document.body.addEventListener('keyup', this.keyHandle);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('keyup', this.keyHandle);
     }
 
     render() {
@@ -66,8 +82,6 @@ class Card extends React.Component {
         return (
             <div className={`show_card ${this.state.open} ${this.props.nextAnimation}`} >
                 <div className='card_flip_area' onClick={this.flipCard} >
-                    <KeyboardEventHandler handleKeys={['up']} onKeyEvent={this.flipCard} />
-                    <KeyboardEventHandler handleKeys={['down']} onKeyEvent={this.speak} />
                     <div style={{ display: this.state.pic_showing ? 'block' : 'none' }} className='img_wrap'>
                         <img src={this.props.picture} />
                     </div>

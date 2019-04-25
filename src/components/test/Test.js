@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { updateCollection } from '../store/actions/collectionActions';
+import { updateCollection } from '../../store/actions/collectionActions';
+import TestInput from './TestInput';
+import NextQ from './NextQ';
 
 class Test extends React.Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class Test extends React.Component {
             output: '',
             allNewRound: this.props.allNewRound,
             randomIndexArray: '',
-            questionCount: 0,
+            questionCount: '',
             answer: '',
             roundStart: false,
             doneTest: this.props.doneTest
@@ -20,7 +22,6 @@ class Test extends React.Component {
         // 創建一個ref來儲存textInput的DOM元素
         this.textInput = React.createRef();
         this.focusTextInput = this.focusTextInput.bind(this);
-
         this.changeAnswer = this.changeAnswer.bind(this);
         this.testStart = this.testStart.bind(this);
         this.checkAnswer = this.checkAnswer.bind(this);
@@ -114,9 +115,6 @@ class Test extends React.Component {
         } else {
             this.setState({ roundStart: false, answer: '', output: '' });
         }
-
-        // focus input
-        this.focusTextInput();
     }
 
     restartTest() {
@@ -167,6 +165,15 @@ class Test extends React.Component {
             outputColor = 'green';
         }
 
+        // 平均熟悉程度
+        let averageFamiliarity = 0;
+        if (this.props.collection !== null) {
+            for (let i = 0; i < this.props.collection.content.length; i++) {
+                averageFamiliarity += this.props.collection.content[i].familiarity;
+            }
+            averageFamiliarity = Math.floor(averageFamiliarity / this.props.collection.content.length);
+        }
+
         return (
             <div className='content'>
                 <Link className='back_to_collection' to={'/Collection/' + this.props.match.params.id}></Link>
@@ -182,11 +189,8 @@ class Test extends React.Component {
                     <div className='continue_test' style={{ display: this.state.allNewRound ? 'none' : 'block' }}>
                         <div style={{ display: this.state.roundStart ? 'none' : 'block' }}>
                             <h1>目前進度</h1>
-                            {
-                                this.props.collection && this.props.collection.content.map((card, index) => {
-                                    return <p key={index} >{card.word} / {card.definition}：熟悉程度 {card.familiarity}%</p>
-                                })
-                            }
+                            <p className='familiarity_description'>熟悉程度平均</p>
+                            <p className='average_percent'>{averageFamiliarity}%</p>
                             <button onClick={this.testStart} style={{ display: this.state.doneTest ? 'none' : 'block' }}>繼續測驗</button>
 
                             <p style={{ display: this.state.doneTest ? 'block' : 'none' }}>恭喜！已熟悉所有字卡</p>
@@ -194,19 +198,25 @@ class Test extends React.Component {
                         </div>
                     </div>
 
-                    <div className='test'>
-                        <div style={{ display: this.state.roundStart ? 'block' : 'none' }} >
-                            <div>
-                                <h1>{definition && definition}</h1>
-                                <form onSubmit={this.checkAnswer}>
-                                    <input name='answer' autoComplete="off" autoFocus="true" ref={this.textInput} value={this.state.answer} onChange={this.changeAnswer} />
-                                </form>
-                            </div>
-                        </div>
-                        <div style={{ display: ouputDiasplay ? 'block' : 'none' }}>
+                    <div className='test' style={{ display: this.state.roundStart ? 'block' : 'none' }}>
+                        <TestInput
+                            ouputDiasplay={ouputDiasplay}
+                            count={this.state.questionCount}
+                            definition={definition}
+                            changeAnswer={this.changeAnswer}
+                            answer={this.state.answer}
+                            checkAnswer={this.checkAnswer}
+                        />
+                        <NextQ
+                            ouputDiasplay={ouputDiasplay}
+                            outputColor={outputColor}
+                            output={this.state.output}
+                            nextQuestion={this.nextQuestion}
+                        />
+                        {/* <div style={{ display: ouputDiasplay ? 'block' : 'none' }}>
                             <h1 style={{ color: outputColor }}>{this.state.output}</h1>
                             <button onClick={this.nextQuestion}>點擊繼續</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
