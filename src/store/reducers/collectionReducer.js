@@ -1,4 +1,4 @@
-import { ADD_NEW_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION, UPDATE_COLLECTION, RESET_SUBMIT_STATUS, DELETE_COLLECTION } from '../actions/collectionActions';
+import { ADD_NEW_COLLECTION, COPY_TO_SELF_COLLECTION, ALREADY_HAD_COLLECTION, GET_COLLECTION, UPDATE_COLLECTION, RESET_SUBMIT_STATUS, DELETE_COLLECTION } from '../actions/collectionActions';
 
 const defaultState = {
     collectionEmpty: true,
@@ -15,6 +15,9 @@ function collectionReducer(state = defaultState, action) {
                 ...state,
                 submitStatus: action.typeStr
             }
+
+        case COPY_TO_SELF_COLLECTION:
+            return state
 
         case UPDATE_COLLECTION:
             return {

@@ -8,6 +8,7 @@
     border: 1px solid #dbdbdb;
     color: #333333;
     cursor: pointer;
+    position: relative;
 }
 
 .collection:hover {
@@ -32,6 +33,23 @@
     color: #333333;
     margin-bottom: 10px;
     text-align: left;
+}
+
+.collection .not_open {
+    width: 20px;
+    height: 20px;
+    background-image: url('/image/lock.svg');
+    background-size: cover;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+}
+
+.search_none {
+    margin: 30px auto;
+    text-align: center;
+    color: #636363;
+    line-height: 50px;
 }
 
 .white-overlay {

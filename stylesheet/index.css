@@ -155,9 +155,9 @@ header > .container > .search_bar_mobile {
 
     .search_bar_mobile_input > input {
         border-bottom: 2px solid rgb(181, 228, 255);
-        font-size: 14px;
+        font-size: 16px;
         padding: 5px;
-        width: calc(95vw - 40px);
+        width: calc(95vw - 50px);
         border-radius: 0;
     }
 

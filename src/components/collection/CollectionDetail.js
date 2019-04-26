@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import Card from './Card';
-import { deleteCollection } from '../../store/actions/collectionActions';
+import { deleteCollection, copyToSelfCollection } from '../../store/actions/collectionActions';
 
 class CollectionDetail extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            collection: this.props.collection,
+            collection: props.collection,
             currentIndex: 0,
             nextAnimation: '',
             deleteState: false,
@@ -26,6 +27,7 @@ class CollectionDetail extends React.Component {
         this.deleteCollection = this.deleteCollection.bind(this);
         this.showKeyHint = this.showKeyHint.bind(this);
         this.keyHandle = this.keyHandle.bind(this);
+        this.copyHandler = this.copyHandler.bind(this);
     }
 
     changeCard(e) {
@@ -131,9 +133,16 @@ class CollectionDetail extends React.Component {
         }
     }
 
+    copyHandler() {
+        let user = this.props.login;
+        let id = this.props.match.params.id;
+        this.props.copyToSelfCollection(id, user);
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.collection !== prevProps.collection) {
-            this.setState({ collection: this.props.collection });
+            let copyCollection = this.props.collection;
+            this.setState({ collection: copyCollection });
         }
     }
 
@@ -156,11 +165,22 @@ class CollectionDetail extends React.Component {
     render() {
         let card;
         let currentIndex = this.state.currentIndex;
+        let notSelf = false;
+        let publicClose = false;
+        let user_uid = this.props.login.user_id;
+
         if (this.state.collection !== null) {
             card = [this.state.collection.content[currentIndex]];
+
+            if (this.state.collection.user_id !== user_uid) {
+                notSelf = true;
+                if (!this.state.collection.public) {
+                    publicClose = true;
+                }
+            }
         }
 
-        if (this.state.deleteState) return <Redirect to='/' />
+        if (this.state.deleteState || publicClose) return <Redirect to='/' />
 
         return (
             <div className="content">
@@ -186,10 +206,14 @@ class CollectionDetail extends React.Component {
 
                 <div className="wrap">
                     <div className='features'>
-                        <Link className='feature_block' to={'/Test/' + this.props.match.params.id}>
+                        <Link className='feature_block' to={'/Test/' + this.props.match.params.id} style={{ display: notSelf ? 'none' : 'flex' }}>
                             <div className='card_test block_img'></div>
                             <div>字卡測驗</div>
                         </Link>
+                        <div className='feature_block' style={{ display: notSelf ? 'flex' : 'none' }} onClick={this.copyHandler}>
+                            <div className='add_to_learn block_img'></div>
+                            <div>複製學習</div>
+                        </div>
                         <Link className='feature_block' to={'/MatchGame/' + this.props.match.params.id}>
                             <div className='match_game block_img'></div>
                             <div>配對遊戲</div>
@@ -209,10 +233,10 @@ class CollectionDetail extends React.Component {
                             <div className='edit-feature_block' onClick={this.exchangeWordDef}>
                                 <div className='exchange_cards block_img' title='詞語定義交換'></div>
                             </div>
-                            <Link className='edit-feature_block' to={'/MakingCards/' + this.props.match.params.id}>
+                            <Link className='edit-feature_block' to={'/MakingCards/' + this.props.match.params.id} style={{ display: notSelf ? 'none' : 'block' }}>
                                 <div className='edit_collection block_img' title='編輯'></div>
                             </Link>
-                            <div className='edit-feature_block' onClick={this.deleteCheckHandler}>
+                            <div className='edit-feature_block' onClick={this.deleteCheckHandler} style={{ display: notSelf ? 'none' : 'block' }}>
                                 <div className='delete_collection block_img' title='刪除'>刪除</div>
                             </div>
                         </div>
@@ -232,6 +256,7 @@ class CollectionDetail extends React.Component {
                                     nextAnimation={this.state.nextAnimation}
                                     iOSdevice={this.state.iOSdevice}
                                     length={this.props.collection.content.length}
+                                    notSelf={notSelf}
                                 />
                             })
                         }
@@ -253,7 +278,8 @@ const mapStateToProps = (state, ownProps) => {
     const collection = collections ? collections[id] : null;
 
     return {
-        collection: collection
+        collection: collection,
+        login: state.login.loginState
     }
 }
 
@@ -261,6 +287,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteCollection: (id) => {
             dispatch(deleteCollection(id));
+        },
+        copyToSelfCollection: (id, user) => {
+            dispatch(copyToSelfCollection(id, user));
         }
     }
 }

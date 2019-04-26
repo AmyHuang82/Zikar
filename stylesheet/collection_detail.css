@@ -193,32 +193,42 @@
 
 .feature_block .card_test {
     background: url('/image/feature_sprite.svg') 0 0;
-    background-size: 130px 195px;
+    background-size: 130px 260px;
 }
 
 .feature_block:hover .card_test {
     background: url('/image/feature_sprite.svg') -65px 0; 
-    background-size: 130px 195px;
+    background-size: 130px 260px;
 }
 
 .feature_block .match_game {
     background: url('/image/feature_sprite.svg') 0 -65px;
-    background-size: 130px 195px;
+    background-size: 130px 260px;
 }
 
 .feature_block:hover .match_game {
     background: url('/image/feature_sprite.svg') -65px -65px;
-    background-size: 130px 195px;
+    background-size: 130px 260px;
 }
 
 .feature_block .shuffle_card {
     background: url('/image/feature_sprite.svg') 0 -130px;
-    background-size: 130px 195px;
+    background-size: 130px 260px;
 }
 
 .feature_block:hover .shuffle_card {
     background: url('/image/feature_sprite.svg') -65px -130px;
-    background-size: 130px 195px;
+    background-size: 130px 260px;
+}
+
+.feature_block .add_to_learn {
+    background: url('/image/feature_sprite.svg') 0 -195px;
+    background-size: 130px 260px;
+}
+
+.feature_block:hover .add_to_learn {
+    background: url('/image/feature_sprite.svg') -65px -195px;
+    background-size: 130px 260px;
 }
 
 .content .edit-feature {
@@ -413,32 +423,42 @@
 
     .feature_block .card_test {
         background: url('/image/feature_sprite.svg') 0 0;
-        background-size: 90px 135px;
+        background-size: 90px 180px;
     }
     
     .feature_block:hover .card_test {
         background: url('/image/feature_sprite.svg') -45px 0; 
-        background-size: 90px 135px;
+        background-size: 90px 180px;
     }
     
     .feature_block .match_game {
         background: url('/image/feature_sprite.svg') 0 -45px;
-        background-size: 90px 135px;
+        background-size: 90px 180px;
     }
     
     .feature_block:hover .match_game {
         background: url('/image/feature_sprite.svg') -45px -45px;
-        background-size: 90px 135px;
+        background-size: 90px 180px;
     }
     
     .feature_block .shuffle_card {
         background: url('/image/feature_sprite.svg') 0 -90px;
-        background-size: 90px 135px;
+        background-size: 90px 180px;
     }
     
     .feature_block:hover .shuffle_card {
         background: url('/image/feature_sprite.svg') -45px -90px;
-        background-size: 90px 135px;
+        background-size: 90px 180px;
+    }
+
+    .feature_block .add_to_learn {
+        background: url('/image/feature_sprite.svg') 0 -135px;
+        background-size: 90px 180px;
+    }
+    
+    .feature_block:hover .add_to_learn {
+        background: url('/image/feature_sprite.svg') -45px -135px;
+        background-size: 90px 180px;
     }
 }
 

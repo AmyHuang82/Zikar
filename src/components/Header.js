@@ -9,11 +9,14 @@ class Header extends React.Component {
         super(props);
         this.state = {
             logoutBlock: false,
-            logoutState: false
+            logoutState: false,
+            keyword: ''
         }
         this.openSearchBarToggle = this.openSearchBarToggle.bind(this);
         this.logoutBlockToggle = this.logoutBlockToggle.bind(this);
         this.logout = this.logout.bind(this);
+        this.searchKeyword = this.searchKeyword.bind(this);
+        this.startSearch = this.startSearch.bind(this);
     }
 
     openSearchBarToggle() {
@@ -27,6 +30,18 @@ class Header extends React.Component {
     logout() {
         this.setState({ logoutState: true });
         this.props.logout();
+    }
+
+    searchKeyword(e) {
+        this.setState({ keyword: e.target.value });
+    }
+
+    startSearch(e) {
+        e.preventDefault();
+        if (this.state.keyword !== '') {
+            window.location.hash = '/Search/' + this.state.keyword;
+            this.setState({ keyword: '' });
+        }
     }
 
     render() {
@@ -43,9 +58,9 @@ class Header extends React.Component {
                         <p>建立字卡</p>
                     </Link>
                     {this.props.children}
-                    <form className='search_bar'>
-                        <input className='search_input'></input>
-                        <img className='search_btn icon' src='../../image/search.svg' />
+                    <form className='search_bar' onSubmit={this.startSearch}>
+                        <input className='search_input' onChange={this.searchKeyword} value={this.state.keyword} />
+                        <img className='search_btn icon' src='../../image/search.svg' onClick={this.startSearch} />
                     </form>
                     <div className='search_bar_mobile'>
                         <img className='search_btn_top icon'
@@ -60,9 +75,10 @@ class Header extends React.Component {
                         />
                         <form className='search_bar_mobile_input'
                             style={{ display: this.props.searchBarToggle ? 'flex' : 'none' }}
+                            onSubmit={this.startSearch}
                         >
-                            <input className='search_input'></input>
-                            <img className='search_btn_down icon' src='../../image/search.svg' />
+                            <input className='search_input' onChange={this.searchKeyword} value={this.state.keyword} />
+                            <img className='search_btn_down icon' src='../../image/search.svg' onClick={this.startSearch} />
                         </form>
                     </div>
                     <div className='log_out' style={{ display: this.state.logoutBlock ? 'block' : 'none' }} onClick={this.logout}>登 出</div>

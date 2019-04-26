@@ -20,12 +20,25 @@ class Dashboard extends React.Component {
     render() {
         let user_uid = this.props.login.user_id;
         let collectionInfo = this.props.collectionInfo;
-        if (collectionInfo !== undefined) {
-            collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
-            if (collectionInfo.length === 0) {
-                this.props.alreadyHadCollection(false);
-            } else {
-                this.props.alreadyHadCollection(true);
+        let searchEmpty = false;
+
+        if (this.props.match.path === '/') {
+            if (collectionInfo !== undefined) {
+                collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
+                if (collectionInfo.length === 0) {
+                    this.props.alreadyHadCollection(false);
+                } else {
+                    this.props.alreadyHadCollection(true);
+                }
+            }
+        } else {
+            let keyword = this.props.match.params.keyword;
+            if (collectionInfo !== undefined) {
+                collectionInfo = collectionInfo.filter(item => item.user_id === user_uid || item.public);
+                collectionInfo = collectionInfo.filter(item => item.title.includes(keyword));
+                if (collectionInfo.length === 0) {
+                    searchEmpty = true;
+                }
             }
         }
 
@@ -50,9 +63,12 @@ class Dashboard extends React.Component {
                             author={collection.author}
                             time={collection.timestamp}
                             id={collection.id}
+                            public={collection.public}
+                            copyFromOther={collection.copyFromOther}
                         />
                     })
                 }
+                <h2 className='search_none' style={{ display: searchEmpty ? 'block' : 'none' }}>抱歉！無此關鍵字字卡集<br />請使用其他關鍵字試試看</h2>
             </div>
         )
     }

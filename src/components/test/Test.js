@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { updateCollection } from '../../store/actions/collectionActions';
 import TestInput from './TestInput';
 import NextQ from './NextQ';
@@ -12,12 +12,12 @@ class Test extends React.Component {
         super(props);
         this.state = {
             output: '',
-            allNewRound: this.props.allNewRound,
+            allNewRound: props.allNewRound,
             randomIndexArray: '',
             questionCount: '',
             answer: '',
             roundStart: false,
-            doneTest: this.props.doneTest
+            doneTest: props.doneTest
         }
         // 創建一個ref來儲存textInput的DOM元素
         this.textInput = React.createRef();
@@ -64,10 +64,6 @@ class Test extends React.Component {
             randomArray[i] = randomArray[randomIndex];
             randomArray[randomIndex] = temporaryValue;
         }
-        // 將熟悉度較低的字放在前面
-        randomArray = randomArray.sort((a, b) => {
-            return a.familiarity - b.familiarity;
-        });
         // 判斷是否還有未考完的字
         if (randomArray.length > 0) {
             this.setState({
@@ -165,14 +161,22 @@ class Test extends React.Component {
             outputColor = 'green';
         }
 
-        // 平均熟悉程度
+        // 平均熟悉程度&判斷是不是自己的字卡
         let averageFamiliarity = 0;
+        let notSelf = false;
+        let user_uid = this.props.login.user_id;
         if (this.props.collection !== null) {
             for (let i = 0; i < this.props.collection.content.length; i++) {
                 averageFamiliarity += this.props.collection.content[i].familiarity;
             }
             averageFamiliarity = Math.floor(averageFamiliarity / this.props.collection.content.length);
+
+            if (this.props.collection.user_id !== user_uid) {
+                notSelf = true;
+            }
         }
+
+        if (notSelf) return <Redirect to='/' />
 
         return (
             <div className='content'>
@@ -213,10 +217,6 @@ class Test extends React.Component {
                             output={this.state.output}
                             nextQuestion={this.nextQuestion}
                         />
-                        {/* <div style={{ display: ouputDiasplay ? 'block' : 'none' }}>
-                            <h1 style={{ color: outputColor }}>{this.state.output}</h1>
-                            <button onClick={this.nextQuestion}>點擊繼續</button>
-                        </div> */}
                     </div>
                 </div>
             </div>
@@ -244,7 +244,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         collection: collection,
         allNewRound: allNewRound,
-        doneTest: doneTest
+        doneTest: doneTest,
+        login: state.login.loginState
     }
 }
 

@@ -4,8 +4,8 @@ class Card extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showing: this.props.word,
-            showing_lan: this.props.word_lan,
+            showing: props.word,
+            showing_lan: props.word_lan,
             open: '',
             pic_showing: false,
             speakBackground: '0'
@@ -87,7 +87,7 @@ class Card extends React.Component {
                     </div>
                     <p className='text-align-center'>{this.state.showing}</p>
                     <div className='paging'>{this.props.currentIndex + 1}/{this.props.length}</div>
-                    <div className='show_card_hover' style={{ color: color }}><span>熟悉程度：</span>{this.props.familiarity}%</div>
+                    <div className='show_card_hover' style={{ color: color, display: this.props.notSelf ? 'none' : 'block' }}><span>熟悉程度：</span>{this.props.familiarity}%</div>
                 </div>
                 <div className='card_feature'>
                     <div onClick={this.speak} className='speak' style={{ backgroundPositionX: this.state.speakBackground, display: this.props.iOSdevice ? 'none' : 'block' }}></div>

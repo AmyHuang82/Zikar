@@ -42,6 +42,7 @@ class Main extends React.Component {
                     <LoginPopup />
                     <Background />
                     <Route path="/" exact component={Dashboard} />
+                    <Route path="/Search/:keyword" exact component={Dashboard} />
                     <Route path="/Collection/:id" exact component={CollectionDetail} />
                     <Route path="/MakingCards/:id" exact component={MakingCollection} />
                     <Route path="/Test/:id" exact component={Test} />
