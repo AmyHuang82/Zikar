@@ -214,21 +214,14 @@ class MakingCollection extends React.Component {
     }
 
     deleteImg(card) {
-        let imageRef = storage.ref('images').child(card.pictureName);
         let newContentData = this.state.collection.content.slice();
-        imageRef.delete().then(() => {
-            newContentData[card.label].pictureURL = '';
-            newContentData[card.label].pictureName = '';
-            this.setState({
-                collection: {
-                    ...this.state.collection,
-                    content: newContentData
-                }
-            });
-            alert('圖片刪除成功');
-        }).catch((error) => {
-            alert('發生問題請再試一次');
-            console.log(error);
+        newContentData[card.label].pictureURL = '';
+        newContentData[card.label].pictureName = '';
+        this.setState({
+            collection: {
+                ...this.state.collection,
+                content: newContentData
+            }
         });
     }
 

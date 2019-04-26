@@ -118,7 +118,7 @@ class MatchGame extends React.Component {
         if (count === 2) {
             let checkArray = cardsArray.filter(item => item.border !== undefined);
             checkArray = checkArray.filter(item => item.border !== 'correct');
-            if (checkArray[0].word === checkArray[1].word) {
+            if (checkArray[0].word === checkArray[1].word && checkArray[0].show !== checkArray[1].show) {
                 cardsArray[checkArray[0].label].border = 'correct';
                 cardsArray[checkArray[1].label].border = 'correct';
                 this.setState({ count: 0 });
