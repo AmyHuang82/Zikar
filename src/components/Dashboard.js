@@ -21,6 +21,7 @@ class Dashboard extends React.Component {
         let user_uid = this.props.login.user_id;
         let collectionInfo = this.props.collectionInfo;
         let searchEmpty = false;
+        let addNewDisplay = true;
 
         if (this.props.match.path === '/') {
             if (collectionInfo !== undefined) {
@@ -30,6 +31,7 @@ class Dashboard extends React.Component {
                 } else {
                     this.props.alreadyHadCollection(true);
                 }
+                addNewDisplay = this.props.hadCollection;
             }
         } else {
             let keyword = this.props.match.params.keyword;
@@ -39,6 +41,7 @@ class Dashboard extends React.Component {
                 if (collectionInfo.length === 0) {
                     searchEmpty = true;
                 }
+                addNewDisplay = true;
             }
         }
 
@@ -47,7 +50,7 @@ class Dashboard extends React.Component {
                 <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'none' }} >
                     <img className='loading' src='../../image/loading.gif' />
                 </div>
-                <div className="white-overlay" style={{ display: this.props.hadCollection ? 'none' : 'flex' }}>
+                <div className="white-overlay" style={{ display: addNewDisplay ? 'none' : 'flex' }}>
                     <Link to='/MakingCards/new' className='new_card' exact></Link>
                 </div>
 
