@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { addNewCollection, updateCollection, resetSubmitStatus } from '../../store/actions/collectionActions';
 import { storage } from '../../firebase';
 import MakingCard from './MakingCard';
+import XLSX from 'xlsx';
 
 class MakingCollection extends React.Component {
     constructor(props) {
@@ -65,6 +66,7 @@ class MakingCollection extends React.Component {
         this.deleteCard = this.deleteCard.bind(this);
         this.uploadImg = this.uploadImg.bind(this);
         this.deleteImg = this.deleteImg.bind(this);
+        this.uploadXlsx = this.uploadXlsx.bind(this);
         this.submitCollection = this.submitCollection.bind(this);
     }
 
@@ -238,6 +240,35 @@ class MakingCollection extends React.Component {
         }
     }
 
+    uploadXlsx(e) {
+        let newContentData = [];
+        let files = e.target.files, f = files[0];
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            let data = new Uint8Array(e.target.result);
+            let workbook = XLSX.read(data, { type: 'array' });
+            for (let i = 0; i < workbook.Strings.length - 1; i++) {
+                if (i % 2 === 0) {
+                    newContentData.push({
+                        word: workbook.Strings[i].t,
+                        definition: workbook.Strings[i + 1].t,
+                        familiarity: 0,
+                        pictureURL: '',
+                        pictureName: '',
+                        empty: ''
+                    });
+                }
+            }
+            this.setState({
+                collection: {
+                    ...this.state.collection,
+                    content: newContentData
+                }
+            });
+        };
+        reader.readAsArrayBuffer(f);
+    }
+
     submitCollection(e) {
         let content = this.state.collection.content.slice();
         let flag = false;
@@ -285,6 +316,8 @@ class MakingCollection extends React.Component {
                         public: true,
                         word_lan: { lan: 'en-US', text: '英文' },
                         definition_lan: { lan: 'en-US', text: '英文' },
+                        user_id: this.props.login.user_id,
+                        author: this.props.login.user_name,
                         content: [{
                             word: '',
                             definition: '',
@@ -340,7 +373,13 @@ class MakingCollection extends React.Component {
                         <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                 </div>
-                <div className='add-from-file'><span> + 從檔案匯入</span></div>
+
+                <div className='add-from-file'>
+                    <label onChange={this.uploadXlsx}> + 從 xlsx 檔案匯入<span style={{ color: 'silver' }}>（請將詞語放置 A 欄，定義放置 B 欄）</span>
+                        <input type='file' style={{ display: 'none' }} accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                    </label>
+                </div>
+
                 <div className='card_info'>
                     <div className='select-box'>
                         <select onChange={this.changeWordLan} value={this.state.collection.word_lan.lan}>

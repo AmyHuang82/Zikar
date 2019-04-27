@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     align-items: baseline;
+    margin-bottom: 20px;
 }
 
 .collection_info > input {
@@ -21,15 +22,15 @@
 
 .content > .add-from-file {
     width: 100%;
-    margin: 10px 0 20px 0; 
-    color: #333333;
+    margin: -10px 0 20px 0;
+    color: #5F5F5F;
 }
 
-.content > .add-from-file > span {
+.content > .add-from-file > label {
     cursor: pointer;
 }
 
-.content > .add-from-file > span:hover {
+.content > .add-from-file > label:hover {
     color: rgb(1, 192, 192);
 }
 
