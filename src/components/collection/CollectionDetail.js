@@ -11,7 +11,7 @@ class CollectionDetail extends React.Component {
         super(props);
 
         this.state = {
-            collection: props.collection,
+            collection: null,
             currentIndex: 0,
             nextAnimation: '',
             deleteState: false,
@@ -101,9 +101,9 @@ class CollectionDetail extends React.Component {
         let exchangeData = this.state.collection.content.slice();
         let currentWord;
         for (let i = 0; i < exchangeData.length; i++) {
-            currentWord = exchangeData[i].word;
-            exchangeData[i].word = exchangeData[i].definition;
-            exchangeData[i].definition = currentWord;
+            currentWord = exchangeData[i].showWord;
+            exchangeData[i].showWord = exchangeData[i].showDef;
+            exchangeData[i].showDef = currentWord;
         }
         // 把語言交換
         let currentWordLan = this.state.collection.word_lan;
@@ -141,13 +141,23 @@ class CollectionDetail extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.collection !== prevProps.collection) {
-            let copyCollection = this.props.collection;
-            this.setState({ collection: copyCollection });
+            // 設定showWord與showDef
+            let newContent = this.props.collection.content.slice();
+            for (let i = 0; i < newContent.length; i++) {
+                newContent[i].showWord = newContent[i].word;
+                newContent[i].showDef = newContent[i].definition;
+            }
+            this.setState({
+                collection: {
+                    ...this.props.collection,
+                    content: newContent
+                }
+            });
         }
     }
 
     componentDidMount() {
-        let iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+        let iOS = !!navigator.platform && /iPhone|iPod/.test(navigator.platform);
         if (iOS) {
             this.setState({ iOSdevice: true });
         }
@@ -156,6 +166,20 @@ class CollectionDetail extends React.Component {
             this.setState({ mobile: true });
         }
         document.body.addEventListener('keyup', this.keyHandle);
+        if (this.props.collection !== null) {
+            // 設定showWord與showDef
+            let newContent = this.props.collection.content.slice();
+            for (let i = 0; i < newContent.length; i++) {
+                newContent[i].showWord = newContent[i].word;
+                newContent[i].showDef = newContent[i].definition;
+            }
+            this.setState({
+                collection: {
+                    ...this.props.collection,
+                    content: newContent
+                }
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -247,8 +271,8 @@ class CollectionDetail extends React.Component {
                                     key={index}
                                     label={index}
                                     currentIndex={currentIndex}
-                                    word={card.word}
-                                    definition={card.definition}
+                                    word={card.showWord}
+                                    definition={card.showDef}
                                     picture={card.pictureURL}
                                     familiarity={card.familiarity}
                                     word_lan={this.state.collection.word_lan.lan}

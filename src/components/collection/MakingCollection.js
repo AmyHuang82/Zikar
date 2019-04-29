@@ -300,7 +300,7 @@ class MakingCollection extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.match.params.id !== 'new') {
+        if (this.props.match.params.id !== 'new' && this.props.editCollection !== null) {
             this.setState({ collection: this.props.editCollection });
         }
         this.props.resetSubmitStatus();
@@ -336,6 +336,8 @@ class MakingCollection extends React.Component {
                         }]
                     }
                 });
+            } else {
+                this.setState({ collection: this.props.editCollection });
             }
         }
     }

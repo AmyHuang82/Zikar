@@ -21,9 +21,9 @@ function loginReducer(state = defaultState, action) {
                 ...state,
                 loginState: {
                     login: true,
-                    user_name: action.user.displayName,
+                    user_name: action.user.displayName ? action.user.displayName : '匿名訪客',
                     user_id: action.user.uid,
-                    user_photo: action.user.photoURL
+                    user_photo: action.user.photoURL ? action.user.photoURL : '/image/user.svg'
                 }
             }
 

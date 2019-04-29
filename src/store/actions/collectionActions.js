@@ -61,11 +61,16 @@ export function copyToSelfCollection(id, user) {
                 + minute;
 
             let copyData = collection.data();
+            let copyContent = copyData.content.slice();
+            for (let i = 0; i < copyContent.length; i++) {
+                copyContent[i].familiarity = 0;
+            }
             copyData = {
                 ...copyData,
+                content: copyContent,
                 copyFromOther: true,
                 user_id: user.user_id,
-                user_name: user.user_name,
+                author: user.user_name,
                 timestamp: datetime
             }
 
@@ -91,9 +96,16 @@ export const UPDATE_COLLECTION = 'UPDATE_COLLECTION';
 export function updateCollection(collection, id, typeStr) {
     return (dispatch, getState, { getFirestore }) => {
 
+        let newContent = collection.content.slice();
+        for (let i = 0; i < newContent.length; i++) {
+            delete newContent[i]["showWord"];
+            delete newContent[i]["showDef"];
+        }
+
         const firestore = getFirestore();
         firestore.collection('collection').doc(id).set({
-            ...collection
+            ...collection,
+            content: newContent
         }).then(() => {
             dispatch({ type: UPDATE_COLLECTION, typeStr });
         }).catch((error) => {

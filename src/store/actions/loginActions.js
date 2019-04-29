@@ -4,19 +4,27 @@ export function loginToWeb(provider) {
 
         const firebase = getFirebase();
 
-        if (provider === 'facebook') {
-            provider = new firebase.auth.FacebookAuthProvider();
+        if (provider !== '') {
+            if (provider === 'facebook') {
+                provider = new firebase.auth.FacebookAuthProvider();
+            } else if (provider === 'google') {
+                provider = new firebase.auth.GoogleAuthProvider();
+            }
+
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                let user = result.user;
+                dispatch({ type: LOGIN_TO_WEB, user });
+            }).catch(function (error) {
+                console.log(error);
+                alert('發生問題請再試一次');
+            });
         } else {
-            provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInAnonymously().catch(function (error) {
+                alert('發生問題請再試一次');
+                console.log(error.message);
+            });
         }
 
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            let user = result.user;
-            dispatch({ type: LOGIN_TO_WEB, user });
-        }).catch(function (error) {
-            console.log(error);
-            alert('發生問題請再試一次');
-        });
     }
 }
 

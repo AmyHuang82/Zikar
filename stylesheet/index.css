@@ -263,8 +263,12 @@ header > .container > .search_bar_mobile {
     background-color: #254ea6;
 }
 
-.modal > .actions > button:last-child {
+.modal > .actions > button:nth-child(2) {
     background-color: #d84134;
+}
+
+.modal > .actions > button:nth-child(3) {
+    background-color: #686868;
 }
 
 .modal > .actions > button > img {

@@ -241,6 +241,7 @@ const mapStateToProps = (state, ownProps) => {
             doneTest = true;
         }
     }
+
     return {
         collection: collection,
         allNewRound: allNewRound,

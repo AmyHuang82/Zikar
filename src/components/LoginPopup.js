@@ -13,8 +13,10 @@ class LoginPopup extends React.Component {
         let provider;
         if (e.target.textContent === '使用 Facebook 登入') {
             provider = 'facebook';
-        } else {
+        } else if (e.target.textContent === '使用 Google 登入') {
             provider = 'google';
+        } else {
+            provider = '';
         }
         this.props.login_reducer(provider);
     }
@@ -49,6 +51,14 @@ class LoginPopup extends React.Component {
                                 <img src="../../image/google.svg" />
                                 使用 Google 登入
                             </button>
+
+                            {/* <button
+                                className="button"
+                                onClick={this.login}
+                            >
+                                <img src="../../image/user.svg" />
+                                使用訪客模式登入
+                            </button> */}
                         </div>
                     </div>
                 </div>
