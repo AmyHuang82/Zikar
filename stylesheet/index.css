@@ -76,6 +76,7 @@ header > .container > .log_out:hover {
 
 header > .container > .add_card {
     margin-right: auto;
+    cursor: pointer;
 }
 
 header > .container > .search_bar {

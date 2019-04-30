@@ -192,15 +192,25 @@ class CollectionDetail extends React.Component {
         let notSelf = false;
         let publicClose = false;
         let user_uid = this.props.login.user_id;
+        let copyCollectionBtn;
 
         if (this.state.collection !== null) {
             card = [this.state.collection.content[currentIndex]];
 
             if (this.state.collection.user_id !== user_uid) {
                 notSelf = true;
+                copyCollectionBtn =
+                    <div className='feature_block' style={{ display: notSelf ? 'flex' : 'none' }} onClick={this.copyHandler}>
+                        <div className='add_to_learn block_img'></div>
+                        <div>複製學習</div>
+                    </div>;
                 if (!this.state.collection.public) {
                     publicClose = true;
                 }
+            }
+
+            if (user_uid === 'anonymous') {
+                copyCollectionBtn = '';
             }
         }
 
@@ -234,10 +244,7 @@ class CollectionDetail extends React.Component {
                             <div className='card_test block_img'></div>
                             <div>字卡測驗</div>
                         </Link>
-                        <div className='feature_block' style={{ display: notSelf ? 'flex' : 'none' }} onClick={this.copyHandler}>
-                            <div className='add_to_learn block_img'></div>
-                            <div>複製學習</div>
-                        </div>
+                        {copyCollectionBtn}
                         <Link className='feature_block' to={'/MatchGame/' + this.props.match.params.id}>
                             <div className='match_game block_img'></div>
                             <div>配對遊戲</div>

@@ -3,11 +3,17 @@ import React from 'react';
 class MakingCard extends React.Component {
     constructor(props) {
         super(props);
+        this.textInput = React.createRef();
+        this.focusTextInput = this.focusTextInput.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
         this.uploadImgHandler = this.uploadImgHandler.bind(this);
         this.deleteImgHandler = this.deleteImgHandler.bind(this);
         this.wordInputHandler = this.wordInputHandler.bind(this);
         this.defInputHandler = this.defInputHandler.bind(this);
+    }
+
+    focusTextInput() {
+        this.textInput.current.focus();
     }
 
     wordInputHandler(e) {
@@ -30,6 +36,12 @@ class MakingCard extends React.Component {
         this.props.deleteCard(this.props);
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.empty !== this.props.empty) {
+            this.focusTextInput();
+        }
+    }
+
     render() {
         let pictureStatue;
         if (this.props.pictureName === '') {
@@ -42,7 +54,7 @@ class MakingCard extends React.Component {
 
         return (
             <div className='making_card ease'>
-                <input placeholder='詞語' onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
+                <input placeholder='詞語' ref={this.textInput} onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
                 <input placeholder='定義' onChange={this.defInputHandler} value={this.props.definition} style={{ borderBottom: this.props.empty }} />
                 {pictureStatue}
                 <div onClick={this.deleteHandler} className='delete_card' title='刪除字卡'></div>

@@ -11,8 +11,12 @@
 }
 
 .collection_info select {
-    width: 95%;
+    width: 99%;
     font-size: 14px;
+    background-image: url(/image/arrow.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 25px;
 }
 
 .collection_info > .select-box {
@@ -48,8 +52,12 @@
 }
 
 .content > .card_info .select-box select {
-    width: 95%;
+    width: 99%;
     font-size: 14px;
+    background-image: url(/image/arrow.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 25px;
 }
 
 .making_card {

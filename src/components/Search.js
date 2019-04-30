@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { alreadyHadCollection, getCollection } from '../store/actions/collectionActions';
 import Collection from './collection/Collection';
 
-class Dashboard extends React.Component {
+class Search extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -20,34 +19,23 @@ class Dashboard extends React.Component {
     render() {
         let user_uid = this.props.login.user_id;
         let collectionInfo = this.props.collectionInfo;
-        let addNewDisplay = true;
+        let searchEmpty = false;
         let pageLocation = '';
 
+        let keyword = this.props.match.params.keyword;
         if (collectionInfo !== undefined) {
-            collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
+            collectionInfo = collectionInfo.filter(item => item.user_id === user_uid || item.public);
+            collectionInfo = collectionInfo.filter(item => item.title.includes(keyword));
             if (collectionInfo.length === 0) {
-                this.props.alreadyHadCollection(false);
+                searchEmpty = true;
                 pageLocation = '';
             } else {
-                this.props.alreadyHadCollection(true);
-                pageLocation = <div className="page_location">你的字卡集（{collectionInfo.length}）</div>;
+                pageLocation = <div className="page_location">搜尋結果（{collectionInfo.length}）</div>;
             }
-            addNewDisplay = this.props.hadCollection;
-        }
-
-        if (user_uid === 'anonymous') {
-            return <Redirect to='/Recent/' />
         }
 
         return (
             <div className='content'>
-                <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'none' }} >
-                    <img className='loading' src='../../image/loading.gif' />
-                </div>
-                <div className="white-overlay" style={{ display: addNewDisplay ? 'none' : 'flex' }}>
-                    <Link to='/MakingCards/new' className='new_card' exact></Link>
-                </div>
-
                 {pageLocation}
                 {
                     collectionInfo && collectionInfo.map((collection, index) => {
@@ -66,6 +54,7 @@ class Dashboard extends React.Component {
                         />
                     })
                 }
+                <h2 className='search_none' style={{ display: searchEmpty ? 'block' : 'none' }}>抱歉！無此關鍵字字卡集<br />請使用其他關鍵字試試看</h2>
             </div>
         )
     }
@@ -73,7 +62,6 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        hadCollection: state.collection.collectionEmpty,
         getData: state.collection.getCollection,
         collectionInfo: state.firestore.ordered.collection,
         login: state.login.loginState
@@ -96,4 +84,4 @@ export default compose(
     firestoreConnect([
         { collection: 'collection', orderBy: ['timestamp', 'desc'] }
     ])
-)(Dashboard);
+)(Search);

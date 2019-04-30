@@ -56,6 +56,8 @@ class MakingCollection extends React.Component {
             ]
         }
 
+        this.textInput = React.createRef();
+        this.focusTextInput = this.focusTextInput.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.changePublicState = this.changePublicState.bind(this);
         this.changeWordLan = this.changeWordLan.bind(this);
@@ -68,6 +70,10 @@ class MakingCollection extends React.Component {
         this.deleteImg = this.deleteImg.bind(this);
         this.uploadXlsx = this.uploadXlsx.bind(this);
         this.submitCollection = this.submitCollection.bind(this);
+    }
+
+    focusTextInput() {
+        this.textInput.current.focus();
     }
 
     changeTitle(e) {
@@ -289,6 +295,7 @@ class MakingCollection extends React.Component {
 
         if (this.state.collection.title === '') {
             this.setState({ borderBottom: '3px solid red' });
+            this.focusTextInput();
         } else if (flag) {
             return;
         } else if (e.target.textContent === '建立') {
@@ -366,13 +373,12 @@ class MakingCollection extends React.Component {
         return (
             <div className='content'>
                 <div className='collection_info'>
-                    <input placeholder='字卡集標題' onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
+                    <input placeholder='字卡集標題' ref={this.textInput} onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
                     <div className='select-box'>
                         <select onChange={this.changePublicState} value={publicState}>
                             <option value='open'>公開</option>
                             <option value='close'>不公開</option>
                         </select>
-                        <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                 </div>
 
@@ -391,7 +397,6 @@ class MakingCollection extends React.Component {
                                 })
                             }
                         </select>
-                        <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                     <div className='select-box'>
                         <select onChange={this.changeDefinitionLan} value={this.state.collection.definition_lan.lan}>
@@ -401,7 +406,6 @@ class MakingCollection extends React.Component {
                                 })
                             }
                         </select>
-                        <img className='arrow' src='../../image/arrow.svg' />
                     </div>
                     {
                         this.state.collection.content.map((content, index) => {

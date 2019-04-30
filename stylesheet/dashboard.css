@@ -48,8 +48,9 @@
 .search_none {
     margin: 30px auto;
     text-align: center;
-    color: #636363;
+    color: #979797;
     line-height: 50px;
+    font-weight: 300;
 }
 
 .white-overlay {
@@ -78,6 +79,12 @@
 .white-overlay .new_card:hover {
     background: url('/image/new_card_sprite.svg') -200px 0;
     background-size: 400px 200px;
+}
+
+.page_location {
+    width: 100%;
+    margin: 0 11px 11px 11px;
+    color: #979797;
 }
 
 @media screen and (max-width: 800px) {

@@ -10,13 +10,15 @@ class Header extends React.Component {
         this.state = {
             logoutBlock: false,
             logoutState: false,
-            keyword: ''
+            keyword: '',
+            loginRequest: false
         }
         this.openSearchBarToggle = this.openSearchBarToggle.bind(this);
         this.logoutBlockToggle = this.logoutBlockToggle.bind(this);
         this.logout = this.logout.bind(this);
         this.searchKeyword = this.searchKeyword.bind(this);
         this.startSearch = this.startSearch.bind(this);
+        this.loginRequestPopup = this.loginRequestPopup.bind(this);
     }
 
     openSearchBarToggle() {
@@ -41,25 +43,58 @@ class Header extends React.Component {
         if (this.state.keyword !== '') {
             window.location.hash = '/Search/' + this.state.keyword;
             this.setState({ keyword: '' });
+            this.openSearchBarToggle();
+        }
+    }
+
+    loginRequestPopup(e) {
+        if (e.target.textContent === '取消') {
+            this.setState({ loginRequest: false });
+        } else {
+            this.setState({ loginRequest: true });
         }
     }
 
     render() {
-        if (this.state.logoutState) return <Redirect to='/' />
+        if (this.state.logoutState) return <Redirect to='/' />;
+
+        let logOutWord;
+        let addNewCollectionShow;
+        if (this.props.loginState.user_id === 'anonymous') {
+            logOutWord = '登 入';
+            addNewCollectionShow =
+                <div onClick={this.loginRequestPopup} className='add_card'>
+                    <img className='add_card icon' src='../../image/add card.svg' />
+                    <p>建立字卡</p>
+                </div>;
+        } else {
+            logOutWord = '登 出';
+            addNewCollectionShow =
+                <Link to='/MakingCards/new' exact className='add_card'>
+                    <img className='add_card icon' src='../../image/add card.svg' />
+                    <p>建立字卡</p>
+                </Link>;
+        }
 
         return (
             <header>
+                <div className="popup-overlay" style={{ display: this.state.loginRequest ? 'flex' : 'none' }}>
+                    <div className="deletecheck-popup">
+                        <p style={{ zIndex: 5 }}>立即登入建立自己的字卡<br />體驗完整功能！</p>
+                        <button className='cancel' onClick={this.loginRequestPopup}>取消</button>
+                        <button className='confirm' onClick={this.logout}>登入</button>
+                        <div className='deletecheck-popup-background'></div>
+                    </div>
+                </div>
+
                 <div className='container'>
                     <Link to='/' exact style={{ padding: 0 }}>
                         <img src={'../../image/Logo.svg'} className='logo' />
                     </Link>
-                    <Link to='/MakingCards/new' exact className='add_card'>
-                        <img className='add_card icon' src='../../image/add card.svg' />
-                        <p>建立字卡</p>
-                    </Link>
+                    {addNewCollectionShow}
                     {this.props.children}
                     <form className='search_bar' onSubmit={this.startSearch}>
-                        <input className='search_input' onChange={this.searchKeyword} value={this.state.keyword} />
+                        <input className='search_input' onChange={this.searchKeyword} value={this.state.keyword} placeholder='搜尋全站字卡集' />
                         <img className='search_btn icon' src='../../image/search.svg' onClick={this.startSearch} />
                     </form>
                     <div className='search_bar_mobile'>
@@ -77,11 +112,11 @@ class Header extends React.Component {
                             style={{ display: this.props.searchBarToggle ? 'flex' : 'none' }}
                             onSubmit={this.startSearch}
                         >
-                            <input className='search_input' onChange={this.searchKeyword} value={this.state.keyword} />
+                            <input className='search_input' onChange={this.searchKeyword} value={this.state.keyword} placeholder='搜尋全站字卡集' />
                             <img className='search_btn_down icon' src='../../image/search.svg' onClick={this.startSearch} />
                         </form>
                     </div>
-                    <div className='log_out' style={{ display: this.state.logoutBlock ? 'block' : 'none' }} onClick={this.logout}>登 出</div>
+                    <div className='log_out' style={{ display: this.state.logoutBlock ? 'block' : 'none' }} onClick={this.logout}>{logOutWord}</div>
                     <div className='member icon'
                         style={{ backgroundImage: this.props.loginState.login ? `url(${this.props.loginState.user_photo})` : `url('../../image/user.svg')` }}
                         onClick={this.logoutBlockToggle}

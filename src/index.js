@@ -24,6 +24,8 @@ import CollectionDetail from './components/collection/CollectionDetail';
 import MakingCollection from './components/collection/MakingCollection';
 import Test from './components/test/Test';
 import MatchGame from './components/MatchGame';
+import Search from './components/Search';
+import Recent from './components/Recent';
 
 // 建立 store，把 reducer 傳進去
 let store = createStore(rootReducer,
@@ -42,7 +44,8 @@ class Main extends React.Component {
                     <LoginPopup />
                     <Background />
                     <Route path="/" exact component={Dashboard} />
-                    <Route path="/Search/:keyword" exact component={Dashboard} />
+                    <Route path="/Recent/" exact component={Recent} />
+                    <Route path="/Search/:keyword" exact component={Search} />
                     <Route path="/Collection/:id" exact component={CollectionDetail} />
                     <Route path="/MakingCards/:id" exact component={MakingCollection} />
                     <Route path="/Test/:id" exact component={Test} />

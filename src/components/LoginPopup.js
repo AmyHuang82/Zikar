@@ -52,13 +52,13 @@ class LoginPopup extends React.Component {
                                 使用 Google 登入
                             </button>
 
-                            {/* <button
+                            <button
                                 className="button"
                                 onClick={this.login}
                             >
                                 <img src="../../image/user.svg" />
-                                使用訪客模式登入
-                            </button> */}
+                                使用 訪客身份 瀏覽
+                            </button>
                         </div>
                     </div>
                 </div>

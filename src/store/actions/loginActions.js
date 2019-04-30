@@ -19,10 +19,12 @@ export function loginToWeb(provider) {
                 alert('發生問題請再試一次');
             });
         } else {
-            firebase.auth().signInAnonymously().catch(function (error) {
-                alert('發生問題請再試一次');
-                console.log(error.message);
-            });
+            let user = {
+                displayName: '訪客',
+                uid: 'anonymous',
+                photoURL: null
+            }
+            dispatch({ type: LOGIN_TO_WEB, user });
         }
 
     }
