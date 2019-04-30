@@ -17,8 +17,8 @@ class MakingCollection extends React.Component {
                 public: true,
                 word_lan: { lan: 'en-US', text: '英文' },
                 definition_lan: { lan: 'en-US', text: '英文' },
-                user_id: props.login.user_id,
-                author: props.login.user_name,
+                user_id: '',
+                author: '',
 
                 content: [{
                     word: '',
@@ -344,7 +344,9 @@ class MakingCollection extends React.Component {
                     }
                 });
             } else {
-                this.setState({ collection: this.props.editCollection });
+                if (this.props.editCollection !== null) {
+                    this.setState({ collection: this.props.editCollection });
+                }
             }
         }
     }
