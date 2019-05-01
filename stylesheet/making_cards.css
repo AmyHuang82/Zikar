@@ -85,8 +85,7 @@
 }
 
 .making_card .delete_card,
-.making_card .add_image,
-.making_card .delete_image {
+.making_card .add_image {
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -99,14 +98,14 @@
     background-size: cover;
 }
 
-.making_card .delete_image {
-    background: url('/image/make_card_sprite.svg') 0 -80px;
-    background-size: 80px 120px;
-}
-
-.making_card .delete_image:hover {
-    background: url('/image/make_card_sprite.svg') -40px -80px;
-    background-size: 80px 120px;
+.making_card .preview_image {
+    width: 24px;
+    height: 24px;
+    margin: 8px;
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .making_card .add_image {

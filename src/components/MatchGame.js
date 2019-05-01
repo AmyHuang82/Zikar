@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class MatchGame extends React.Component {
     constructor(props) {
@@ -163,6 +163,7 @@ class MatchGame extends React.Component {
     }
 
     render() {
+        if (!this.props.login.login) return <Redirect to='/' />
         return (
             <div className='content game_area'>
                 <Link className='back_to_collection' to={'/Collection/' + this.props.match.params.id}></Link>
@@ -198,7 +199,8 @@ const mapStateToProps = (state, ownProps) => {
     const collections = state.firestore.data.collection;
     const collectionContent = collections ? collections[id].content : null;
     return {
-        collectionContent: collectionContent
+        collectionContent: collectionContent,
+        login: state.login.loginState
     }
 }
 

@@ -214,7 +214,7 @@ class CollectionDetail extends React.Component {
             }
         }
 
-        if (this.state.deleteState || publicClose) return <Redirect to='/' />
+        if (this.state.deleteState || publicClose || !this.props.login.login) return <Redirect to='/' />
 
         return (
             <div className="content">

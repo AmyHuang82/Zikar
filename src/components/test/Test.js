@@ -176,7 +176,7 @@ class Test extends React.Component {
             }
         }
 
-        if (notSelf) return <Redirect to='/' />
+        if (notSelf || !this.props.login.login) return <Redirect to='/' />
 
         return (
             <div className='content'>

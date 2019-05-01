@@ -366,7 +366,7 @@ class MakingCollection extends React.Component {
             publicState = 'close';
         }
 
-        if (this.state.submitOK === '建立') {
+        if (this.state.submitOK === '建立' || !this.props.login.login || this.props.login.user_id === 'anonymous') {
             return <Redirect to='/' />
         } else if (this.state.submitOK === '更新') {
             return <Redirect to={'/Collection/' + this.props.match.params.id} />
@@ -417,6 +417,7 @@ class MakingCollection extends React.Component {
                                 word={content.word}
                                 definition={content.definition}
                                 pictureName={content.pictureName}
+                                pictureURL={content.pictureURL}
                                 wordChange={this.wordChange}
                                 definitionChange={this.definitionChange}
                                 deleteCard={this.deleteCard}

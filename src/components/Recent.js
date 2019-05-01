@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { Redirect } from 'react-router-dom';
 import { getCollection } from '../store/actions/collectionActions';
 import Collection from './collection/Collection';
 
@@ -20,6 +21,8 @@ class Recent extends React.Component {
     }
 
     render() {
+        if (!this.props.login.login) return <Redirect to='/' />
+
         let collectionInfo = this.props.collectionInfo;
 
         if (collectionInfo !== undefined) {
@@ -57,6 +60,7 @@ const mapStateToProps = (state) => {
     return {
         getData: state.collection.getCollection,
         collectionInfo: state.firestore.ordered.collection,
+        login: state.login.loginState
     }
 }
 

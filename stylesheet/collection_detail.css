@@ -469,18 +469,20 @@
     line-height: 30px;
 }
 
-.content .show_card .img_wrap {
+.img_wrap {
     width: 50%;
     padding-bottom: 50%;
     position: relative;
     margin-bottom: 10px;
 }
 
-.content .show_card .img_wrap img {
+.img_wrap img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .content .show_card_hover {
