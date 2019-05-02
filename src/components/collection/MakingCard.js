@@ -29,7 +29,7 @@ class MakingCard extends React.Component {
     }
 
     uploadImgHandler(e) {
-        this.props.uploadImg(this.props, e);
+        this.props.compressImg(this.props, e);
     }
 
     deleteImgHandler() {

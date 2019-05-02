@@ -66,6 +66,7 @@ class MakingCollection extends React.Component {
         this.definitionChange = this.definitionChange.bind(this);
         this.addNewCard = this.addNewCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
+        this.compressImg = this.compressImg.bind(this);
         this.uploadImg = this.uploadImg.bind(this);
         this.deleteImg = this.deleteImg.bind(this);
         this.uploadXlsx = this.uploadXlsx.bind(this);
@@ -183,42 +184,72 @@ class MakingCollection extends React.Component {
         }
     }
 
-    uploadImg(card, e) {
-        let newContentData = this.state.collection.content.slice();
+    compressImg(card, e) {
+        let oringinFile = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(oringinFile);
+        reader.onload = (e) => {
+            // 先建立image放入src
+            let img = new Image();
+            img.src = e.target.result;
+            // 讀取img資料
+            img.onload = () => {
+                if (img.width > 299) {
+                    // 建立canvas並開始設定
+                    const elem = document.createElement('canvas');
+                    const width = 300;
+                    // 維持比例
+                    const scaleFactor = width / img.width;
+                    elem.width = width;
+                    elem.height = img.height * scaleFactor;
+                    const ctx = elem.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
+                    ctx.canvas.toBlob((blob) => {
+                        const compressFile = new File([blob], oringinFile.name, {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        this.uploadImg(card, compressFile);
+                    }, 'image/jpeg', 1);
+                } else {
+                    this.uploadImg(card, oringinFile);
+                }
+            }
+        }
+    }
 
-        if (e.target.files[0]) {
-            const image = (e.target.files[0]);
-            let name = new Date().getTime() + image.name;
-            const uplaodTask = storage.ref(`images/${name}`).put(image);
-            uplaodTask.on('state_changed',
-                () => {
-                    // console.log(snapshot);
-                    newContentData[card.label].pictureName = 'loading';
+    uploadImg(card, image) {
+        let newContentData = this.state.collection.content.slice();
+        let name = new Date().getTime() + image.name;
+        const uplaodTask = storage.ref(`images/${name}`).put(image);
+        uplaodTask.on('state_changed',
+            () => {
+                // console.log(snapshot);
+                newContentData[card.label].pictureName = 'loading';
+                this.setState({
+                    collection: {
+                        ...this.state.collection,
+                        content: newContentData
+                    }
+                });
+            },
+            (error) => {
+                alert('圖片上傳發生問題請再試一次');
+                console.log(error);
+            },
+            () => {
+                storage.ref('images').child(name).getDownloadURL().then(url => {
+                    newContentData[card.label].pictureURL = url;
+                    newContentData[card.label].pictureName = name;
                     this.setState({
                         collection: {
                             ...this.state.collection,
                             content: newContentData
                         }
                     });
-                },
-                (error) => {
-                    alert('圖片上傳發生問題請再試一次');
-                    console.log(error);
-                },
-                () => {
-                    storage.ref('images').child(name).getDownloadURL().then(url => {
-                        newContentData[card.label].pictureURL = url;
-                        newContentData[card.label].pictureName = name;
-                        this.setState({
-                            collection: {
-                                ...this.state.collection,
-                                content: newContentData
-                            }
-                        });
-                    })
-                }
-            )
-        }
+                })
+            }
+        )
     }
 
     deleteImg(card) {
@@ -422,7 +453,7 @@ class MakingCollection extends React.Component {
                                 definitionChange={this.definitionChange}
                                 deleteCard={this.deleteCard}
                                 empty={content.empty}
-                                uploadImg={this.uploadImg}
+                                compressImg={this.compressImg}
                                 deleteImg={this.deleteImg}
                             />
                         })
