@@ -25,12 +25,12 @@ class Search extends React.Component {
         let keyword = this.props.match.params.keyword;
         if (collectionInfo !== undefined) {
             collectionInfo = collectionInfo.filter(item => item.user_id === user_uid || item.public);
-            collectionInfo = collectionInfo.filter(item => item.title.includes(keyword));
+            collectionInfo = collectionInfo.filter(item => item.title.toUpperCase().includes(keyword.toUpperCase()) || item.author.toUpperCase().includes(keyword.toUpperCase()) || item.definition_lan.text.includes(keyword) || item.word_lan.text.includes(keyword));
             if (collectionInfo.length === 0) {
                 searchEmpty = true;
                 pageLocation = '';
             } else {
-                pageLocation = <div className="page_location">搜尋結果（{collectionInfo.length}）</div>;
+                pageLocation = <div className="page_location page_active">搜尋結果（{collectionInfo.length}）</div>;
             }
         }
 
@@ -51,6 +51,7 @@ class Search extends React.Component {
                             id={collection.id}
                             public={collection.public}
                             copyFromOther={collection.copyFromOther}
+                            user_photo={collection.user_photo}
                         />
                     })
                 }

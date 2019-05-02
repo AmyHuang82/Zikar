@@ -33,7 +33,7 @@ class Recent extends React.Component {
         return (
             <div className='content'>
 
-                <div className="page_location">全站近期新增</div>
+                <div className="page_location page_active">全站近期新增</div>
                 {
                     collectionInfo && collectionInfo.map((collection, index) => {
                         return <Collection
@@ -48,6 +48,7 @@ class Recent extends React.Component {
                             id={collection.id}
                             public={collection.public}
                             copyFromOther={collection.copyFromOther}
+                            user_photo={collection.user_photo}
                         />
                     })
                 }

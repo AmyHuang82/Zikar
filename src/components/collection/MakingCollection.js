@@ -17,9 +17,9 @@ class MakingCollection extends React.Component {
                 public: true,
                 word_lan: { lan: 'en-US', text: '英文' },
                 definition_lan: { lan: 'en-US', text: '英文' },
-                user_id: '',
-                author: '',
-
+                user_photo: this.props.login.user_photo,
+                user_id: this.props.login.user_id,
+                author: this.props.login.user_name,
                 content: [{
                     word: '',
                     definition: '',
@@ -354,6 +354,7 @@ class MakingCollection extends React.Component {
                         public: true,
                         word_lan: { lan: 'en-US', text: '英文' },
                         definition_lan: { lan: 'en-US', text: '英文' },
+                        user_photo: this.props.login.user_photo,
                         user_id: this.props.login.user_id,
                         author: this.props.login.user_name,
                         content: [{

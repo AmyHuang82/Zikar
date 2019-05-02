@@ -16,7 +16,6 @@ class CollectionDetail extends React.Component {
             nextAnimation: '',
             deleteState: false,
             deleteCheck: false,
-            iOSdevice: false,
             mobile: false,
             showHotKeyHint: false
         }
@@ -157,10 +156,6 @@ class CollectionDetail extends React.Component {
     }
 
     componentDidMount() {
-        let iOS = !!navigator.platform && /iPhone|iPod/.test(navigator.platform);
-        if (iOS) {
-            this.setState({ iOSdevice: true });
-        }
         let mobile = !!navigator.userAgent && /(mobile)/i.test(navigator.userAgent);
         if (mobile) {
             this.setState({ mobile: true });
@@ -285,7 +280,6 @@ class CollectionDetail extends React.Component {
                                     word_lan={this.state.collection.word_lan.lan}
                                     definition_lan={this.state.collection.definition_lan.lan}
                                     nextAnimation={this.state.nextAnimation}
-                                    iOSdevice={this.state.iOSdevice}
                                     length={this.props.collection.content.length}
                                     notSelf={notSelf}
                                 />

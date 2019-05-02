@@ -90,7 +90,7 @@ class Card extends React.Component {
                     <div className='show_card_hover' style={{ color: color, display: this.props.notSelf ? 'none' : 'block' }}><span>熟悉程度：</span>{this.props.familiarity}%</div>
                 </div>
                 <div className='card_feature'>
-                    <div onClick={this.speak} className='speak' style={{ backgroundPositionX: this.state.speakBackground, display: this.props.iOSdevice ? 'none' : 'block' }}></div>
+                    <div onClick={this.speak} className='speak' style={{ backgroundPositionX: this.state.speakBackground }}></div>
                 </div>
             </div>
         )

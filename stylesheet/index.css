@@ -166,7 +166,6 @@ header > .container > .search_bar_mobile {
 
 /* ----------- Background ---------- */
 .background {
-    overflow: hidden;
     width: 100vw;
     height: 160px;
     position: absolute;

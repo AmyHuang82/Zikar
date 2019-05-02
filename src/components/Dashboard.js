@@ -9,6 +9,20 @@ import Collection from './collection/Collection';
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            pageLocation: "self",
+            selfActive: "page_active",
+            wholeActive: ""
+        }
+        this.changePage = this.changePage.bind(this);
+    }
+
+    changePage(e) {
+        if (e.target.textContent === "全站近期新增") {
+            this.setState({ pageLocation: "whole", selfActive: "", wholeActive: "page_active" });
+        } else {
+            this.setState({ pageLocation: "self", selfActive: "page_active", wholeActive: "" });
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -21,16 +35,21 @@ class Dashboard extends React.Component {
         let user_uid = this.props.login.user_id;
         let collectionInfo = this.props.collectionInfo;
         let addNewDisplay = true;
-        let pageLocation = '';
 
         if (collectionInfo !== undefined) {
-            collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
+
+            if (this.state.pageLocation === "self") {
+                collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
+            } else {
+                collectionInfo = collectionInfo.filter(item => item.public);
+                collectionInfo.splice(9);
+            }
+
+            // 判斷有沒有創建過字卡集
             if (collectionInfo.length === 0) {
                 this.props.alreadyHadCollection(false);
-                pageLocation = '';
             } else {
                 this.props.alreadyHadCollection(true);
-                pageLocation = <div className="page_location">你的字卡集（{collectionInfo.length}）</div>;
             }
             addNewDisplay = this.props.hadCollection;
         }
@@ -44,11 +63,12 @@ class Dashboard extends React.Component {
                 <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'none' }} >
                     <img className='loading' src='../../image/loading.gif' />
                 </div>
-                <div className="white-overlay" style={{ display: addNewDisplay ? 'none' : 'flex' }}>
-                    <Link to='/MakingCards/new' className='new_card' exact></Link>
+                <div className="page_location" style={{ display: this.props.login.login ? 'flex' : 'none' }}>
+                    <div onClick={this.changePage} className={this.state.selfActive}>你的字卡集</div>
+                    <span>|</span>
+                    <div onClick={this.changePage} className={this.state.wholeActive}>全站近期新增</div>
                 </div>
-
-                {pageLocation}
+                <Link style={{ display: addNewDisplay ? 'none' : 'flex' }} to='/MakingCards/new' className='new_card' exact></Link>
                 {
                     collectionInfo && collectionInfo.map((collection, index) => {
                         return <Collection
@@ -63,6 +83,7 @@ class Dashboard extends React.Component {
                             id={collection.id}
                             public={collection.public}
                             copyFromOther={collection.copyFromOther}
+                            user_photo={collection.user_photo}
                         />
                     })
                 }

@@ -32,7 +32,7 @@ class LoginPopup extends React.Component {
                     <div className="modal">
                         <div className="header">
                             <img src='../../image/Logo.svg' />
-                            馬上登入建立字卡學習
+                            馬上登入 / 註冊建立字卡學習
                         </div>
 
                         <div className="actions">

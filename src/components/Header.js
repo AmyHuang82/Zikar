@@ -40,10 +40,12 @@ class Header extends React.Component {
 
     startSearch(e) {
         e.preventDefault();
-        if (this.state.keyword !== '') {
-            window.location.hash = '/Search/' + this.state.keyword;
+        if (this.state.keyword.trim() !== '') {
+            window.location.hash = '/Search/' + this.state.keyword.trim();
             this.setState({ keyword: '' });
             this.openSearchBarToggle();
+        } else {
+            this.setState({ keyword: '' });
         }
     }
 
@@ -80,7 +82,7 @@ class Header extends React.Component {
             <header>
                 <div className="popup-overlay" style={{ display: this.state.loginRequest ? 'flex' : 'none' }}>
                     <div className="deletecheck-popup">
-                        <p style={{ zIndex: 5 }}>立即登入建立自己的字卡<br />體驗完整功能！</p>
+                        <p style={{ zIndex: 5 }}>立即登入 / 註冊建立字卡<br />體驗完整功能！</p>
                         <button className='cancel' onClick={this.loginRequestPopup}>取消</button>
                         <button className='confirm' onClick={this.logout}>登入</button>
                         <div className='deletecheck-popup-background'></div>
