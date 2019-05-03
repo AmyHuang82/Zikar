@@ -464,9 +464,10 @@
 }
 
 .content .show_card p {
-    font-size: 30px;
+    font-size: 20px;
+    font-size: 3.5vh;
     color: #333333;
-    line-height: 30px;
+    margin: -10px auto;
 }
 
 .img_wrap {

@@ -1,14 +1,62 @@
 .collection {
     width: 30%;
+    min-height: 163px;
     padding: 10px 20px;
-    margin: 0 10px;
+    margin: 0 1.6666%;
     margin-bottom: 30px;
     background-color: white;
     box-shadow: 5px 5px 5px #dbdbdb;
-    border: 1px solid #dbdbdb;
+    outline: 1px solid #dbdbdb;
+    border-bottom: 2px solid white;
     color: #333333;
     cursor: pointer;
     position: relative;
+}
+
+.first_time_hint {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.first_time_hint h3 {
+    width: 100%;
+    margin: 0 2% 20px 2%;
+    color: rgb(1, 192, 192);
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+    border-bottom: 3px solid #FFE20E;
+    padding-bottom: 5px;
+}
+
+.first_time_hint .collection {
+    border: 1px dashed #dbdbdb;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    outline: none;
+}
+
+.first_time_hint .collection .wrap_new {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.first_time_hint .collection p{
+    text-align: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.first_time_hint .collection .search_lan{
+    display: block;
+    width: 30%;
+    padding-bottom: 30%;
+    margin: 0 auto;
+    background-size: cover;
 }
 
 .collection:hover {
@@ -20,6 +68,46 @@
     border-bottom: 3px solid #FFE20E;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+.collection .new_card {
+    background-image: url('/image/new_card.svg');
+}
+
+.collection:hover .new_card {
+    background-image: url('/image/new_card_hover.svg');
+}
+
+.collection .recent_card {
+    background-image: url('/image/light.svg');
+}
+
+.collection:hover .recent_card {
+    background-image: url('/image/light_hover.svg');
+}
+
+.collection .english {
+    background-image: url('/image/english.svg');
+}
+
+.collection .english:hover {
+    background-image: url('/image/english_hover.svg');
+}
+
+.collection .japanese {
+    background-image: url('/image/japanese.svg');
+}
+
+.collection .japanese:hover {
+    background-image: url('/image/japanese_hover.svg');
+}
+
+.collection .korean {
+    background-image: url('/image/korean.svg');
+}
+
+.collection .korean:hover {
+    background-image: url('/image/korean_hover.svg');
 }
 
 .collection .creator_grid {
@@ -82,22 +170,9 @@
     margin: auto;
 }
 
-.new_card {
-    width: 200px;
-    height: 200px;
-    margin: 15vh auto 0 auto;
-    background: url('/image/new_card_sprite.svg') 0 0;
-    background-size: 400px 200px;
-}
-
-.new_card:hover {
-    background: url('/image/new_card_sprite.svg') -200px 0;
-    background-size: 400px 200px;
-}
-
 .page_location {
     width: 100%;
-    margin: 0 11px 15px 15px;
+    margin: 0 2% 20px 2%;
     color: rgb(211, 211, 211);
     display: flex;
     flex-flow: row;

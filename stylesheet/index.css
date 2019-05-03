@@ -166,7 +166,7 @@ header > .container > .search_bar_mobile {
 
 /* ----------- Background ---------- */
 .background {
-    width: 100vw;
+    width: 100%;
     height: 160px;
     position: absolute;
     bottom: 0;

@@ -111,3 +111,8 @@ select {
     right: 0;
     top: 0;
 }
+
+/* 取消手機點擊hilight效果 */
+div {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

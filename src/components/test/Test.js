@@ -140,11 +140,12 @@ class Test extends React.Component {
 
     render() {
         // 判斷現在要顯現的題目
-        let index, definition;
+        let index, definition, word;
         if (this.state.randomIndexArray !== '') {
             if (this.state.randomIndexArray[this.state.questionCount] !== undefined) {
                 index = this.state.randomIndexArray[this.state.questionCount].index;
                 definition = this.props.collection.content[index].definition;
+                word = this.props.collection.content[index].word;
             }
         }
 
@@ -216,6 +217,8 @@ class Test extends React.Component {
                             outputColor={outputColor}
                             output={this.state.output}
                             nextQuestion={this.nextQuestion}
+                            definition={definition}
+                            word={word}
                         />
                     </div>
                 </div>

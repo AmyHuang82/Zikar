@@ -6,10 +6,6 @@ const defaultState = {
         user_name: '',
         user_id: '',
         user_photo: ''
-        // login: true,
-        // user_name: 'Amy Huang',
-        // user_id: "62aZObMlvFX35VJ8t8Vg1BfLedi1",
-        // user_photo: "https://graph.facebook.com/2213110725441835/picture"
     }
 }
 

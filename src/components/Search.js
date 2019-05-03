@@ -25,7 +25,8 @@ class Search extends React.Component {
         let keyword = this.props.match.params.keyword;
         if (collectionInfo !== undefined) {
             collectionInfo = collectionInfo.filter(item => item.user_id === user_uid || item.public);
-            collectionInfo = collectionInfo.filter(item => item.title.toUpperCase().includes(keyword.toUpperCase()) || item.author.toUpperCase().includes(keyword.toUpperCase()) || item.definition_lan.text.includes(keyword) || item.word_lan.text.includes(keyword));
+            //用toUpperCase全大寫和trim去除空格，讓搜尋更直觀
+            collectionInfo = collectionInfo.filter(item => item.title.toUpperCase().trim().includes(keyword.toUpperCase()) || item.author.toUpperCase().trim().includes(keyword.toUpperCase()) || item.definition_lan.text.trim().includes(keyword) || item.word_lan.text.trim().includes(keyword));
             if (collectionInfo.length === 0) {
                 searchEmpty = true;
                 pageLocation = '';

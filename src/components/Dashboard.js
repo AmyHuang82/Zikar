@@ -18,10 +18,10 @@ class Dashboard extends React.Component {
     }
 
     changePage(e) {
-        if (e.target.textContent === "全站近期新增") {
-            this.setState({ pageLocation: "whole", selfActive: "", wholeActive: "page_active" });
-        } else {
+        if (e.target.textContent === "你的字卡集") {
             this.setState({ pageLocation: "self", selfActive: "page_active", wholeActive: "" });
+        } else {
+            this.setState({ pageLocation: "whole", selfActive: "", wholeActive: "page_active" });
         }
     }
 
@@ -68,7 +68,31 @@ class Dashboard extends React.Component {
                     <span>|</span>
                     <div onClick={this.changePage} className={this.state.wholeActive}>全站近期新增</div>
                 </div>
-                <Link style={{ display: addNewDisplay ? 'none' : 'flex' }} to='/MakingCards/new' className='new_card' exact></Link>
+                <div style={{ display: this.props.login.login ? 'flex' : 'none', width: '100%' }}>
+                    <div style={{ display: addNewDisplay ? 'none' : 'flex' }} className='first_time_hint'>
+                        <h3>任選一個方式開始吧！</h3>
+                        <Link to='/MakingCards/new' exact className='collection'>
+                            <div className='wrap_new'>
+                                <div className='search_lan new_card'></div>
+                                <p>新建自己的字卡</p>
+                            </div>
+                        </Link>
+                        <div onClick={this.changePage} className='collection'>
+                            <div className='wrap_new'>
+                                <div className='search_lan recent_card'></div>
+                                <p>看看其他人的字卡</p>
+                            </div>
+                        </div>
+                        <div className='collection'>
+                            <div className='wrap_new'>
+                                <Link className='search_lan english' to='/Search/英文' exact></Link>
+                                <Link className='search_lan japanese' to='/Search/日文' exact></Link>
+                                <Link className='search_lan korean' to='/Search/韓文' exact></Link>
+                                <p>搜尋特定語言</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {
                     collectionInfo && collectionInfo.map((collection, index) => {
                         return <Collection
