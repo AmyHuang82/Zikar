@@ -12,23 +12,25 @@
 }
 
 .left-arrow {
-    background: url('/image/arrow_sprite.svg') 0 0;
+    background: url('/image/arrow_sprite.svg');
+    background-position: 0 0;
     background-size: 80px;
 }
 
 .left-arrow:hover {
-    background: url('/image/arrow_sprite.svg') -40px 0;
+    background-position: -40px 0;
     background-size: 80px;
     background-color: white;
 }
 
 .right-arrow {
-    background: url('/image/arrow_sprite.svg') 0 -40px;
+    background: url('/image/arrow_sprite.svg');
+    background-position: 0 -40px;
     background-size: 80px;
 }
 
 .right-arrow:hover {
-    background: url('/image/arrow_sprite.svg') -40px -40px;
+    background-position: -40px -40px;
     background-size: 80px;
     background-color: white;
 }
@@ -193,42 +195,46 @@
 }
 
 .feature_block .card_test {
-    background: url('/image/feature_sprite.svg') 0 0;
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 0;
     background-size: 130px 260px;
 }
 
 .feature_block:hover .card_test {
-    background: url('/image/feature_sprite.svg') -65px 0; 
+    background-position: -65px 0; 
     background-size: 130px 260px;
 }
 
 .feature_block .match_game {
-    background: url('/image/feature_sprite.svg') 0 -65px;
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 -65px;
     background-size: 130px 260px;
 }
 
 .feature_block:hover .match_game {
-    background: url('/image/feature_sprite.svg') -65px -65px;
+    background-position: -65px -65px;
     background-size: 130px 260px;
 }
 
 .feature_block .shuffle_card {
-    background: url('/image/feature_sprite.svg') 0 -130px;
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 -130px;
     background-size: 130px 260px;
 }
 
 .feature_block:hover .shuffle_card {
-    background: url('/image/feature_sprite.svg') -65px -130px;
+    background-position: -65px -130px;
     background-size: 130px 260px;
 }
 
 .feature_block .add_to_learn {
-    background: url('/image/feature_sprite.svg') 0 -195px;
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 -195px;
     background-size: 130px 260px;
 }
 
 .feature_block:hover .add_to_learn {
-    background: url('/image/feature_sprite.svg') -65px -195px;
+    background-position: -65px -195px;
     background-size: 130px 260px;
 }
 
@@ -274,51 +280,55 @@
 }
 
 .edit-feature_block .hot_key {
-    background: url('/image/card_feature_sprite.svg') 0 0;
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 0;
     background-size: 90px 180px;
     background-color: white;
 }
 
 
 .edit-feature_block:hover .hot_key {
-    background: url('/image/card_feature_sprite.svg') -45px 0;
+    background-position: -45px 0;
     background-size: 90px 180px;
     background-color: white;
 }
 
 .edit-feature_block .exchange_cards {
-    background: url('/image/card_feature_sprite.svg') 0 -45px;
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 -45px;
     background-size: 90px 180px;
     background-color: white;
 }
 
 
 .edit-feature_block:hover .exchange_cards {
-    background: url('/image/card_feature_sprite.svg') -45px -45px;
+    background-position: -45px -45px;
     background-size: 90px 180px;
     background-color: white;
 }
 
 .edit-feature_block .edit_collection {
-    background: url('/image/card_feature_sprite.svg') 0 -90px;
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 -90px;
     background-size: 90px 180px;
     background-color: white;
 }
 
 .edit-feature_block:hover .edit_collection {
-    background: url('/image/card_feature_sprite.svg') -45px -90px;
+    background-position: -45px -90px;
     background-size: 90px 180px;
     background-color: white;
 }
 
 .edit-feature_block .delete_collection {
-    background: url('/image/card_feature_sprite.svg') 0 -135px;
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 -135px;
     background-size: 90px 180px;
     background-color: white;
 }
 
 .edit-feature_block:hover .delete_collection {
-    background: url('/image/card_feature_sprite.svg') -45px -135px;
+    background-position: -45px -135px;
     background-size: 90px 180px;
     background-color: white;
 }
@@ -360,51 +370,55 @@
     }
 
     .edit-feature_block .hot_key {
-        background: url('/image/card_feature_sprite.svg') 0 0;
+        background: url('/image/card_feature_sprite.svg');
+        background-position: 0 0;
         background-size: 80px 160px;
         background-color: white;
     }
     
     
     .edit-feature_block:hover .hot_key {
-        background: url('/image/card_feature_sprite.svg') -40px 0;
+        background-position: -40px 0;
         background-size: 80px 160px;
         background-color: white;
     }
     
     .edit-feature_block .exchange_cards {
-        background: url('/image/card_feature_sprite.svg') 0 -40px;
+        background: url('/image/card_feature_sprite.svg');
+        background-position: 0 -40px;
         background-size: 80px 160px;
         background-color: white;
     }
     
     
     .edit-feature_block:hover .exchange_cards {
-        background: url('/image/card_feature_sprite.svg') -40px -40px;
+        background-position:  -40px -40px;
         background-size: 80px 160px;
         background-color: white;
     }
     
     .edit-feature_block .edit_collection {
-        background: url('/image/card_feature_sprite.svg') 0 -80px;
+        background: url('/image/card_feature_sprite.svg');
+        background-position: 0 -80px;
         background-size: 80px 160px;
         background-color: white;
     }
     
     .edit-feature_block:hover .edit_collection {
-        background: url('/image/card_feature_sprite.svg') -40px -80px;
+        background-position: -40px -80px;
         background-size: 80px 160px;
         background-color: white;
     }
     
     .edit-feature_block .delete_collection {
-        background: url('/image/card_feature_sprite.svg') 0 -120px;
+        background: url('/image/card_feature_sprite.svg');
+        background-position: 0 -120px;
         background-size: 80px 160px;
         background-color: white;
     }
     
     .edit-feature_block:hover .delete_collection {
-        background: url('/image/card_feature_sprite.svg') -40px -120px;
+        background-position: -40px -120px;
         background-size: 80px 160px;
         background-color: white;
     }
@@ -423,42 +437,46 @@
     }
 
     .feature_block .card_test {
-        background: url('/image/feature_sprite.svg') 0 0;
+        background: url('/image/feature_sprite.svg');
+        background-position: 0 0;
         background-size: 90px 180px;
     }
     
     .feature_block:hover .card_test {
-        background: url('/image/feature_sprite.svg') -45px 0; 
+        background-position: -45px 0; 
         background-size: 90px 180px;
     }
     
     .feature_block .match_game {
-        background: url('/image/feature_sprite.svg') 0 -45px;
+        background: url('/image/feature_sprite.svg');
+        background-position: 0 -45px;
         background-size: 90px 180px;
     }
     
     .feature_block:hover .match_game {
-        background: url('/image/feature_sprite.svg') -45px -45px;
+        background-position: -45px -45px;
         background-size: 90px 180px;
     }
     
     .feature_block .shuffle_card {
-        background: url('/image/feature_sprite.svg') 0 -90px;
+        background: url('/image/feature_sprite.svg');
+        background-position: 0 -90px;
         background-size: 90px 180px;
     }
     
     .feature_block:hover .shuffle_card {
-        background: url('/image/feature_sprite.svg') -45px -90px;
+        background-position: -45px -90px;
         background-size: 90px 180px;
     }
 
     .feature_block .add_to_learn {
-        background: url('/image/feature_sprite.svg') 0 -135px;
+        background: url('/image/feature_sprite.svg');
+        background-position: 0 -135px;
         background-size: 90px 180px;
     }
     
     .feature_block:hover .add_to_learn {
-        background: url('/image/feature_sprite.svg') -45px -135px;
+        background-position: -45px -135px;
         background-size: 90px 180px;
     }
 }

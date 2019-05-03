@@ -109,22 +109,24 @@
 }
 
 .making_card .add_image {
-    background: url('/image/make_card_sprite.svg') 0 0;
+    background: url('/image/make_card_sprite.svg');
+    background-position: 0 0;
     background-size: 80px 120px;
 }
 
 .making_card .add_image:hover {
-    background: url('/image/make_card_sprite.svg') -40px 0;
+    background-position:  -40px 0;
     background-size: 80px 120px;
 }
 
 .making_card .delete_card {
-    background: url('/image/make_card_sprite.svg') 0 -40px;
+    background: url('/image/make_card_sprite.svg');
+    background-position: 0 -40px;
     background-size: 80px 120px;
 }
 
 .making_card .delete_card:hover {
-    background: url('/image/make_card_sprite.svg') -40px -40px;
+    background-position: -40px -40px;
     background-size: 80px 120px;
 }
 

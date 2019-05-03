@@ -56,7 +56,6 @@
     width: 30%;
     padding-bottom: 30%;
     margin: 0 auto;
-    background-size: cover;
 }
 
 .collection:hover {
@@ -71,43 +70,53 @@
 }
 
 .collection .new_card {
-    background-image: url('/image/new_card.svg');
+    background-image: url('/image/new_card_sprite.svg');
+    background-size: 200%;
+    background-position: 0 0;
 }
 
 .collection:hover .new_card {
-    background-image: url('/image/new_card_hover.svg');
+    background-position: -100% 0;
 }
 
 .collection .recent_card {
-    background-image: url('/image/light.svg');
+    background-image: url('/image/new_card_sprite.svg');
+    background-size: 200%;
+    background-position: 0 -100%;
 }
 
 .collection:hover .recent_card {
-    background-image: url('/image/light_hover.svg');
+    background-position: -100% -100%;
 }
 
 .collection .english {
-    background-image: url('/image/english.svg');
+    background-image: url('/image/lan_sprite.svg');
+    background-size: 200% 300%;
+    background-position: 0 0;
 }
 
 .collection .english:hover {
-    background-image: url('/image/english_hover.svg');
+    background-position: -100% 0;
 }
 
 .collection .japanese {
-    background-image: url('/image/japanese.svg');
+    background-image: url('/image/lan_sprite.svg');
+    background-size: 200% 300%;
+    background-position: 0 -100%;
 }
 
 .collection .japanese:hover {
-    background-image: url('/image/japanese_hover.svg');
+    background-position: -100% -100%;
 }
 
 .collection .korean {
-    background-image: url('/image/korean.svg');
+    background-image: url('/image/lan_sprite.svg');
+    background-size: 200% 300%;
+    background-position: 0 -200%;
 }
 
 .collection .korean:hover {
-    background-image: url('/image/korean_hover.svg');
+    background-position: -100% -200%;
 }
 
 .collection .creator_grid {
