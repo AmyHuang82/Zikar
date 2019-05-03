@@ -42,13 +42,12 @@
     border-radius: 50%;
     box-shadow: 0 0 5px silver;
     background: url('/image/back_arrow_sprite.svg') 0 0;
+    background-position: 0 0;
     background-size: 100px 50px;
     background-color: white;
 }
 
 .back_to_collection:hover {
-    background: url('/image/back_arrow_sprite.svg') -50px 0;
-    background-size: 100px 50px;
-    background-color: white;
+    background-position: -50px 0;
 }
 
