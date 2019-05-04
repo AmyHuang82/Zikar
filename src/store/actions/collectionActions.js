@@ -19,13 +19,16 @@ export function addNewCollection(collection, typeStr) {
             + currentdate.getDate() + " "
             + hour + ":"
             + minute;
-
+        let newContent = collection.content.slice();
+        for (let i = 0; i < newContent.length; i++) {
+            delete newContent[i]["empty"];
+        }
 
         const firestore = getFirestore();
         firestore.collection('collection').add({
             ...collection,
             timestamp: datetime,
-            copyFromOther: false
+            copyFrom: ''
         }).then(() => {
             dispatch({ type: ADD_NEW_COLLECTION, typeStr });
         }).catch((error) => {
@@ -68,8 +71,9 @@ export function copyToSelfCollection(id, user) {
             copyData = {
                 ...copyData,
                 content: copyContent,
-                copyFromOther: true,
+                copyFrom: id,
                 user_id: user.user_id,
+                user_photo: user.user_photo,
                 author: user.user_name,
                 timestamp: datetime
             }
@@ -100,6 +104,7 @@ export function updateCollection(collection, id, typeStr) {
         for (let i = 0; i < newContent.length; i++) {
             delete newContent[i]["showWord"];
             delete newContent[i]["showDef"];
+            delete newContent[i]["empty"];
         }
 
         const firestore = getFirestore();

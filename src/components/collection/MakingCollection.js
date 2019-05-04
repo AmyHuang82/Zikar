@@ -186,24 +186,51 @@ class MakingCollection extends React.Component {
 
     compressImg(card, e) {
         let oringinFile = e.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(oringinFile);
-        reader.onload = (e) => {
-            // 先建立image放入src
-            let img = new Image();
-            img.src = e.target.result;
-            // 讀取img資料
-            img.onload = () => {
-                if (img.width > 299) {
-                    // 建立canvas並開始設定
-                    const elem = document.createElement('canvas');
-                    const width = 300;
-                    // 維持比例
-                    const scaleFactor = width / img.width;
-                    elem.width = width;
-                    elem.height = img.height * scaleFactor;
-                    const ctx = elem.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
+        this.getOrientation(oringinFile, (orientation) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(oringinFile);
+            reader.onload = (e) => {
+                // 先建立image放入src
+                let img = new Image();
+                img.src = e.target.result;
+                // 讀取img資料
+                img.onload = () => {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext("2d");
+                    let width, height;
+
+                    // 確認圖片大小要不要縮小
+                    if (img.width > 299) {
+                        width = 300;
+                        let scaleFactor = 300 / img.width;
+                        height = img.height * scaleFactor;
+                    } else {
+                        width = img.width;
+                        height = img.height;
+                    }
+
+                    if (4 < orientation && orientation < 9) {
+                        canvas.width = height;
+                        canvas.height = width;
+                    } else {
+                        canvas.width = width;
+                        canvas.height = height;
+                    }
+
+                    // 如果方向不是正的就把它導正
+                    switch (orientation) {
+                        case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+                        case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+                        case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+                        case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+                        case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+                        case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+                        case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+                        default: break;
+                    }
+
+                    // 繪製圖片
+                    ctx.drawImage(img, 0, 0, width, height);
                     ctx.canvas.toBlob((blob) => {
                         const compressFile = new File([blob], oringinFile.name, {
                             type: 'image/jpeg',
@@ -211,11 +238,49 @@ class MakingCollection extends React.Component {
                         });
                         this.uploadImg(card, compressFile);
                     }, 'image/jpeg', 1);
-                } else {
-                    this.uploadImg(card, oringinFile);
                 }
             }
-        }
+        });
+    }
+
+    getOrientation(file, callback) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+
+            let view = new DataView(e.target.result);
+            if (view.getUint16(0, false) != 0xFFD8) {
+                return callback(-2);
+            }
+            let length = view.byteLength, offset = 2;
+            while (offset < length) {
+                if (view.getUint16(offset + 2, false) <= 8) return callback(-1);
+                let marker = view.getUint16(offset, false);
+                offset += 2;
+                if (marker == 0xFFE1) {
+                    if (view.getUint32(offset += 2, false) != 0x45786966) {
+                        return callback(-1);
+                    }
+
+                    let little = view.getUint16(offset += 6, false) == 0x4949;
+                    offset += view.getUint32(offset + 4, little);
+                    let tags = view.getUint16(offset, little);
+                    offset += 2;
+                    for (let i = 0; i < tags; i++) {
+                        if (view.getUint16(offset + (i * 12), little) == 0x0112) {
+                            return callback(view.getUint16(offset + (i * 12) + 8, little));
+                        }
+                    }
+                }
+                else if ((marker & 0xFF00) != 0xFF00) {
+                    break;
+                }
+                else {
+                    offset += view.getUint16(offset, false);
+                }
+            }
+            return callback(-1);
+        };
+        reader.readAsArrayBuffer(file);
     }
 
     uploadImg(card, image) {
@@ -262,6 +327,20 @@ class MakingCollection extends React.Component {
                 content: newContentData
             }
         });
+        let id = this.props.match.params.id;
+        if (id === 'new') {
+            this.deleteImgFromStorage(card.pictureName);
+        }
+    }
+
+    deleteImgFromStorage(pictureName) {
+        let imageRef = storage.ref('images').child(pictureName);
+        imageRef.delete().then(() => {
+            console.log('圖片從資料庫刪除成功');
+        }).catch((error) => {
+            alert('發生問題請再試一次');
+            console.log(error);
+        });
     }
 
     deleteCard(card) {
@@ -280,30 +359,35 @@ class MakingCollection extends React.Component {
     uploadXlsx(e) {
         let newContentData = [];
         let files = e.target.files, f = files[0];
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            let data = new Uint8Array(e.target.result);
-            let workbook = XLSX.read(data, { type: 'array' });
-            for (let i = 0; i < workbook.Strings.length - 1; i++) {
-                if (i % 2 === 0) {
+        if (files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                let data = new Uint8Array(e.target.result);
+                let workbook = XLSX.read(data, { type: 'array' });
+                let first_sheet_name = workbook.SheetNames[0];
+                let worksheet = workbook.Sheets[first_sheet_name];
+                for (let i = 1; i < 101; i++) {
+                    if (worksheet[`A${i}`] === undefined) {
+                        break;
+                    }
                     newContentData.push({
-                        word: workbook.Strings[i].t,
-                        definition: workbook.Strings[i + 1].t,
+                        word: worksheet[`A${i}`].v,
+                        definition: worksheet[`B${i}`].v,
                         familiarity: 0,
                         pictureURL: '',
                         pictureName: '',
                         empty: ''
                     });
                 }
-            }
-            this.setState({
-                collection: {
-                    ...this.state.collection,
-                    content: newContentData
-                }
-            });
-        };
-        reader.readAsArrayBuffer(f);
+                this.setState({
+                    collection: {
+                        ...this.state.collection,
+                        content: newContentData
+                    }
+                });
+            };
+            reader.readAsArrayBuffer(f);
+        }
     }
 
     submitCollection(e) {
@@ -473,6 +557,7 @@ const mapStateToProps = (state, ownProps) => {
     const collections = state.firestore.data.collection;
     const collection = collections ? collections[id] : null;
     return {
+        allCollection: collections,
         editCollection: collection,
         login: state.login.loginState,
         submitStatus: state.collection.submitStatus

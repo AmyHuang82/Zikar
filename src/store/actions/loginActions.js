@@ -15,8 +15,10 @@ export function loginToWeb(provider) {
                 let user = result.user;
                 dispatch({ type: LOGIN_TO_WEB, user });
             }).catch(function (error) {
-                console.log(error);
-                alert('發生問題請再試一次');
+                if (error.code !== 'auth/missing-or-invalid-nonce') {
+                    console.log(error);
+                    alert('發生問題請再試一次');
+                }
             });
         } else {
             let user = {

@@ -51,7 +51,6 @@ class Search extends React.Component {
                             time={collection.timestamp}
                             id={collection.id}
                             public={collection.public}
-                            copyFromOther={collection.copyFromOther}
                             user_photo={collection.user_photo}
                         />
                     })
