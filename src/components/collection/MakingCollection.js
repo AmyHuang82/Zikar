@@ -431,38 +431,8 @@ class MakingCollection extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps) {
             this.setState({ submitOK: this.props.submitStatus });
-            if (this.props.match.params.id === 'new') {
-                this.setState({
-                    collection: {
-                        title: '',
-                        public: true,
-                        word_lan: { lan: 'en-US', text: '英文' },
-                        definition_lan: { lan: 'en-US', text: '英文' },
-                        user_photo: this.props.login.user_photo,
-                        user_id: this.props.login.user_id,
-                        author: this.props.login.user_name,
-                        content: [{
-                            word: '',
-                            definition: '',
-                            familiarity: 0,
-                            pictureURL: '',
-                            pictureName: '',
-                            empty: ''
-                        },
-                        {
-                            word: '',
-                            definition: '',
-                            familiarity: 0,
-                            pictureURL: '',
-                            pictureName: '',
-                            empty: ''
-                        }]
-                    }
-                });
-            } else {
-                if (this.props.editCollection !== null) {
-                    this.setState({ collection: this.props.editCollection });
-                }
+            if (this.props.match.params.id !== 'new' && this.props.editCollection !== null) {
+                this.setState({ collection: this.props.editCollection });
             }
         }
     }
