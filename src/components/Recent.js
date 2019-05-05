@@ -9,9 +9,6 @@ import Collection from './collection/Collection';
 class Recent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showCollectionNumber: ''
-        }
     }
 
     componentDidUpdate(prevProps) {
@@ -32,7 +29,6 @@ class Recent extends React.Component {
 
         return (
             <div className='content'>
-
                 <div className="page_location page_active">全站近期新增</div>
                 {
                     collectionInfo && collectionInfo.map((collection, index) => {
