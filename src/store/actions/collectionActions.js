@@ -14,14 +14,14 @@ export function addNewCollection(collection, typeStr) {
         } else {
             minute = currentdate.getMinutes();
         }
-        let datetime = currentdate.getFullYear() + "-"
-            + (currentdate.getMonth() + 1) + "-"
-            + currentdate.getDate() + " "
-            + hour + ":"
+        let datetime = currentdate.getFullYear() + '-'
+            + (currentdate.getMonth() + 1) + '-'
+            + currentdate.getDate() + ' '
+            + hour + ':'
             + minute;
         let newContent = collection.content.slice();
         for (let i = 0; i < newContent.length; i++) {
-            delete newContent[i]["empty"];
+            delete newContent[i]['empty'];
         }
 
         const firestore = getFirestore();
@@ -57,10 +57,10 @@ export function copyToSelfCollection(id, user) {
             } else {
                 minute = currentdate.getMinutes();
             }
-            let datetime = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth() + 1) + "-"
-                + currentdate.getDate() + " "
-                + hour + ":"
+            let datetime = currentdate.getFullYear() + '-'
+                + (currentdate.getMonth() + 1) + '-'
+                + currentdate.getDate() + ' '
+                + hour + ':'
                 + minute;
 
             let copyData = collection.data();
@@ -102,9 +102,9 @@ export function updateCollection(collection, id, typeStr) {
 
         let newContent = collection.content.slice();
         for (let i = 0; i < newContent.length; i++) {
-            delete newContent[i]["showWord"];
-            delete newContent[i]["showDef"];
-            delete newContent[i]["empty"];
+            delete newContent[i]['showWord'];
+            delete newContent[i]['showDef'];
+            delete newContent[i]['empty'];
         }
 
         const firestore = getFirestore();

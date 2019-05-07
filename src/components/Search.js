@@ -31,7 +31,7 @@ class Search extends React.Component {
                 searchEmpty = true;
                 pageLocation = '';
             } else {
-                pageLocation = <div className="page_location page_active">搜尋結果（{collectionInfo.length}）</div>;
+                pageLocation = <div className='page_location page_active'>搜尋結果（{collectionInfo.length}）</div>;
             }
         }
 

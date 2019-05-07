@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -10,24 +10,33 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pageLocation: "self",
-            selfActive: "page_active",
-            wholeActive: ""
+            pageLocation: 'self',
+            selfActive: 'page_active',
+            wholeActive: '',
+            guestMode: false
         }
         this.changePage = this.changePage.bind(this);
     }
 
     changePage(e) {
-        if (e.target.textContent === "你的字卡集") {
-            this.setState({ pageLocation: "self", selfActive: "page_active", wholeActive: "" });
+        if (e.target.textContent === '你的字卡集') {
+            this.setState({ pageLocation: 'self', selfActive: 'page_active', wholeActive: '' });
         } else {
-            this.setState({ pageLocation: "whole", selfActive: "", wholeActive: "page_active" });
+            this.setState({ pageLocation: 'whole', selfActive: '', wholeActive: 'page_active' });
         }
     }
 
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps) {
             this.props.getCollection();
+            if (this.props.login.user_id === 'anonymous') {
+                this.setState({
+                    pageLocation: 'whole',
+                    selfActive: '',
+                    wholeActive: 'page_active',
+                    guestMode: true
+                })
+            }
         }
     }
 
@@ -38,7 +47,7 @@ class Dashboard extends React.Component {
 
         if (collectionInfo !== undefined) {
 
-            if (this.state.pageLocation === "self") {
+            if (this.state.pageLocation === 'self') {
                 collectionInfo = collectionInfo.filter(item => item.user_id === user_uid);
             } else {
                 collectionInfo = collectionInfo.filter(item => item.public);
@@ -54,19 +63,15 @@ class Dashboard extends React.Component {
             addNewDisplay = this.props.hadCollection;
         }
 
-        if (user_uid === 'anonymous') {
-            return <Redirect to='/Recent/' />
-        }
-
         return (
             <div className='content'>
-                <div className="white-overlay" style={{ display: this.props.getData ? 'none' : 'none' }} >
+                <div className='white-overlay' style={{ display: this.props.getData ? 'none' : 'none' }} >
                     <img className='loading' src='../../image/loading.gif' />
                 </div>
-                <div className="page_location" style={{ display: this.props.login.login ? 'flex' : 'none' }}>
-                    <div onClick={this.changePage} className={this.state.selfActive}>你的字卡集</div>
-                    <span>|</span>
-                    <div onClick={this.changePage} className={this.state.wholeActive}>全站近期新增</div>
+                <div className='page_location' style={{ display: this.props.login.login ? 'flex' : 'none' }}>
+                    <div onClick={this.changePage} className={this.state.selfActive} style={{ display: this.state.guestMode ? 'none' : 'block' }}>你的字卡集</div>
+                    <span style={{ display: this.state.guestMode ? 'none' : 'block' }}>|</span>
+                    <div onClick={this.changePage} className={this.state.wholeActive} style={{ marginLeft: this.state.guestMode ? 0 : '10px' }}>全站近期新增</div>
                 </div>
                 <div style={{ display: this.props.login.login ? 'flex' : 'none', width: '100%' }}>
                     <div style={{ display: addNewDisplay ? 'none' : 'flex' }} className='first_time_hint'>

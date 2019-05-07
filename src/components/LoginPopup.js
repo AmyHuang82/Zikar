@@ -40,37 +40,37 @@ class LoginPopup extends React.Component {
 
     render() {
         return (
-            <div className="popup-overlay" style={{ display: this.props.loginState.login ? 'none' : 'flex' }}>
-                <div className="popup-overlay" style={{ display: this.state.showDescription ? 'none' : 'flex', backgroundColor: 'rgba(0,0,0,0)' }}>
-                    <div className="popup-content">
-                        <div className="modal">
-                            <div className="header">
+            <div className='popup-overlay' style={{ display: this.props.loginState.login ? 'none' : 'flex' }}>
+                <div className='popup-overlay' style={{ display: this.state.showDescription ? 'none' : 'flex', backgroundColor: 'rgba(0,0,0,0)' }}>
+                    <div className='popup-content'>
+                        <div className='modal'>
+                            <div className='header'>
                                 <img src='../../image/Logo.svg' />
                                 馬上登入 / 註冊建立字卡學習
                         </div>
 
-                            <div className="actions">
+                            <div className='actions'>
                                 <button
-                                    className="button"
+                                    className='button'
                                     onClick={this.login}
                                 >
-                                    <img src="../../image/facebook.svg" />
+                                    <img src='../../image/facebook.svg' />
                                     使用 Facebook 登入
                             </button>
 
                                 <button
-                                    className="button"
+                                    className='button'
                                     onClick={this.login}
                                 >
-                                    <img src="../../image/google.svg" />
+                                    <img src='../../image/google.svg' />
                                     使用 Google 登入
                             </button>
 
                                 <button
-                                    className="button"
+                                    className='button'
                                     onClick={this.showDesHandler}
                                 >
-                                    <img src="../../image/user.svg" />
+                                    <img src='../../image/user.svg' />
                                     使用 訪客身份 瀏覽
                             </button>
                             </div>
@@ -78,7 +78,7 @@ class LoginPopup extends React.Component {
                     </div>
                 </div>
 
-                <div className="deletecheck-popup" style={{ height: '397px', padding: 0, display: this.state.showDescription ? 'block' : 'none' }}>
+                <div className='deletecheck-popup' style={{ height: '397px', padding: 0, display: this.state.showDescription ? 'block' : 'none' }}>
                     <img src='/image/description.svg' />
                     <button className='cancel' onClick={this.login}>先逛逛</button>
                     <button className='confirm' onClick={this.logout}>登入 / 註冊</button>

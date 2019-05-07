@@ -212,9 +212,9 @@ class CollectionDetail extends React.Component {
         if (this.state.deleteState || publicClose || !this.props.login.login) return <Redirect to='/' />
 
         return (
-            <div className="content">
-                <div className="popup-overlay" style={{ display: this.state.deleteCheck ? 'flex' : 'none' }}>
-                    <div className="deletecheck-popup">
+            <div className='content'>
+                <div className='popup-overlay' style={{ display: this.state.deleteCheck ? 'flex' : 'none' }}>
+                    <div className='deletecheck-popup'>
                         確定要刪除此字卡集嗎？
                         <button className='cancel' onClick={this.deleteCheckHandler}>取消</button>
                         <button className='confirm' onClick={this.deleteCollection}>確定</button>
@@ -222,8 +222,8 @@ class CollectionDetail extends React.Component {
                     </div>
                 </div>
 
-                <div className="popup-overlay" style={{ display: this.state.showHotKeyHint ? 'flex' : 'none' }}>
-                    <div className="deletecheck-popup hot_key_popup">
+                <div className='popup-overlay' style={{ display: this.state.showHotKeyHint ? 'flex' : 'none' }}>
+                    <div className='deletecheck-popup hot_key_popup'>
                         <div className='key_description'><div className='keyarrow'>←</div>前一個</div>
                         <div className='key_description'><div className='keyarrow'>→</div>下一個</div>
                         <div className='key_description'><div className='keyarrow'>↑</div>翻字卡</div>
@@ -233,7 +233,7 @@ class CollectionDetail extends React.Component {
                     </div>
                 </div>
 
-                <div className="wrap">
+                <div className='wrap'>
                     <div className='features'>
                         <Link className='feature_block' to={'/Test/' + this.props.match.params.id} style={{ display: notSelf ? 'none' : 'flex' }}>
                             <div className='card_test block_img'></div>
@@ -250,7 +250,7 @@ class CollectionDetail extends React.Component {
                         </Link>
                     </div>
 
-                    <div className="cards_content">
+                    <div className='cards_content'>
 
                         <div className='edit-feature'>
                             <div className='edit-feature_block' onClick={this.showKeyHint} style={{ display: this.state.mobile ? 'none' : 'block' }}>

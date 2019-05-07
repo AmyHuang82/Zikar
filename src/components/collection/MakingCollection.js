@@ -196,7 +196,7 @@ class MakingCollection extends React.Component {
                 // 讀取img資料
                 img.onload = () => {
                     let canvas = document.createElement('canvas');
-                    let ctx = canvas.getContext("2d");
+                    let ctx = canvas.getContext('2d');
                     let width, height;
 
                     // 確認圖片大小要不要縮小
@@ -289,7 +289,6 @@ class MakingCollection extends React.Component {
         const uplaodTask = storage.ref(`images/${name}`).put(image);
         uplaodTask.on('state_changed',
             () => {
-                // console.log(snapshot);
                 newContentData[card.label].pictureName = 'loading';
                 this.setState({
                     collection: {
@@ -472,7 +471,7 @@ class MakingCollection extends React.Component {
 
                 <div className='add-from-file'>
                     <label onChange={this.uploadXlsx}> + 從 xlsx 檔案匯入<span style={{ color: 'silver' }}>（請將詞語放置 A 欄，定義放置 B 欄）</span>
-                        <input type='file' style={{ display: 'none' }} accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                        <input type='file' style={{ display: 'none' }} accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' />
                     </label>
                 </div>
 

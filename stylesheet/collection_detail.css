@@ -333,6 +333,12 @@
     background-color: white;
 }
 
+.content .show_card p {
+    font-size: 25px;
+    color: #333333;
+    margin: -10px auto;
+}
+
 @media screen and (max-width: 850px) {
     .content .wrap {
         display: flex;
@@ -479,13 +485,10 @@
         background-position: -45px -135px;
         background-size: 90px 180px;
     }
-}
 
-.content .show_card p {
-    font-size: 20px;
-    font-size: 3.5vh;
-    color: #333333;
-    margin: -10px auto;
+    .content .show_card p {
+        font-size: 20px;
+    }
 }
 
 .img_wrap {

@@ -58,7 +58,7 @@ class MakingCard extends React.Component {
     render() {
         let pictureStatue;
         if (this.props.pictureName === '') {
-            pictureStatue = <label onChange={this.uploadImgHandler} className='add_image' title='增加圖片'> <input type='file' style={{ display: 'none' }} accept="image/*" /> </label>;
+            pictureStatue = <label onChange={this.uploadImgHandler} className='add_image' title='增加圖片'> <input type='file' style={{ display: 'none' }} accept='image/*' /> </label>;
         } else if (this.props.pictureName === 'loading') {
             pictureStatue = <div className='loading_image'></div>;
         } else {
@@ -67,8 +67,8 @@ class MakingCard extends React.Component {
 
         return (
             <div className='making_card ease'>
-                <div className="popup-overlay" style={{ display: this.state.previewPicToggle ? 'flex' : 'none' }}>
-                    <div className="deletecheck-popup" style={{ height: '330px' }}>
+                <div className='popup-overlay' style={{ display: this.state.previewPicToggle ? 'flex' : 'none' }}>
+                    <div className='deletecheck-popup' style={{ height: '330px' }}>
                         <p>圖片預覽</p>
                         <div style={{ zIndex: 5, border: '1px dashed silver', width: '80%', paddingBottom: '80%' }} className='img_wrap'>
                             <img src={this.props.pictureURL} />

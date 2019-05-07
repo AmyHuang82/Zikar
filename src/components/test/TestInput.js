@@ -22,7 +22,7 @@ class TestInput extends React.Component {
             <div style={{ display: this.props.ouputDiasplay ? 'none' : 'block' }}>
                 <h1>{this.props.definition && this.props.definition}</h1>
                 <form onSubmit={this.props.checkAnswer}>
-                    <input name='answer' autoComplete="off" ref={this.textInput} value={this.props.answer} onChange={this.props.changeAnswer} />
+                    <input name='answer' autoComplete='off' ref={this.textInput} value={this.props.answer} onChange={this.props.changeAnswer} />
                 </form>
                 <p style={{ color: 'silver' }}>（按 Enter 送出答案）</p>
             </div>

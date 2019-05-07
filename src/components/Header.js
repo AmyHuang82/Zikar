@@ -80,8 +80,8 @@ class Header extends React.Component {
 
         return (
             <header>
-                <div className="popup-overlay" style={{ display: this.state.loginRequest ? 'flex' : 'none' }}>
-                    <div className="deletecheck-popup">
+                <div className='popup-overlay' style={{ display: this.state.loginRequest ? 'flex' : 'none' }}>
+                    <div className='deletecheck-popup'>
                         <p style={{ zIndex: 5 }}>立即登入 / 註冊建立字卡<br />體驗完整功能！</p>
                         <button className='cancel' onClick={this.loginRequestPopup}>取消</button>
                         <button className='confirm' onClick={this.logout}>登入</button>

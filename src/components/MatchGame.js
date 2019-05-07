@@ -180,8 +180,8 @@ class MatchGame extends React.Component {
                         />
                     })
                 }
-                <div className="popup-overlay" style={{ display: this.state.roundOver ? 'flex' : 'none' }}>
-                    <div className="deletecheck-popup">
+                <div className='popup-overlay' style={{ display: this.state.roundOver ? 'flex' : 'none' }}>
+                    <div className='deletecheck-popup'>
                         你花了{this.state.roundOverTime}完成遊戲！
                         <button className='cancel' onClick={this.gameStart.bind(this, this.props.collectionContent)}>再玩一次</button>
                         <Link className='cancel' to={'/Collection/' + this.props.match.params.id}>繼續背誦</Link>

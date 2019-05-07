@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
-//引用path模組
 const path = require('path');
+
 module.exports = {
     mode: 'production',
     //如果有一個以上的檔案需要打包，可以傳陣列給entry
@@ -17,7 +17,8 @@ module.exports = {
         //rules的值是一個陣列可以存放多個loader物件
         rules: [
             {
-                test: /\.js$/, exclude: /node_modules/,
+                test: /\.js$/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: { presets: ['@babel/preset-react', '@babel/preset-env'] }
@@ -68,10 +69,5 @@ module.exports = {
                 }
             }
         }
-    },
-    //增加一個給devserver的設定
-    devServer: {
-        //指定開啟port為9000
-        port: 5500
     }
 };

@@ -9,11 +9,11 @@ function Collection(props) {
     }
 
     return (
-        <Link to={'/Collection/' + props.id} className="collection">
+        <Link to={'/Collection/' + props.id} className='collection'>
             <h2>{props.title}</h2>
-            <p className="words_number">語言：{props.wordLan} / {props.defLan}</p>
-            <p className="words_number">詞語：{props.contentLength} 個</p>
-            <div className="creator_grid">
+            <p className='words_number'>語言：{props.wordLan} / {props.defLan}</p>
+            <p className='words_number'>詞語：{props.contentLength} 個</p>
+            <div className='creator_grid'>
                 <p>{props.author}</p>
                 <img src={props.user_photo} />
             </div>

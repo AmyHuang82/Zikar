@@ -1,9 +1,9 @@
-@import "./basic.css";
-@import "./making_cards.css";
-@import "./dashboard.css";
-@import "./collection_detail.css";
-@import "./test.css";
-@import "./match_game.css";
+@import './basic.css';
+@import './making_cards.css';
+@import './dashboard.css';
+@import './collection_detail.css';
+@import './test.css';
+@import './match_game.css';
 
 /* ----------- Header ---------- */
 header {
