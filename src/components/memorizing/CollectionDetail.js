@@ -14,19 +14,55 @@ class CollectionDetail extends React.Component {
             collection: null,
             currentIndex: 0,
             nextAnimation: '',
-            deleteState: false,
-            deleteCheck: false,
+            deleteCollectionState: false,
+            deleteConfirm: false,
             mobile: false,
             showHotKeyHint: false
         }
-        this.changeCard = this.changeCard.bind(this);
-        this.shuffleCards = this.shuffleCards.bind(this);
-        this.exchangeWordDef = this.exchangeWordDef.bind(this);
-        this.deleteCheckHandler = this.deleteCheckHandler.bind(this);
-        this.deleteCollection = this.deleteCollection.bind(this);
-        this.showKeyHint = this.showKeyHint.bind(this);
         this.keyHandle = this.keyHandle.bind(this);
         this.copyHandler = this.copyHandler.bind(this);
+        this.shuffleCards = this.shuffleCards.bind(this);
+        this.changeCard = this.changeCard.bind(this);
+        this.showKeyHint = this.showKeyHint.bind(this);
+        this.exchangeWordDef = this.exchangeWordDef.bind(this);
+        this.deleteConfirmHandler = this.deleteConfirmHandler.bind(this);
+        this.deleteCollection = this.deleteCollection.bind(this);
+    }
+
+    keyHandle(e) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            this.changeCard(e);
+        }
+    }
+
+    copyHandler() {
+        let user = this.props.login;
+        let id = this.props.match.params.id;
+        this.props.copyToSelfCollection(id, user);
+    }
+
+    shuffleCards() {
+        let newData = this.state.collection.content.slice();
+        let temporaryValue, randomIndex;
+        for (let i = 0; i < newData.length; i++) {
+            // 讓random數字不超過陣列長度
+            randomIndex = Math.floor(Math.random() * newData.length);
+            // 儲存現在陣列位置的值，將現在陣列的位置改到random的位置並把原本的值放進random的位置裡
+            temporaryValue = newData[i];
+            newData[i] = newData[randomIndex];
+            newData[randomIndex] = temporaryValue;
+        }
+        this.setState({
+            collection: {
+                ...this.state.collection,
+                content: newData
+            },
+            currentIndex: 0,
+            nextAnimation: 'ease'
+        });
+        setTimeout(() => {
+            this.setState({ nextAnimation: '' });
+        }, 500);
     }
 
     changeCard(e) {
@@ -57,42 +93,8 @@ class CollectionDetail extends React.Component {
         }
     }
 
-    deleteCheckHandler(e) {
-        if (e.target.textContent === '刪除') {
-            this.setState({ deleteCheck: true });
-        } else {
-            this.setState({ deleteCheck: false });
-        }
-    }
-
-    deleteCollection() {
-        this.setState({ deleteState: true, deleteCheck: false });
-        let id = this.props.match.params.id;
-        this.props.deleteCollection(id);
-    }
-
-    shuffleCards() {
-        let newData = this.state.collection.content.slice();
-        let temporaryValue, randomIndex;
-        for (let i = 0; i < newData.length; i++) {
-            // 讓random數字不超過陣列長度
-            randomIndex = Math.floor(Math.random() * newData.length);
-            // 儲存現在陣列位置的值，將現在陣列的位置改到random的位置並把原本的值放進random的位置裡
-            temporaryValue = newData[i];
-            newData[i] = newData[randomIndex];
-            newData[randomIndex] = temporaryValue;
-        }
-        this.setState({
-            collection: {
-                ...this.state.collection,
-                content: newData
-            },
-            currentIndex: 0,
-            nextAnimation: 'ease'
-        });
-        setTimeout(() => {
-            this.setState({ nextAnimation: '' });
-        }, 500);
+    showKeyHint() {
+        this.setState((prevState) => ({ showHotKeyHint: !prevState.showHotKeyHint }));
     }
 
     exchangeWordDef() {
@@ -122,20 +124,18 @@ class CollectionDetail extends React.Component {
         }, 500);
     }
 
-    showKeyHint() {
-        this.setState((prevState) => ({ showHotKeyHint: !prevState.showHotKeyHint }));
-    }
-
-    keyHandle(e) {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-            this.changeCard(e);
+    deleteConfirmHandler(e) {
+        if (e.target.textContent === '刪除') {
+            this.setState({ deleteConfirm: true });
+        } else {
+            this.setState({ deleteConfirm: false });
         }
     }
 
-    copyHandler() {
-        let user = this.props.login;
+    deleteCollection() {
+        this.setState({ deleteCollectionState: true, deleteConfirm: false });
         let id = this.props.match.params.id;
-        this.props.copyToSelfCollection(id, user);
+        this.props.deleteCollection(id);
     }
 
     componentDidUpdate(prevProps) {
@@ -209,14 +209,14 @@ class CollectionDetail extends React.Component {
             }
         }
 
-        if (this.state.deleteState || publicClose || !this.props.login.login) return <Redirect to='/' />
+        if (this.state.deleteCollectionState || publicClose || !this.props.login.login) return <Redirect to='/' />
 
         return (
             <div className='content'>
-                <div className='popup-overlay' style={{ display: this.state.deleteCheck ? 'flex' : 'none' }}>
+                <div className='popup-overlay' style={{ display: this.state.deleteConfirm ? 'flex' : 'none' }}>
                     <div className='deletecheck-popup'>
                         確定要刪除此字卡集嗎？
-                        <button className='cancel' onClick={this.deleteCheckHandler}>取消</button>
+                        <button className='cancel' onClick={this.deleteConfirmHandler}>取消</button>
                         <button className='confirm' onClick={this.deleteCollection}>確定</button>
                         <div className='deletecheck-popup-background'></div>
                     </div>
@@ -262,7 +262,7 @@ class CollectionDetail extends React.Component {
                             <Link className='edit-feature_block' to={'/MakingCards/' + this.props.match.params.id} style={{ display: notSelf ? 'none' : 'block' }}>
                                 <div className='edit_collection block_img' title='編輯'></div>
                             </Link>
-                            <div className='edit-feature_block' onClick={this.deleteCheckHandler} style={{ display: notSelf ? 'none' : 'block' }}>
+                            <div className='edit-feature_block' onClick={this.deleteConfirmHandler} style={{ display: notSelf ? 'none' : 'block' }}>
                                 <div className='delete_collection block_img' title='刪除'>刪除</div>
                             </div>
                         </div>
@@ -271,7 +271,6 @@ class CollectionDetail extends React.Component {
                             this.state.collection && card.map((card, index) => {
                                 return <Card
                                     key={index}
-                                    label={index}
                                     currentIndex={currentIndex}
                                     word={card.showWord}
                                     definition={card.showDef}
@@ -310,11 +309,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteCollection: (id) => {
-            dispatch(deleteCollection(id));
-        },
         copyToSelfCollection: (id, user) => {
             dispatch(copyToSelfCollection(id, user));
+        },
+        deleteCollection: (id) => {
+            dispatch(deleteCollection(id));
         }
     }
 }

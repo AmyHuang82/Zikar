@@ -2,18 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { alreadyHadCollection, getCollection } from '../store/actions/collectionActions';
-import Collection from './collection/Collection';
+import Collection from './Collection';
 
 class Search extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props !== prevProps) {
-            this.props.getCollection();
-        }
     }
 
     render() {
@@ -42,13 +35,11 @@ class Search extends React.Component {
                     collectionInfo && collectionInfo.map((collection, index) => {
                         return <Collection
                             key={index}
-                            label={index}
                             title={collection.title}
                             contentLength={collection.content.length}
                             wordLan={collection.word_lan.text}
                             defLan={collection.definition_lan.text}
                             author={collection.author}
-                            time={collection.timestamp}
                             id={collection.id}
                             public={collection.public}
                             user_photo={collection.user_photo}
@@ -63,25 +54,13 @@ class Search extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        getData: state.collection.getCollection,
         collectionInfo: state.firestore.ordered.collection,
         login: state.login.loginState
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        alreadyHadCollection: (status) => {
-            dispatch(alreadyHadCollection(status));
-        },
-        getCollection: () => {
-            dispatch(getCollection());
-        }
-    }
-}
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, null),
     firestoreConnect([
         { collection: 'collection', orderBy: ['timestamp', 'desc'] }
     ])

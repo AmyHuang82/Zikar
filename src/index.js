@@ -16,15 +16,15 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 
 // Component
-import Header from './components/Header';
-import Background from './components/Background';
-import LoginPopup from './components/LoginPopup';
-import Dashboard from './components/Dashboard';
-import CollectionDetail from './components/collection/CollectionDetail';
-import MakingCollection from './components/collection/MakingCollection';
-import Test from './components/test/Test';
-import MatchGame from './components/MatchGame';
-import Search from './components/Search';
+import Header from './components/shared/Header';
+import Background from './components/shared/Background';
+import LoginPopup from './components/shared/LoginPopup';
+import Dashboard from './components/dashboard/Dashboard';
+import Search from './components/dashboard/Search';
+import MakingCollection from './components/making/MakingCollection';
+import CollectionDetail from './components/memorizing/CollectionDetail';
+import Test from './components/memorizing/test/Test';
+import MatchGame from './components/memorizing/game/MatchGame';
 
 // 建立 store，把 reducer 傳進去
 let store = createStore(rootReducer,

@@ -19,6 +19,8 @@ export function addNewCollection(collection, typeStr) {
             + currentdate.getDate() + ' '
             + hour + ':'
             + minute;
+
+        // 刪除不必要的key
         let newContent = collection.content.slice();
         for (let i = 0; i < newContent.length; i++) {
             delete newContent[i]['empty'];
@@ -100,6 +102,7 @@ export const UPDATE_COLLECTION = 'UPDATE_COLLECTION';
 export function updateCollection(collection, id, typeStr) {
     return (dispatch, getState, { getFirestore }) => {
 
+        // 刪除不必要的key
         let newContent = collection.content.slice();
         for (let i = 0; i < newContent.length; i++) {
             delete newContent[i]['showWord'];
@@ -143,9 +146,4 @@ export function deleteCollection(id) {
 export const ALREADY_HAD_COLLECTION = 'ALREADY_HAD_COLLECTION';
 export function alreadyHadCollection(status) {
     return { type: ALREADY_HAD_COLLECTION, status }
-}
-
-export const GET_COLLECTION = 'GET_COLLECTION';
-export function getCollection() {
-    return { type: GET_COLLECTION }
 }

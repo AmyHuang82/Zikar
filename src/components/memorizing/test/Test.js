@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
-import { updateCollection } from '../../store/actions/collectionActions';
+import { updateCollection } from '../../../store/actions/collectionActions';
 import TestInput from './TestInput';
 import NextQ from './NextQ';
 
@@ -22,8 +22,8 @@ class Test extends React.Component {
         // 創建一個ref來儲存textInput的DOM元素
         this.textInput = React.createRef();
         this.focusTextInput = this.focusTextInput.bind(this);
-        this.changeAnswer = this.changeAnswer.bind(this);
         this.testStart = this.testStart.bind(this);
+        this.changeAnswer = this.changeAnswer.bind(this);
         this.checkAnswer = this.checkAnswer.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.restartTest = this.restartTest.bind(this);
@@ -31,10 +31,6 @@ class Test extends React.Component {
 
     focusTextInput() {
         this.textInput.current.focus();
-    }
-
-    changeAnswer(e) {
-        this.setState({ answer: e.target.value });
     }
 
     testStart() {
@@ -72,6 +68,10 @@ class Test extends React.Component {
                 roundStart: true
             });
         }
+    }
+
+    changeAnswer(e) {
+        this.setState({ answer: e.target.value });
     }
 
     checkAnswer(e) {
@@ -232,6 +232,7 @@ const mapStateToProps = (state, ownProps) => {
     const collections = state.firestore.data.collection;
     const collection = collections ? collections[id] : null;
 
+    // 判斷是否有考過考試與考過試的話是否都已全部通過
     let allNewRound = false;
     let doneTest = false;
     if (collection !== null) {

@@ -9,8 +9,7 @@ var config = {
     authDomain: 'soy-transducer-236303.firebaseapp.com',
     databaseURL: 'https://soy-transducer-236303.firebaseio.com',
     projectId: 'soy-transducer-236303',
-    storageBucket: 'soy-transducer-236303.appspot.com',
-    messagingSenderId: '890374072270'
+    storageBucket: 'soy-transducer-236303.appspot.com'
 };
 
 firebase.initializeApp(config);

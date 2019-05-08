@@ -22,11 +22,13 @@ class NextQ extends React.Component {
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.ouputDiasplay) {
-            document.body.addEventListener('keyup', this.keyHandle);
-        } else if (this.props.ouputDiasplay === false) {
-            document.body.removeEventListener('keyup', this.keyHandle);
+    componentDidUpdate(prevProps) {
+        if (this.props.ouputDiasplay !== prevProps.ouputDiasplay) {
+            if (this.props.ouputDiasplay) {
+                document.body.addEventListener('keyup', this.keyHandle);
+            } else {
+                document.body.removeEventListener('keyup', this.keyHandle);
+            }
         }
     }
 

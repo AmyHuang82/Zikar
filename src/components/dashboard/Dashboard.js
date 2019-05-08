@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { alreadyHadCollection, getCollection } from '../store/actions/collectionActions';
-import Collection from './collection/Collection';
+import { alreadyHadCollection } from '../../store/actions/collectionActions';
+import Collection from './Collection';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -28,7 +28,6 @@ class Dashboard extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps) {
-            this.props.getCollection();
             if (this.props.login.user_id === 'anonymous') {
                 this.setState({
                     pageLocation: 'whole',
@@ -65,9 +64,6 @@ class Dashboard extends React.Component {
 
         return (
             <div className='content'>
-                <div className='white-overlay' style={{ display: this.props.getData ? 'none' : 'none' }} >
-                    <img className='loading' src='../../image/loading.gif' />
-                </div>
                 <div className='page_location' style={{ display: this.props.login.login ? 'flex' : 'none' }}>
                     <div onClick={this.changePage} className={this.state.selfActive} style={{ display: this.state.guestMode ? 'none' : 'block' }}>你的字卡集</div>
                     <span style={{ display: this.state.guestMode ? 'none' : 'block' }}>|</span>
@@ -102,13 +98,11 @@ class Dashboard extends React.Component {
                     collectionInfo && collectionInfo.map((collection, index) => {
                         return <Collection
                             key={index}
-                            label={index}
                             title={collection.title}
                             contentLength={collection.content.length}
                             wordLan={collection.word_lan.text}
                             defLan={collection.definition_lan.text}
                             author={collection.author}
-                            time={collection.timestamp}
                             id={collection.id}
                             public={collection.public}
                             user_photo={collection.user_photo}
@@ -123,7 +117,6 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => {
     return {
         hadCollection: state.collection.collectionEmpty,
-        getData: state.collection.getCollection,
         collectionInfo: state.firestore.ordered.collection,
         login: state.login.loginState
     }
@@ -133,9 +126,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         alreadyHadCollection: (status) => {
             dispatch(alreadyHadCollection(status));
-        },
-        getCollection: () => {
-            dispatch(getCollection());
         }
     }
 }

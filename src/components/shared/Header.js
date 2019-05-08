@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { searchBarOpenToggle } from '../store/actions/searchBarActions';
-import { logout } from '../store/actions/loginActions';
+import { searchBarOpenToggle } from '../../store/actions/searchBarActions';
+import { logout } from '../../store/actions/loginActions';
 
 class Header extends React.Component {
     constructor(props) {
@@ -14,15 +14,23 @@ class Header extends React.Component {
             loginRequest: false
         }
         this.openSearchBarToggle = this.openSearchBarToggle.bind(this);
+        this.loginRequestPopup = this.loginRequestPopup.bind(this);
         this.logoutBlockToggle = this.logoutBlockToggle.bind(this);
         this.logout = this.logout.bind(this);
         this.searchKeyword = this.searchKeyword.bind(this);
         this.startSearch = this.startSearch.bind(this);
-        this.loginRequestPopup = this.loginRequestPopup.bind(this);
     }
 
     openSearchBarToggle() {
         this.props.searchBarOpen();
+    }
+
+    loginRequestPopup(e) {
+        if (e.target.textContent === '取消') {
+            this.setState({ loginRequest: false });
+        } else {
+            this.setState({ loginRequest: true });
+        }
     }
 
     logoutBlockToggle() {
@@ -49,20 +57,12 @@ class Header extends React.Component {
         }
     }
 
-    loginRequestPopup(e) {
-        if (e.target.textContent === '取消') {
-            this.setState({ loginRequest: false });
-        } else {
-            this.setState({ loginRequest: true });
-        }
-    }
-
     render() {
         if (this.state.logoutState) return <Redirect to='/' />;
 
         let logOutWord;
         let addNewCollectionShow;
-        if (this.props.loginState.user_id === 'anonymous') {
+        if (this.props.login.user_id === 'anonymous') {
             logOutWord = '登 入';
             addNewCollectionShow =
                 <div onClick={this.loginRequestPopup} className='add_card'>
@@ -120,7 +120,7 @@ class Header extends React.Component {
                     </div>
                     <div className='log_out' style={{ display: this.state.logoutBlock ? 'block' : 'none' }} onClick={this.logout}>{logOutWord}</div>
                     <div className='member icon'
-                        style={{ backgroundImage: this.props.loginState.login ? `url(${this.props.loginState.user_photo})` : `url('../../image/user.svg')` }}
+                        style={{ backgroundImage: this.props.login.login ? `url(${this.props.login.user_photo})` : `url('../../image/user.svg')` }}
                         onClick={this.logoutBlockToggle}
                     ></div>
                 </div>
@@ -133,7 +133,7 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
     return {
         searchBarToggle: state.mobileSearchBar.mobileSearchBarOpen,
-        loginState: state.login.loginState
+        login: state.login.loginState
     }
 }
 

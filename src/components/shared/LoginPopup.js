@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loginToWeb, loginCheck, logout } from '../store/actions/loginActions';
+import { loginToWeb, loginCheck, logout } from '../../store/actions/loginActions';
 
 class LoginPopup extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class LoginPopup extends React.Component {
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
-        this.showDesHandler = this.showDesHandler.bind(this);
+        this.showGuestDesHandler = this.showGuestDesHandler.bind(this);
     }
 
     login(e) {
@@ -30,7 +30,7 @@ class LoginPopup extends React.Component {
         this.props.logout();
     }
 
-    showDesHandler() {
+    showGuestDesHandler() {
         this.setState({ showDescription: true });
     }
 
@@ -40,7 +40,7 @@ class LoginPopup extends React.Component {
 
     render() {
         return (
-            <div className='popup-overlay' style={{ display: this.props.loginState.login ? 'none' : 'flex' }}>
+            <div className='popup-overlay' style={{ display: this.props.login.login ? 'none' : 'flex' }}>
                 <div className='popup-overlay' style={{ display: this.state.showDescription ? 'none' : 'flex', backgroundColor: 'rgba(0,0,0,0)' }}>
                     <div className='popup-content'>
                         <div className='modal'>
@@ -68,7 +68,7 @@ class LoginPopup extends React.Component {
 
                                 <button
                                     className='button'
-                                    onClick={this.showDesHandler}
+                                    onClick={this.showGuestDesHandler}
                                 >
                                     <img src='../../image/user.svg' />
                                     使用 訪客身份 瀏覽
@@ -90,7 +90,7 @@ class LoginPopup extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loginState: state.login.loginState
+        login: state.login.loginState
     }
 }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
+import GameCard from './GameCard';
 
 class MatchGame extends React.Component {
     constructor(props) {
@@ -17,24 +18,25 @@ class MatchGame extends React.Component {
         this.gameStart = this.gameStart.bind(this);
         this.startTimer = this.startTimer.bind(this);
         this.pickCard = this.pickCard.bind(this);
-        this.deleteBorder = this.deleteBorder.bind(this);
+        this.checkAnswer = this.checkAnswer.bind(this);
+        this.nonActiveBorder = this.nonActiveBorder.bind(this);
         this.checkRoundOver = this.checkRoundOver.bind(this);
     }
 
     gameStart(content) {
-        let collectionContent = content.slice();
+        let collection = content.slice();
         let passArray = [];
-        if (collectionContent !== null) {
+        if (collection !== null) {
             let randomArray = [];
             // 判斷如果字少於4個就每個字再複製一份
-            if (collectionContent.length < 4) {
-                for (let i = 0; i < collectionContent.length; i++) {
+            if (collection.length < 4) {
+                for (let i = 0; i < collection.length; i++) {
                     for (let j = 0; j < 2; j++) {
-                        randomArray.push(collectionContent[i]);
+                        randomArray.push(collection[i]);
                     }
                 }
             } else {
-                randomArray = collectionContent;
+                randomArray = collection;
             }
             // 打亂陣列
             let temporaryValue, randomIndex;
@@ -116,26 +118,30 @@ class MatchGame extends React.Component {
         }
 
         if (count === 2) {
-            let checkArray = cardsArray.filter(item => item.border !== undefined);
-            checkArray = checkArray.filter(item => item.border !== 'correct');
-            if (checkArray[0].word === checkArray[1].word && checkArray[0].show !== checkArray[1].show) {
-                cardsArray[checkArray[0].label].border = 'correct';
-                cardsArray[checkArray[1].label].border = 'correct';
-                this.setState({ count: 0 });
-                setTimeout(() => {
-                    this.checkRoundOver();
-                }, 800);
-            } else {
-                cardsArray[checkArray[0].label].border = 'wrong';
-                cardsArray[checkArray[1].label].border = 'wrong';
-                setTimeout(() => {
-                    this.deleteBorder();
-                }, 1000);
-            }
+            this.checkAnswer(cardsArray);
         }
     }
 
-    deleteBorder() {
+    checkAnswer(cardsArray) {
+        let checkArray = cardsArray.filter(item => item.border !== undefined);
+        checkArray = checkArray.filter(item => item.border !== 'correct');
+        if (checkArray[0].word === checkArray[1].word && checkArray[0].show !== checkArray[1].show) {
+            cardsArray[checkArray[0].label].border = 'correct';
+            cardsArray[checkArray[1].label].border = 'correct';
+            this.setState({ count: 0 });
+            setTimeout(() => {
+                this.checkRoundOver();
+            }, 800);
+        } else {
+            cardsArray[checkArray[0].label].border = 'wrong';
+            cardsArray[checkArray[1].label].border = 'wrong';
+            setTimeout(() => {
+                this.nonActiveBorder();
+            }, 1000);
+        }
+    }
+
+    nonActiveBorder() {
         let cardsArray = this.state.cardsArray.slice();
         let newArray = cardsArray.filter(item => item.border === 'wrong');
         delete cardsArray[newArray[0].label].border;
@@ -151,14 +157,14 @@ class MatchGame extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.collectionContent !== null) {
-            this.gameStart(this.props.collectionContent);
+        if (this.props.collection !== null) {
+            this.gameStart(this.props.collection);
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.collectionContent !== prevProps.collectionContent) {
-            this.gameStart(this.props.collectionContent);
+        if (this.props.collection !== prevProps.collection) {
+            this.gameStart(this.props.collection);
         }
     }
 
@@ -183,7 +189,7 @@ class MatchGame extends React.Component {
                 <div className='popup-overlay' style={{ display: this.state.roundOver ? 'flex' : 'none' }}>
                     <div className='deletecheck-popup'>
                         你花了{this.state.roundOverTime}完成遊戲！
-                        <button className='cancel' onClick={this.gameStart.bind(this, this.props.collectionContent)}>再玩一次</button>
+                        <button className='cancel' onClick={this.gameStart.bind(this, this.props.collection)}>再玩一次</button>
                         <Link className='cancel' to={'/Collection/' + this.props.match.params.id}>繼續背誦</Link>
                         <div className='deletecheck-popup-background'></div>
                     </div>
@@ -197,9 +203,9 @@ class MatchGame extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const collections = state.firestore.data.collection;
-    const collectionContent = collections ? collections[id].content : null;
+    const collection = collections ? collections[id].content : null;
     return {
-        collectionContent: collectionContent,
+        collection: collection,
         login: state.login.loginState
     }
 }
@@ -210,12 +216,3 @@ export default compose(
         { collection: 'collection' }
     ])
 )(MatchGame);
-
-
-function GameCard(props) {
-    return (
-        <div className={`game_card ${props.border}`} onClick={props.pickCard.bind(this, props)}>
-            <div className='show_word'>{props.show}</div>
-        </div>
-    )
-}

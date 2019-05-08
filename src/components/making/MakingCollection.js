@@ -184,6 +184,19 @@ class MakingCollection extends React.Component {
         }
     }
 
+    deleteCard(card) {
+        let newContentData = this.state.collection.content.slice();
+        newContentData.splice(card.label, 1);
+        if (newContentData.length >= 2) {
+            this.setState({
+                collection: {
+                    ...this.state.collection,
+                    content: newContentData
+                }
+            });
+        }
+    }
+
     compressImg(card, e) {
         let oringinFile = e.target.files[0];
         this.getOrientation(oringinFile, (orientation) => {
@@ -244,6 +257,7 @@ class MakingCollection extends React.Component {
     }
 
     getOrientation(file, callback) {
+        // 取得圖片目前的旋轉方向
         let reader = new FileReader();
         reader.onload = function (e) {
 
@@ -285,6 +299,7 @@ class MakingCollection extends React.Component {
 
     uploadImg(card, image) {
         let newContentData = this.state.collection.content.slice();
+        // 在檔名加上時間以免檔名相同檔案被覆蓋
         let name = new Date().getTime() + image.name;
         const uplaodTask = storage.ref(`images/${name}`).put(image);
         uplaodTask.on('state_changed',
@@ -342,19 +357,6 @@ class MakingCollection extends React.Component {
         });
     }
 
-    deleteCard(card) {
-        let newContentData = this.state.collection.content.slice();
-        newContentData.splice(card.label, 1);
-        if (newContentData.length >= 2) {
-            this.setState({
-                collection: {
-                    ...this.state.collection,
-                    content: newContentData
-                }
-            });
-        }
-    }
-
     uploadXlsx(e) {
         let newContentData = [];
         let files = e.target.files, f = files[0];
@@ -391,12 +393,12 @@ class MakingCollection extends React.Component {
 
     submitCollection(e) {
         let content = this.state.collection.content.slice();
-        let flag = false;
+        let emptyWordOrDef = false;
 
         for (let i = 0; i < content.length; i++) {
             if (content[i].word === '' || content[i].definition === '') {
                 content[i].empty = '3px solid red';
-                flag = true;
+                emptyWordOrDef = true;
             }
         }
 
@@ -410,7 +412,7 @@ class MakingCollection extends React.Component {
         if (this.state.collection.title === '') {
             this.setState({ borderBottom: '3px solid red' });
             this.focusTextInput();
-        } else if (flag) {
+        } else if (emptyWordOrDef) {
             return;
         } else if (e.target.textContent === '建立') {
             this.props.addNewCollection(this.state.collection, '建立');
@@ -437,11 +439,11 @@ class MakingCollection extends React.Component {
     }
 
     render() {
-        let flag;
+        let submitType;
         if (this.props.match.params.id === 'new') {
-            flag = true;
+            submitType = true;
         } else {
-            flag = false;
+            submitType = false;
         }
 
         let publicState = this.state.collection.public;
@@ -451,6 +453,7 @@ class MakingCollection extends React.Component {
             publicState = 'close';
         }
 
+        // 建立完成、未登入或訪客模式都重新導向到首頁
         if (this.state.submitOK === '建立' || !this.props.login.login || this.props.login.user_id === 'anonymous') {
             return <Redirect to='/' />
         } else if (this.state.submitOK === '更新') {
@@ -514,8 +517,8 @@ class MakingCollection extends React.Component {
                     }
                     <div className='add_card' onClick={this.addNewCard}><span> + 新增單詞卡</span></div>
                 </div>
-                <button onClick={this.submitCollection} style={{ display: flag ? 'block' : 'none' }}>建立</button>
-                <button onClick={this.submitCollection} style={{ display: flag ? 'none' : 'block' }}>更新</button>
+                <button onClick={this.submitCollection} style={{ display: submitType ? 'block' : 'none' }}>建立</button>
+                <button onClick={this.submitCollection} style={{ display: submitType ? 'none' : 'block' }}>更新</button>
             </div>
         )
     }
@@ -526,7 +529,6 @@ const mapStateToProps = (state, ownProps) => {
     const collections = state.firestore.data.collection;
     const collection = collections ? collections[id] : null;
     return {
-        allCollection: collections,
         editCollection: collection,
         login: state.login.loginState,
         submitStatus: state.collection.submitStatus

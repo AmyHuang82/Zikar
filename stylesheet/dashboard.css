@@ -208,6 +208,7 @@
     color: #979797;
 }
 
+/* ---------- RWD ---------- */
 @media screen and (max-width: 800px) {
     .collection {
         width: 45%;

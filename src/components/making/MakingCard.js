@@ -4,16 +4,16 @@ class MakingCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            previewPicToggle: false
+            previewImgToggle: false
         }
         this.textInput = React.createRef();
         this.focusTextInput = this.focusTextInput.bind(this);
-        this.deleteHandler = this.deleteHandler.bind(this);
-        this.uploadImgHandler = this.uploadImgHandler.bind(this);
-        this.deleteImgHandler = this.deleteImgHandler.bind(this);
         this.wordInputHandler = this.wordInputHandler.bind(this);
         this.defInputHandler = this.defInputHandler.bind(this);
-        this.previewPic = this.previewPic.bind(this);
+        this.uploadImgHandler = this.uploadImgHandler.bind(this);
+        this.previewImg = this.previewImg.bind(this);
+        this.deleteImgHandler = this.deleteImgHandler.bind(this);
+        this.deleteCardHandler = this.deleteCardHandler.bind(this);
     }
 
     focusTextInput() {
@@ -32,21 +32,21 @@ class MakingCard extends React.Component {
         this.props.compressImg(this.props, e);
     }
 
+    previewImg(e) {
+        if (e.target.textContent === '取消') {
+            this.setState({ previewImgToggle: false });
+        } else {
+            this.setState({ previewImgToggle: true });
+        }
+    }
+
     deleteImgHandler() {
         this.props.deleteImg(this.props);
-        this.setState({ previewPicToggle: false });
+        this.setState({ previewImgToggle: false });
     }
 
-    deleteHandler() {
+    deleteCardHandler() {
         this.props.deleteCard(this.props);
-    }
-
-    previewPic(e) {
-        if (e.target.textContent === '取消') {
-            this.setState({ previewPicToggle: false });
-        } else {
-            this.setState({ previewPicToggle: true });
-        }
     }
 
     componentDidUpdate(prevProps) {
@@ -62,18 +62,18 @@ class MakingCard extends React.Component {
         } else if (this.props.pictureName === 'loading') {
             pictureStatue = <div className='loading_image'></div>;
         } else {
-            pictureStatue = <div onClick={this.previewPic} className='preview_image' style={{ backgroundImage: `url(${this.props.pictureURL})` }} title='預覽圖片'></div>;
+            pictureStatue = <div onClick={this.previewImg} className='preview_image' style={{ backgroundImage: `url(${this.props.pictureURL})` }} title='預覽圖片'></div>;
         }
 
         return (
             <div className='making_card ease'>
-                <div className='popup-overlay' style={{ display: this.state.previewPicToggle ? 'flex' : 'none' }}>
+                <div className='popup-overlay' style={{ display: this.state.previewImgToggle ? 'flex' : 'none' }}>
                     <div className='deletecheck-popup' style={{ height: '330px' }}>
                         <p>圖片預覽</p>
                         <div style={{ zIndex: 5, border: '1px dashed silver', width: '80%', paddingBottom: '80%' }} className='img_wrap'>
                             <img src={this.props.pictureURL} />
                         </div>
-                        <button className='cancel' onClick={this.previewPic}>取消</button>
+                        <button className='cancel' onClick={this.previewImg}>取消</button>
                         <button className='confirm' onClick={this.deleteImgHandler}>刪除</button>
                         <div className='deletecheck-popup-background'></div>
                     </div>
@@ -81,7 +81,7 @@ class MakingCard extends React.Component {
                 <input placeholder='詞語' ref={this.textInput} onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
                 <input placeholder='定義' onChange={this.defInputHandler} value={this.props.definition} style={{ borderBottom: this.props.empty }} />
                 {pictureStatue}
-                <div onClick={this.deleteHandler} className='delete_card' title='刪除字卡'></div>
+                <div onClick={this.deleteCardHandler} className='delete_card' title='刪除字卡'></div>
             </div>
         )
     }

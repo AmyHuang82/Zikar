@@ -101,7 +101,7 @@ header > .container > .search_bar_mobile {
     display: none;
 }
 
-/* ----------- Header Mobile ---------- */
+/* ----------- Header RWD ---------- */
 @media screen and (max-width: 650px) {
     header > .container {
         width: 100%;
