@@ -55,13 +55,17 @@ class Card extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (this.props.word !== prevProps.word) {
             this.setState({ showing: this.props.word, showing_lan: this.props.word_lan, pic_showing: '' });
+        }
+        if (this.state.showing !== prevState.showing) {
+            this.speak();
         }
     }
 
     componentDidMount() {
+        this.speak();
         document.body.addEventListener('keyup', this.keyHandle);
     }
 
