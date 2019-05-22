@@ -56,13 +56,13 @@ class MakingCard extends React.Component {
     }
 
     render() {
-        let pictureStatue;
+        let pictureStatus;
         if (this.props.pictureName === '') {
-            pictureStatue = <label onChange={this.uploadImgHandler} className='add_image' title='增加圖片'> <input type='file' style={{ display: 'none' }} accept='image/*' /> </label>;
+            pictureStatus = <label onChange={this.uploadImgHandler} className='add_image' title='增加圖片'> <input type='file' style={{ display: 'none' }} accept='image/*' /> </label>;
         } else if (this.props.pictureName === 'loading') {
-            pictureStatue = <div className='loading_image'></div>;
+            pictureStatus = <div className='loading_image'></div>;
         } else {
-            pictureStatue = <div onClick={this.previewImg} className='preview_image' style={{ backgroundImage: `url(${this.props.pictureURL})` }} title='預覽圖片'></div>;
+            pictureStatus = <div onClick={this.previewImg} className='preview_image' style={{ backgroundImage: `url(${this.props.pictureURL})` }} title='預覽圖片'></div>;
         }
 
         return (
@@ -80,7 +80,7 @@ class MakingCard extends React.Component {
                 </div>
                 <input placeholder='詞語' ref={this.textInput} onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
                 <input placeholder='定義' onChange={this.defInputHandler} value={this.props.definition} style={{ borderBottom: this.props.empty }} />
-                {pictureStatue}
+                {pictureStatus}
                 <div onClick={this.deleteCardHandler} className='delete_card' title='刪除字卡'></div>
             </div>
         )

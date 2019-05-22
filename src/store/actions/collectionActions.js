@@ -3,7 +3,17 @@ export function addNewCollection(collection, typeStr) {
     return (dispatch, getState, { getFirestore }) => {
 
         let currentdate = new Date();
-        let hour, minute;
+        let month, date, hour, minute;
+        if ((currentdate.getMonth() + 1) < 10) {
+            month = `0${currentdate.getMonth() + 1}`;
+        } else {
+            month = currentdate.getMonth() + 1;
+        }
+        if (currentdate.getDate() < 10) {
+            date = `0${currentdate.getDate()}`;
+        } else {
+            date = currentdate.getDate();
+        }
         if (currentdate.getHours() < 10) {
             hour = `0${currentdate.getHours()}`;
         } else {
@@ -15,8 +25,8 @@ export function addNewCollection(collection, typeStr) {
             minute = currentdate.getMinutes();
         }
         let datetime = currentdate.getFullYear() + '-'
-            + (currentdate.getMonth() + 1) + '-'
-            + currentdate.getDate() + ' '
+            + month + '-'
+            + date + ' '
             + hour + ':'
             + minute;
 
@@ -48,7 +58,17 @@ export function copyToSelfCollection(id, user) {
         const firestore = getFirestore();
         firestore.collection('collection').doc(id).get({}).then((collection) => {
             let currentdate = new Date();
-            let hour, minute;
+            let month, date, hour, minute;
+            if ((currentdate.getMonth() + 1) < 10) {
+                month = `0${currentdate.getMonth() + 1}`;
+            } else {
+                month = currentdate.getMonth() + 1;
+            }
+            if (currentdate.getDate() < 10) {
+                date = `0${currentdate.getDate()}`;
+            } else {
+                date = currentdate.getDate();
+            }
             if (currentdate.getHours() < 10) {
                 hour = `0${currentdate.getHours()}`;
             } else {
@@ -60,8 +80,8 @@ export function copyToSelfCollection(id, user) {
                 minute = currentdate.getMinutes();
             }
             let datetime = currentdate.getFullYear() + '-'
-                + (currentdate.getMonth() + 1) + '-'
-                + currentdate.getDate() + ' '
+                + month + '-'
+                + date + ' '
                 + hour + ':'
                 + minute;
 
