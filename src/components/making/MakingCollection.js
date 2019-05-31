@@ -262,7 +262,7 @@ class MakingCollection extends React.Component {
         reader.onload = function (e) {
 
             let view = new DataView(e.target.result);
-            if (view.getUint16(0, false) != 0xFFD8) {
+            if (view.getUint16(0, false) !== 0xFFD8) {
                 return callback(-2);
             }
             let length = view.byteLength, offset = 2;
@@ -285,7 +285,7 @@ class MakingCollection extends React.Component {
                         }
                     }
                 }
-                else if ((marker & 0xFF00) != 0xFF00) {
+                else if ((marker & 0xFF00) !== 0xFF00) {
                     break;
                 }
                 else {
