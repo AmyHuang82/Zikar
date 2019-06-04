@@ -127,11 +127,7 @@ class Test extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps && this.props.collection !== null) {
-            let arrayCheck = this.props.collection.content.filter(item => item.familiarity === 0);
-            if (arrayCheck.length === this.props.collection.content.length) {
-                this.setState({ allNewRound: true });
-            }
-            arrayCheck = this.props.collection.content.filter(item => item.familiarity === 100);
+            let arrayCheck = this.props.collection.content.filter(item => item.familiarity === 100);
             if (arrayCheck.length === this.props.collection.content.length) {
                 this.setState({ doneTest: true });
             }
