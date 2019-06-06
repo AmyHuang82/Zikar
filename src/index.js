@@ -28,32 +28,32 @@ import MatchGame from './components/memorizing/game/MatchGame';
 
 // 建立 store，把 reducer 傳進去
 let store = createStore(rootReducer,
-    composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-        reduxFirestore(firebase),
-        reactReduxFirebase(firebase, { attachAuthIsReady: true })
-    ));
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(firebase),
+    reactReduxFirebase(firebase, { attachAuthIsReady: true })
+  ));
 
 class Main extends React.Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <Router>
-                    <Header />
-                    <LoginPopup />
-                    <Background />
-                    <Route path='/' exact component={Dashboard} />
-                    <Route path='/Search/:keyword' exact component={Search} />
-                    <Route path='/Collection/:id' exact component={CollectionDetail} />
-                    <Route path='/MakingCards/:id' exact component={MakingCollection} />
-                    <Route path='/Test/:id' exact component={Test} />
-                    <Route path='/MatchGame/:id' exact component={MatchGame} />
-                </Router>
-            </Provider>
-        );
-    }
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Header />
+          <LoginPopup />
+          <Background />
+          <Route path='/' exact component={Dashboard} />
+          <Route path='/Search/:keyword' exact component={Search} />
+          <Route path='/Collection/:id' exact component={CollectionDetail} />
+          <Route path='/MakingCards/:id' exact component={MakingCollection} />
+          <Route path='/Test/:id' exact component={Test} />
+          <Route path='/MatchGame/:id' exact component={MatchGame} />
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 store.firebaseAuthIsReady.then(() => {
-    ReactDOM.render(<Main />, document.getElementById('root'));
+  ReactDOM.render(<Main />, document.getElementById('root'));
 });

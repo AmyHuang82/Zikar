@@ -1,671 +1,675 @@
 .content .arrows {
-    width: 100%;
-    display: flex;
-    margin: 20px 0;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
 }
 
 .left-arrow {
-    background: url('/image/arrow_sprite.svg');
-    background-position: 0 0;
-    background-size: 80px;
+  background: url('/image/arrow_sprite.svg');
+  background-position: 0 0;
+  background-size: 80px;
 }
 
 .left-arrow:hover {
-    background-position: -40px 0;
-    background-size: 80px;
-    background-color: white;
+  background-position: -40px 0;
+  background-size: 80px;
+  background-color: white;
 }
 
 .right-arrow {
-    background: url('/image/arrow_sprite.svg');
-    background-position: 0 -40px;
-    background-size: 80px;
+  background: url('/image/arrow_sprite.svg');
+  background-position: 0 -40px;
+  background-size: 80px;
 }
 
 .right-arrow:hover {
-    background-position: -40px -40px;
-    background-size: 80px;
-    background-color: white;
+  background-position: -40px -40px;
+  background-size: 80px;
+  background-color: white;
 }
 
-.left-arrow, .right-arrow {
-    border: 1px solid silver;
-    border-radius: 50%;
-    background-color: white;
-    cursor: pointer;
-    height: 40px;
-    width: 40px;
-    margin: 0 30px;
+.left-arrow,
+.right-arrow {
+  border: 1px solid silver;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  margin: 0 30px;
 }
 
 .content .cards_content {
-    overflow: hidden;
-    width: 70%;
-    margin: 0 auto;
-    position: relative;
+  overflow: hidden;
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
 }
 
 .content .paging {
-    font-size: 18px;
-    color: silver;
-    position: absolute;
-    text-align: right;
-    top: 5px;
-    left: 10px;
+  font-size: 18px;
+  color: silver;
+  position: absolute;
+  text-align: right;
+  top: 5px;
+  left: 10px;
 }
 
 .content .show_card {
-    border: 1px solid silver;
-    width: 100%;
-    max-width: 500px;
-    height: 350px;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    cursor: pointer;
-    position: relative;
-    margin:auto;
-    padding: 10px;
+  border: 1px solid silver;
+  width: 100%;
+  max-width: 500px;
+  height: 350px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  padding: 10px;
 }
 
 .text-align-center {
-    text-align: center;
+  text-align: center;
 }
 
 .deletecheck-popup {
-    background: rgb(255, 255, 255);
-    border-radius: 10px;
-    margin: auto;
-    position: relative;
-    width: 290px;
-    height: 150px;
-    color: #333333;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 18px;
-    box-shadow: 0 0 10px;
-    overflow: hidden;
-    text-align: center;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  margin: auto;
+  position: relative;
+  width: 290px;
+  height: 150px;
+  color: #333333;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 18px;
+  box-shadow: 0 0 10px;
+  overflow: hidden;
+  text-align: center;
 }
 
-.deletecheck-popup .cancel, .deletecheck-popup .confirm{
-    width: 30%;
-    margin: 10px 10% 0 10%;
-    padding: 3px;
-    background-color: white;
-    border-radius: 3px;
-    border: none;
-    font-size: 15px;
-    color: white;
-    z-index: 5;
-    text-align: center;
-    height: 34px;
-    line-height: 28px;
-    font-weight: 700;
+.deletecheck-popup .cancel,
+.deletecheck-popup .confirm {
+  width: 30%;
+  margin: 10px 10% 0 10%;
+  padding: 3px;
+  background-color: white;
+  border-radius: 3px;
+  border: none;
+  font-size: 15px;
+  color: white;
+  z-index: 5;
+  text-align: center;
+  height: 34px;
+  line-height: 28px;
+  font-weight: 700;
 }
 
-.deletecheck-popup > .cancel {
-    background-color: rgb(1, 192, 192);
+.deletecheck-popup>.cancel {
+  background-color: rgb(1, 192, 192);
 }
 
-.deletecheck-popup > .confirm {
-    background-color: #E02D2D;
+.deletecheck-popup>.confirm {
+  background-color: #E02D2D;
 }
 
 .deletecheck-popup-background {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 90px 0 0 100vw;
-    border-color: transparent transparent transparent rgb(231, 247, 255);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 90px 0 0 100vw;
+  border-color: transparent transparent transparent rgb(231, 247, 255);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
 }
 
 .wrap {
-    width: 100%;
-    position: relative;
-    margin: 50px 0 0 50px;
+  width: 100%;
+  position: relative;
+  margin: 50px 0 0 50px;
 }
 
 .features {
-    margin: 0 auto;
-    display: flex;
-    flex-flow: column;
-    position: absolute;
-    top: 0;
-    left: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .content .feature_block {
-    width: 100px;
-    height: 100px;
-    border-bottom: 3px solid rgb(1, 192, 192);
-    box-shadow: 0 0 5px silver;
-    margin-bottom: 20px;
-    cursor: pointer;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    color: #5f5f5f;
-    background-color: white;
+  width: 100px;
+  height: 100px;
+  border-bottom: 3px solid rgb(1, 192, 192);
+  box-shadow: 0 0 5px silver;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: #5f5f5f;
+  background-color: white;
 }
 
 .content .feature_block:hover {
-    border-bottom: 5px solid #FFE20E;
+  border-bottom: 5px solid #FFE20E;
 }
 
 .feature_block .block_img {
-    width: 65px;
-    height: 65px;
-    background-size: cover;
-    font-size: 0;
+  width: 65px;
+  height: 65px;
+  background-size: cover;
+  font-size: 0;
 }
 
 .feature_block .card_test {
-    background: url('/image/feature_sprite.svg');
-    background-position: 0 0;
-    background-size: 130px 260px;
+  background: url('/image/feature_sprite.svg');
+  background-position: 0 0;
+  background-size: 130px 260px;
 }
 
 .feature_block:hover .card_test {
-    background-position: -65px 0; 
-    background-size: 130px 260px;
+  background-position: -65px 0;
+  background-size: 130px 260px;
 }
 
 .feature_block .match_game {
-    background: url('/image/feature_sprite.svg');
-    background-position: 0 -65px;
-    background-size: 130px 260px;
+  background: url('/image/feature_sprite.svg');
+  background-position: 0 -65px;
+  background-size: 130px 260px;
 }
 
 .feature_block:hover .match_game {
-    background-position: -65px -65px;
-    background-size: 130px 260px;
+  background-position: -65px -65px;
+  background-size: 130px 260px;
 }
 
 .feature_block .shuffle_card {
-    background: url('/image/feature_sprite.svg');
-    background-position: 0 -130px;
-    background-size: 130px 260px;
+  background: url('/image/feature_sprite.svg');
+  background-position: 0 -130px;
+  background-size: 130px 260px;
 }
 
 .feature_block:hover .shuffle_card {
-    background-position: -65px -130px;
-    background-size: 130px 260px;
+  background-position: -65px -130px;
+  background-size: 130px 260px;
 }
 
 .feature_block .add_to_learn {
-    background: url('/image/feature_sprite.svg');
-    background-position: 0 -195px;
-    background-size: 130px 260px;
+  background: url('/image/feature_sprite.svg');
+  background-position: 0 -195px;
+  background-size: 130px 260px;
 }
 
 .feature_block:hover .add_to_learn {
-    background-position: -65px -195px;
-    background-size: 130px 260px;
+  background-position: -65px -195px;
+  background-size: 130px 260px;
 }
 
 .content .edit-feature {
-    display: flex;
-    flex-flow: column;
-    position: absolute;
-    top: 0;
-    right: 0;
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .content .edit-feature_block {
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    border-radius: 50%;
-    box-shadow: 0 0 5px silver;
-    background-color: white;
-    margin: 5px 5px 10px 5px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 5px silver;
+  background-color: white;
+  margin: 5px 5px 10px 5px;
 }
 
 .content .edit-feature_block .block_img {
-    width: 100%;
-    height: 100%;
-    font-size: 0;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  border-radius: 50%;
 }
 
 .edit-feature_block .hot_key {
-    background: url('/image/card_feature_sprite.svg');
-    background-position: 0 0;
-    background-size: 90px 180px;
-    background-color: white;
+  background: url('/image/card_feature_sprite.svg');
+  background-position: 0 0;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 
 .edit-feature_block:hover .hot_key {
-    background-position: -45px 0;
-    background-size: 90px 180px;
-    background-color: white;
+  background-position: -45px 0;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 .edit-feature_block .exchange_cards {
-    background: url('/image/card_feature_sprite.svg');
-    background-position: 0 -45px;
-    background-size: 90px 180px;
-    background-color: white;
+  background: url('/image/card_feature_sprite.svg');
+  background-position: 0 -45px;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 
 .edit-feature_block:hover .exchange_cards {
-    background-position: -45px -45px;
-    background-size: 90px 180px;
-    background-color: white;
+  background-position: -45px -45px;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 .edit-feature_block .edit_collection {
-    background: url('/image/card_feature_sprite.svg');
-    background-position: 0 -90px;
-    background-size: 90px 180px;
-    background-color: white;
+  background: url('/image/card_feature_sprite.svg');
+  background-position: 0 -90px;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 .edit-feature_block:hover .edit_collection {
-    background-position: -45px -90px;
-    background-size: 90px 180px;
-    background-color: white;
+  background-position: -45px -90px;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 .edit-feature_block .delete_collection {
-    background: url('/image/card_feature_sprite.svg');
-    background-position: 0 -135px;
-    background-size: 90px 180px;
-    background-color: white;
+  background: url('/image/card_feature_sprite.svg');
+  background-position: 0 -135px;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 .edit-feature_block:hover .delete_collection {
-    background-position: -45px -135px;
-    background-size: 90px 180px;
-    background-color: white;
+  background-position: -45px -135px;
+  background-size: 90px 180px;
+  background-color: white;
 }
 
 .content .show_card p {
-    font-size: 25px;
-    color: #333333;
-    margin: -10px auto;
+  font-size: 25px;
+  color: #333333;
+  margin: -10px auto;
 }
 
 .img_wrap {
-    width: 50%;
-    padding-bottom: 50%;
-    position: relative;
-    margin-bottom: 10px;
+  width: 50%;
+  padding-bottom: 50%;
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .img_wrap img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .content .show_card_hover {
-    color: white;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    padding-right: 10px;
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    visibility: hidden;
+  color: white;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding-right: 10px;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  visibility: hidden;
 }
 
 .content .show_card:hover .show_card_hover {
-    visibility: visible;
+  visibility: visible;
 }
 
 .white-overlay-cover {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background-color: white;
-    z-index: 5;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: white;
+  z-index: 5;
 }
 
 .white-overlay-cover .loading {
-    width: 60px;
-    height: 60px;
-    margin: auto;
+  width: 60px;
+  height: 60px;
+  margin: auto;
 }
 
 .card_feature {
-    position: absolute;
-    top: 6px;
-    right: 8px;
-    display: flex;
-    flex-flow: row;
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: flex;
+  flex-flow: row;
 }
 
 .card_feature div {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 }
 
 .card_feature .speak {
-    background-image: url('/image/speak_sprite.svg');
-    background-position-y: 0;
-    background-size: 70px;
+  background-image: url('/image/speak_sprite.svg');
+  background-position-y: 0;
+  background-size: 70px;
 }
 
 .card_feature .star_card {
-    background: url('/image/speak_sprite.svg') 0 -35px;
-    background-size: 70px;  
+  background: url('/image/speak_sprite.svg') 0 -35px;
+  background-size: 70px;
 }
 
 .card_feature .star_card_mark {
-    background: url('/image/speak_sprite.svg') -35px -35px;
-    background-size: 70px;  
+  background: url('/image/speak_sprite.svg') -35px -35px;
+  background-size: 70px;
 }
 
 .card_flip_area {
-    width: 100%;
-    height: 100%;
-    margin: 35px 0;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 35px 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .hot_key_popup {
-    height: 170px;
+  height: 170px;
 }
 
-.keyarrow, .key_description {
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
+.keyarrow,
+.key_description {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
 }
 
 .key_description {
-    width: 50%;
+  width: 50%;
 }
 
 .keyarrow {
-    width: 35px;
-    height: 35px;
-    color: rgb(255, 196, 0);
-    font-weight: 700;
-    border: 1px solid rgb(255, 196, 0);
-    box-shadow: 2px 2px 0 rgb(255, 196, 0);
-    background-color: white;
-    border-radius: 5px;
-    margin-right: 8px;
+  width: 35px;
+  height: 35px;
+  color: rgb(255, 196, 0);
+  font-weight: 700;
+  border: 1px solid rgb(255, 196, 0);
+  box-shadow: 2px 2px 0 rgb(255, 196, 0);
+  background-color: white;
+  border-radius: 5px;
+  margin-right: 8px;
 }
 
 .continue_test .familiarity_description {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #5f5f5f;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #5f5f5f;
 }
 
 .continue_test .average_percent {
-    font-size: 40px;
-    color: #333333;
-    margin-bottom: 40px;
+  font-size: 40px;
+  color: #333333;
+  margin-bottom: 40px;
 }
 
 /* ---------- RWD ---------- */
-@media screen and (max-width: 1000px){
-    .content .cards_content {
-        width: 80%;
-    }
+@media screen and (max-width: 1000px) {
+  .content .cards_content {
+    width: 80%;
+  }
 }
 
-@media screen and (max-width: 880px){
-    .content .cards_content {
-        width: 85%;
-    }
+@media screen and (max-width: 880px) {
+  .content .cards_content {
+    width: 85%;
+  }
 }
 
 @media screen and (max-width: 850px) {
-    .content .wrap {
-        display: flex;
-        flex-flow: column;
-        margin: 0;
-    }
+  .content .wrap {
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+  }
 
-    .features {
-        position: relative;
-        order: 2;
-        flex-flow: row wrap;
-    }
+  .features {
+    position: relative;
+    order: 2;
+    flex-flow: row wrap;
+  }
 
-    .feature_block {
-        margin: 10px;
-    }
+  .feature_block {
+    margin: 10px;
+  }
 }
 
-@media screen and (max-width: 830px){
-    .content .cards_content {
-        width: 100%;
-    }
+@media screen and (max-width: 830px) {
+  .content .cards_content {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 700px) {
-    .content .arrows {
-        margin: 10px 0;
-    }
-    .content .edit-feature {
-        position: relative;
-        flex-flow: row;
-        justify-content: flex-end;
-        margin-bottom: 10px;
-     }
- 
-    .content .paging {
-        font-size: 12px;
-        top: 5px;
-        left: 10px;
-    }
+  .content .arrows {
+    margin: 10px 0;
+  }
+
+  .content .edit-feature {
+    position: relative;
+    flex-flow: row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .content .paging {
+    font-size: 12px;
+    top: 5px;
+    left: 10px;
+  }
 }
 
 
 @media screen and (max-width: 550px) {
-    .content .show_card {
-        height: 40vh;
-        min-height: 250px;
-    }  
+  .content .show_card {
+    height: 40vh;
+    min-height: 250px;
+  }
 
-    .content .show_card_hover span {
-        display: none;
-    }
+  .content .show_card_hover span {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 500px){
-    .content .edit-feature_block {
-       width: 40px;
-       height: 40px;
-       margin-bottom: 0;
-    }
+@media screen and (max-width: 500px) {
+  .content .edit-feature_block {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+  }
 
-    .edit-feature_block .hot_key {
-        background: url('/image/card_feature_sprite.svg');
-        background-position: 0 0;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    
-    .edit-feature_block:hover .hot_key {
-        background-position: -40px 0;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    .edit-feature_block .exchange_cards {
-        background: url('/image/card_feature_sprite.svg');
-        background-position: 0 -40px;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    
-    .edit-feature_block:hover .exchange_cards {
-        background-position:  -40px -40px;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    .edit-feature_block .edit_collection {
-        background: url('/image/card_feature_sprite.svg');
-        background-position: 0 -80px;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    .edit-feature_block:hover .edit_collection {
-        background-position: -40px -80px;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    .edit-feature_block .delete_collection {
-        background: url('/image/card_feature_sprite.svg');
-        background-position: 0 -120px;
-        background-size: 80px 160px;
-        background-color: white;
-    }
-    
-    .edit-feature_block:hover .delete_collection {
-        background-position: -40px -120px;
-        background-size: 80px 160px;
-        background-color: white;
-    }
+  .edit-feature_block .hot_key {
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 0;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+
+  .edit-feature_block:hover .hot_key {
+    background-position: -40px 0;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+  .edit-feature_block .exchange_cards {
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 -40px;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+
+  .edit-feature_block:hover .exchange_cards {
+    background-position: -40px -40px;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+  .edit-feature_block .edit_collection {
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 -80px;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+  .edit-feature_block:hover .edit_collection {
+    background-position: -40px -80px;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+  .edit-feature_block .delete_collection {
+    background: url('/image/card_feature_sprite.svg');
+    background-position: 0 -120px;
+    background-size: 80px 160px;
+    background-color: white;
+  }
+
+  .edit-feature_block:hover .delete_collection {
+    background-position: -40px -120px;
+    background-size: 80px 160px;
+    background-color: white;
+  }
 }
 
 
 @media screen and (max-width: 450px) {
-    .content .feature_block {
-        margin: 5px;
-        width: 80px;
-        height: 80px;
-    }
+  .content .feature_block {
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+  }
 
-    .feature_block .block_img {
-        width: 45px;
-        height: 45px;
-    }
+  .feature_block .block_img {
+    width: 45px;
+    height: 45px;
+  }
 
-    .feature_block .card_test {
-        background: url('/image/feature_sprite.svg');
-        background-position: 0 0;
-        background-size: 90px 180px;
-    }
-    
-    .feature_block:hover .card_test {
-        background-position: -45px 0; 
-        background-size: 90px 180px;
-    }
-    
-    .feature_block .match_game {
-        background: url('/image/feature_sprite.svg');
-        background-position: 0 -45px;
-        background-size: 90px 180px;
-    }
-    
-    .feature_block:hover .match_game {
-        background-position: -45px -45px;
-        background-size: 90px 180px;
-    }
-    
-    .feature_block .shuffle_card {
-        background: url('/image/feature_sprite.svg');
-        background-position: 0 -90px;
-        background-size: 90px 180px;
-    }
-    
-    .feature_block:hover .shuffle_card {
-        background-position: -45px -90px;
-        background-size: 90px 180px;
-    }
+  .feature_block .card_test {
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 0;
+    background-size: 90px 180px;
+  }
 
-    .feature_block .add_to_learn {
-        background: url('/image/feature_sprite.svg');
-        background-position: 0 -135px;
-        background-size: 90px 180px;
-    }
-    
-    .feature_block:hover .add_to_learn {
-        background-position: -45px -135px;
-        background-size: 90px 180px;
-    }
+  .feature_block:hover .card_test {
+    background-position: -45px 0;
+    background-size: 90px 180px;
+  }
 
-    .content .show_card p {
-        font-size: 20px;
-    }
+  .feature_block .match_game {
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 -45px;
+    background-size: 90px 180px;
+  }
+
+  .feature_block:hover .match_game {
+    background-position: -45px -45px;
+    background-size: 90px 180px;
+  }
+
+  .feature_block .shuffle_card {
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 -90px;
+    background-size: 90px 180px;
+  }
+
+  .feature_block:hover .shuffle_card {
+    background-position: -45px -90px;
+    background-size: 90px 180px;
+  }
+
+  .feature_block .add_to_learn {
+    background: url('/image/feature_sprite.svg');
+    background-position: 0 -135px;
+    background-size: 90px 180px;
+  }
+
+  .feature_block:hover .add_to_learn {
+    background-position: -45px -135px;
+    background-size: 90px 180px;
+  }
+
+  .content .show_card p {
+    font-size: 20px;
+  }
 }
 
 /* ---------- animation ---------- */
 .open {
-    animation-name: flipInX;
-    animation-duration: .5s;
+  animation-name: flipInX;
+  animation-duration: .5s;
 }
 
 @keyframes flipInX {
-    from {
-        transform: perspective(600px) rotate3d(1, 0, 0, 90deg);
-        animation-timing-function: ease-in;
-        opacity: 0;
-    }
+  from {
+    transform: perspective(600px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
 
-    40% {
-        transform: perspective(600px) rotate3d(1, 0, 0, -3deg);
-        animation-timing-function: ease-in;
-    }
+  40% {
+    transform: perspective(600px) rotate3d(1, 0, 0, -3deg);
+    animation-timing-function: ease-in;
+  }
 
-    60% {
-        transform: perspective(600px) rotate3d(1, 0, 0, 3deg);
-        opacity: 1;
-    }
+  60% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 3deg);
+    opacity: 1;
+  }
 
-    80% {
-        transform: perspective(600px) rotate3d(1, 0, 0, 0deg);
-    }
+  80% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 0deg);
+  }
 
-    to {
-        transform: perspective(600px);
-    }
+  to {
+    transform: perspective(600px);
+  }
 }
 
 .ease {
-    animation-name: ease-in-out;
-    animation-duration: .25s;
+  animation-name: ease-in-out;
+  animation-duration: .25s;
 }
 
 @keyframes ease-in-out {
-    from {
-        animation-timing-function: ease-in;
-        opacity: 0;
-    }
+  from {
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
 
-    60% {
-        opacity: 0.5;
-    }
+  60% {
+    opacity: 0.5;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }

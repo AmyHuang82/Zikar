@@ -2,8 +2,8 @@
 
 /* ---------- Basic Setting ------------ */
 * {
-    box-sizing: border-box;
-    font-family: 'Noto Sans TC', sans-serif;
+  box-sizing: border-box;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 
 html,
@@ -24,95 +24,95 @@ li,
 aside,
 nav,
 img {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
-    cursor: pointer;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 button {
-    outline: none;
-    cursor: pointer;
+  outline: none;
+  cursor: pointer;
 }
 
 input {
-    outline: none;
-    border: none;
-    border-radius: 0;
+  outline: none;
+  border: none;
+  border-radius: 0;
 }
 
 input::placeholder {
-    color: rgb(230, 230, 230);
-    font-weight: 300;
+  color: rgb(230, 230, 230);
+  font-weight: 300;
 }
 
 #root {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    min-height: calc(100vh - 85px);
+  position: relative;
+  height: 100%;
+  width: 100%;
+  min-height: calc(100vh - 85px);
 }
 
 .content {
-    width: 90%;
-    max-width: 1000px;
-    margin: 85px auto 30px auto;
-    display: flex;
-    flex-flow: row wrap;
+  width: 90%;
+  max-width: 1000px;
+  margin: 85px auto 30px auto;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 /* ---------- input通用css設定 ---------- */
 .content input {
-    font-weight: 300;
-    margin: 10px 0;
-    padding: 10px 0;
-    color: #333333;
-    border-bottom: 2px solid #979797;
+  font-weight: 300;
+  margin: 10px 0;
+  padding: 10px 0;
+  color: #333333;
+  border-bottom: 2px solid #979797;
 }
 
 
 .content input::placeholder {
-    color: silver;
-    font-weight: 300;
+  color: silver;
+  font-weight: 300;
 }
 
 .content input:focus {
-    border-bottom: 3px solid #FFE20E;
+  border-bottom: 3px solid #FFE20E;
 }
 
 /* ---------- select通用css設定 ---------- */
 .select-box {
-    position: relative;
-    border: 2px solid rgb(235, 235, 235);
-    background-color: white;
+  position: relative;
+  border: 2px solid rgb(235, 235, 235);
+  background-color: white;
 }
 
 select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    color: rgb(1, 192, 192);
-    padding: 10px;
-    padding-right: 30px;
-    outline: none;
-    border: none;
-    background-color: white;
-    font-size: 13px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: rgb(1, 192, 192);
+  padding: 10px;
+  padding-right: 30px;
+  outline: none;
+  border: none;
+  background-color: white;
+  font-size: 13px;
 }
 
 .arrow {
-    padding: 2px;
-    width: 30px;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
+  padding: 2px;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 /* 取消手機點擊hilight效果 */
 div {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

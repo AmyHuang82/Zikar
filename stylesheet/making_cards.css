@@ -1,203 +1,203 @@
 .collection_info {
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-    margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px;
 }
 
-.collection_info > input {
-    width: 80%;
-    font-size: 25px;
+.collection_info>input {
+  width: 80%;
+  font-size: 25px;
 }
 
 .collection_info select {
-    width: 99%;
-    font-size: 14px;
-    background-image: url(/image/arrow.svg);
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 25px;
+  width: 99%;
+  font-size: 14px;
+  background-image: url(/image/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 25px;
 }
 
-.collection_info > .select-box {
-    margin-left: auto;
-    width: 18%;
+.collection_info>.select-box {
+  margin-left: auto;
+  width: 18%;
 }
 
-.content > .add-from-file {
-    width: 100%;
-    margin: -10px 0 20px 0;
-    color: #5F5F5F;
+.content>.add-from-file {
+  width: 100%;
+  margin: -10px 0 20px 0;
+  color: #5F5F5F;
 }
 
-.content > .add-from-file > label {
-    cursor: pointer;
+.content>.add-from-file>label {
+  cursor: pointer;
 }
 
-.content > .add-from-file > label:hover {
-    color: rgb(1, 192, 192);
+.content>.add-from-file>label:hover {
+  color: rgb(1, 192, 192);
 }
 
-.content > .card_info {
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-between;
+.content>.card_info {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.content > .card_info .select-box {
-    width: 48%;
-    margin: 0 0 20px 0;
+.content>.card_info .select-box {
+  width: 48%;
+  margin: 0 0 20px 0;
 }
 
-.content > .card_info .select-box select {
-    width: 99%;
-    font-size: 14px;
-    background-image: url(/image/arrow.svg);
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 25px;
+.content>.card_info .select-box select {
+  width: 99%;
+  font-size: 14px;
+  background-image: url(/image/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 25px;
 }
 
 .making_card {
-    width: 100%;
-    padding: 20px 0;
-    background-color: white;
-    box-shadow: 5px 5px 5px #dbdbdb;
-    border: 1px solid #dbdbdb;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 20px;
+  width: 100%;
+  padding: 20px 0;
+  background-color: white;
+  box-shadow: 5px 5px 5px #dbdbdb;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-.making_card > input {
-    font-size: 18px;
-    font-weight: 300;
-    width: 40%;
-    margin: 0 10px 0 10px;
+.making_card>input {
+  font-size: 18px;
+  font-weight: 300;
+  width: 40%;
+  margin: 0 10px 0 10px;
 }
 
-.making_card > .definition {
-    font-size: 15px;
+.making_card>.definition {
+  font-size: 15px;
 }
 
 .making_card .delete_card,
 .making_card .add_image {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .making_card .loading_image {
-    width: 38px;
-    height: 38px;
-    background-image: url(/image/loading.gif);
-    background-size: cover;
+  width: 38px;
+  height: 38px;
+  background-image: url(/image/loading.gif);
+  background-size: cover;
 }
 
 .making_card .preview_image {
-    width: 24px;
-    height: 24px;
-    margin: 8px;
-    cursor: pointer;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  width: 24px;
+  height: 24px;
+  margin: 8px;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .making_card .add_image {
-    background: url('/image/make_card_sprite.svg');
-    background-position: 0 0;
-    background-size: 200% 300%;
+  background: url('/image/make_card_sprite.svg');
+  background-position: 0 0;
+  background-size: 200% 300%;
 }
 
 .making_card .add_image:hover {
-    background-position:  -100% 0;
+  background-position: -100% 0;
 }
 
 .making_card .delete_card {
-    background: url('/image/make_card_sprite.svg');
-    background-position: 0 -100%;
-    background-size: 200% 300%;
+  background: url('/image/make_card_sprite.svg');
+  background-position: 0 -100%;
+  background-size: 200% 300%;
 }
 
 .making_card .delete_card:hover {
-    background-position: -100% -100%;
+  background-position: -100% -100%;
 }
 
-.content > .card_info .add_card {
-    background-color: white;
-    box-shadow: 5px 5px 5px #dbdbdb;
-    border: 1px dashed #dbdbdb;
-    width: 100%;
-    height: 86px;
-    margin-bottom: 20px;
-    text-align: center;
-    cursor: pointer;
+.content>.card_info .add_card {
+  background-color: white;
+  box-shadow: 5px 5px 5px #dbdbdb;
+  border: 1px dashed #dbdbdb;
+  width: 100%;
+  height: 86px;
+  margin-bottom: 20px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.content > .card_info .add_card > span {
-    margin: 0 auto;
-    color: #797979;
-    line-height: 30px;
-    border-bottom: 2px solid rgb(1, 192, 192);
+.content>.card_info .add_card>span {
+  margin: 0 auto;
+  color: #797979;
+  line-height: 30px;
+  border-bottom: 2px solid rgb(1, 192, 192);
 }
 
-.content > .card_info .add_card:hover > span {
-    border-bottom: 2px solid #FFE20E;
+.content>.card_info .add_card:hover>span {
+  border-bottom: 2px solid #FFE20E;
 }
 
 .content button {
-    background-color:  rgb(1, 192, 192);
-    color: white;
-    width: 100%;
-    max-width: 180px;
-    height: 40px;
-    border: none;
-    font-size: 15px;
-    font-weight: 700;
-    margin-top: 10px;
-    margin-left: auto;
+  background-color: rgb(1, 192, 192);
+  color: white;
+  width: 100%;
+  max-width: 180px;
+  height: 40px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-left: auto;
 }
 
 /* ---------- RWD ---------- */
 @media screen and (max-width: 650px) {
-    .content > .add-from-file {
-        display: none;
-    }
+  .content>.add-from-file {
+    display: none;
+  }
 
-    .collection_info > input {
-        width: 100%;
-    }
-    
-    .collection_info > .select-box {
-        width: 100%;
-    }
+  .collection_info>input {
+    width: 100%;
+  }
 
-    .content button {
-        max-width: 100%;
-    }
+  .collection_info>.select-box {
+    width: 100%;
+  }
 
-    .collection_info {
-        flex-flow: column;
-        margin-bottom: 20px;
-    }
+  .content button {
+    max-width: 100%;
+  }
 
-    .making_card {
-        flex-flow: row wrap;
-        justify-content: flex-end;
-    }
+  .collection_info {
+    flex-flow: column;
+    margin-bottom: 20px;
+  }
 
-    .making_card img {
-        height: 35px;
-        margin-right: 1%;
-    }
+  .making_card {
+    flex-flow: row wrap;
+    justify-content: flex-end;
+  }
 
-    .making_card > input {
-        width: 46%;
-        margin: 2%;
-    }
+  .making_card img {
+    height: 35px;
+    margin-right: 1%;
+  }
+
+  .making_card>input {
+    width: 46%;
+    margin: 2%;
+  }
 }
