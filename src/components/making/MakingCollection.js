@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import { addNewCollection, updateCollection, resetSubmitStatus } from '../../store/actions/collectionActions';
 import { storage } from '../../firebase';
 import MakingCard from './MakingCard';
-import XLSX from 'xlsx';
+import { read } from 'xlsx';
 
 class MakingCollection extends React.Component {
   constructor(props) {
@@ -364,7 +364,7 @@ class MakingCollection extends React.Component {
       let reader = new FileReader();
       reader.onload = (e) => {
         let data = new Uint8Array(e.target.result);
-        let workbook = XLSX.read(data, { type: 'array' });
+        let workbook = read(data, { type: 'array' });
         let first_sheet_name = workbook.SheetNames[0];
         let worksheet = workbook.Sheets[first_sheet_name];
         for (let i = 1; i < 101; i++) {
