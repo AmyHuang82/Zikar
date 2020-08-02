@@ -13,8 +13,8 @@ class MatchGame extends React.Component {
       count: 0,
       roundOver: '',
       roundOverTime: '',
-      gameTime: ''
-    }
+      gameTime: '',
+    };
     this.gameStart = this.gameStart.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.pickCard = this.pickCard.bind(this);
@@ -74,7 +74,11 @@ class MatchGame extends React.Component {
         passArray[i] = { ...passArray[i], label: i };
       }
     }
-    this.setState({ cardsArray: passArray, roundOver: false, gameTime: '00:00' });
+    this.setState({
+      cardsArray: passArray,
+      roundOver: false,
+      gameTime: '00:00',
+    });
     this.startTimer(0, 1);
   }
 
@@ -104,13 +108,15 @@ class MatchGame extends React.Component {
   }
 
   pickCard(card) {
-
     let cardsArray = this.state.cardsArray.slice();
     let count = this.state.count;
 
     if (cardsArray[card.label].border === undefined) {
       if (this.state.count < 2) {
-        cardsArray[card.label] = { ...cardsArray[card.label], border: 'active' };
+        cardsArray[card.label] = {
+          ...cardsArray[card.label],
+          border: 'active',
+        };
         this.setState({ cardsArray: cardsArray });
         this.setState((prevState) => ({ count: prevState.count + 1 }));
         count++;
@@ -123,8 +129,8 @@ class MatchGame extends React.Component {
   }
 
   checkAnswer(cardsArray) {
-    let checkArray = cardsArray.filter(item => item.border !== undefined);
-    checkArray = checkArray.filter(item => item.border !== 'correct');
+    let checkArray = cardsArray.filter((item) => item.border !== undefined);
+    checkArray = checkArray.filter((item) => item.border !== 'correct');
     if (checkArray[0].word === checkArray[1].word) {
       cardsArray[checkArray[0].label].border = 'correct';
       cardsArray[checkArray[1].label].border = 'correct';
@@ -143,14 +149,16 @@ class MatchGame extends React.Component {
 
   nonActiveBorder() {
     let cardsArray = this.state.cardsArray.slice();
-    let newArray = cardsArray.filter(item => item.border === 'wrong');
+    let newArray = cardsArray.filter((item) => item.border === 'wrong');
     delete cardsArray[newArray[0].label].border;
     delete cardsArray[newArray[1].label].border;
     this.setState({ cardsArray: cardsArray, count: 0 });
   }
 
   checkRoundOver() {
-    let checkArray = this.state.cardsArray.filter(item => item.border === 'correct');
+    let checkArray = this.state.cardsArray.filter(
+      (item) => item.border === 'correct'
+    );
     if (checkArray.length === 8) {
       this.setState({ roundOver: true, roundOverTime: this.state.gameTime });
     }
@@ -169,34 +177,55 @@ class MatchGame extends React.Component {
   }
 
   render() {
-    if (!this.props.login.login) return <Redirect to='/' />
+    if (!this.props.login.login) return <Redirect to="/" />;
     return (
-      <div className='content game_area'>
-        <Link className='back_to_collection' to={'/Collection/' + this.props.match.params.id}></Link>
-        <h2 className='game_time' style={{ display: this.state.roundOver ? 'none' : 'block' }}>{this.state.gameTime}</h2>
-        {
-          this.state.cardsArray && this.state.cardsArray.map((card, index) => {
-            return <GameCard
-              key={index}
-              label={card.label}
-              show={card.show}
-              word={card.word}
-              pickCard={this.pickCard}
-              border={card.border}
-            />
-          })
-        }
-        <div className='popup-overlay' style={{ display: this.state.roundOver ? 'flex' : 'none' }}>
-          <div className='deletecheck-popup'>
+      <div className="content game_area">
+        <Link
+          className="back_to_collection"
+          to={'/Collection/' + this.props.match.params.id}
+        ></Link>
+        <h2
+          className="game_time"
+          style={{ display: this.state.roundOver ? 'none' : 'block' }}
+        >
+          {this.state.gameTime}
+        </h2>
+        {this.state.cardsArray &&
+          this.state.cardsArray.map((card, index) => {
+            return (
+              <GameCard
+                key={index}
+                label={card.label}
+                show={card.show}
+                word={card.word}
+                pickCard={this.pickCard}
+                border={card.border}
+              />
+            );
+          })}
+        <div
+          className="popup-overlay"
+          style={{ display: this.state.roundOver ? 'flex' : 'none' }}
+        >
+          <div className="deletecheck-popup">
             你花了{this.state.roundOverTime}完成遊戲！
-                        <button className='cancel' onClick={this.gameStart.bind(this, this.props.collection)}>再玩一次</button>
-            <Link className='cancel' to={'/Collection/' + this.props.match.params.id}>繼續背誦</Link>
-            <div className='deletecheck-popup-background'></div>
+            <button
+              className="cancel"
+              onClick={this.gameStart.bind(this, this.props.collection)}
+            >
+              再玩一次
+            </button>
+            <Link
+              className="cancel"
+              to={'/Collection/' + this.props.match.params.id}
+            >
+              繼續背誦
+            </Link>
+            <div className="deletecheck-popup-background"></div>
           </div>
         </div>
-
       </div>
-    )
+    );
   }
 }
 
@@ -206,13 +235,11 @@ const mapStateToProps = (state, ownProps) => {
   const collection = collections ? collections[id].content : null;
   return {
     collection: collection,
-    login: state.login.loginState
-  }
-}
+    login: state.login.loginState,
+  };
+};
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'collection' }
-  ])
+  firestoreConnect([{ collection: 'collection' }])
 )(MatchGame);

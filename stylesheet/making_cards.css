@@ -5,7 +5,7 @@
   margin-bottom: 20px;
 }
 
-.collection_info>input {
+.collection_info > input {
   width: 80%;
   font-size: 25px;
 }
@@ -19,26 +19,26 @@
   background-size: 25px;
 }
 
-.collection_info>.select-box {
+.collection_info > .select-box {
   margin-left: auto;
   width: 18%;
 }
 
-.content>.add-from-file {
+.content > .add-from-file {
   width: 100%;
   margin: -10px 0 20px 0;
-  color: #5F5F5F;
+  color: #5f5f5f;
 }
 
-.content>.add-from-file>label {
+.content > .add-from-file > label {
   cursor: pointer;
 }
 
-.content>.add-from-file>label:hover {
+.content > .add-from-file > label:hover {
   color: rgb(1, 192, 192);
 }
 
-.content>.card_info {
+.content > .card_info {
   width: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -46,12 +46,12 @@
   justify-content: space-between;
 }
 
-.content>.card_info .select-box {
+.content > .card_info .select-box {
   width: 48%;
   margin: 0 0 20px 0;
 }
 
-.content>.card_info .select-box select {
+.content > .card_info .select-box select {
   width: 99%;
   font-size: 14px;
   background-image: url(/image/arrow.svg);
@@ -73,14 +73,14 @@
   margin-bottom: 20px;
 }
 
-.making_card>input {
+.making_card > input {
   font-size: 18px;
   font-weight: 300;
   width: 40%;
   margin: 0 10px 0 10px;
 }
 
-.making_card>.definition {
+.making_card > .definition {
   font-size: 15px;
 }
 
@@ -128,7 +128,7 @@
   background-position: -100% -100%;
 }
 
-.content>.card_info .add_card {
+.content > .card_info .add_card {
   background-color: white;
   box-shadow: 5px 5px 5px #dbdbdb;
   border: 1px dashed #dbdbdb;
@@ -139,15 +139,15 @@
   cursor: pointer;
 }
 
-.content>.card_info .add_card>span {
+.content > .card_info .add_card > span {
   margin: 0 auto;
   color: #797979;
   line-height: 30px;
   border-bottom: 2px solid rgb(1, 192, 192);
 }
 
-.content>.card_info .add_card:hover>span {
-  border-bottom: 2px solid #FFE20E;
+.content > .card_info .add_card:hover > span {
+  border-bottom: 2px solid #ffe20e;
 }
 
 .content button {
@@ -165,15 +165,15 @@
 
 /* ---------- RWD ---------- */
 @media screen and (max-width: 650px) {
-  .content>.add-from-file {
+  .content > .add-from-file {
     display: none;
   }
 
-  .collection_info>input {
+  .collection_info > input {
     width: 100%;
   }
 
-  .collection_info>.select-box {
+  .collection_info > .select-box {
     width: 100%;
   }
 
@@ -196,7 +196,7 @@
     margin-right: 1%;
   }
 
-  .making_card>input {
+  .making_card > input {
     width: 46%;
     margin: 2%;
   }

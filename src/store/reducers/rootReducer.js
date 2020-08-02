@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   collection: collectionReducer,
   firestore: firestoreReducer,
-  firebase: firebaseReducer
+  firebase: firebaseReducer,
 });
 
 export default rootReducer;

@@ -9,7 +9,7 @@
 header {
   width: 100%;
   height: 55px;
-  background-color: #7BCEFF;
+  background-color: #7bceff;
   box-shadow: 0 5px 5px #dbdbdb;
   z-index: 10;
   position: fixed;
@@ -25,16 +25,16 @@ header {
   align-items: center;
 }
 
-header>.container {
+header > .container {
   width: 98%;
   margin: 0 auto;
 }
 
-header>.container * {
+header > .container * {
   padding: 0 5px;
 }
 
-header>.container p {
+header > .container p {
   color: white;
   font-size: 18px;
   font-weight: 700;
@@ -42,23 +42,22 @@ header>.container p {
   min-width: 80px;
 }
 
-header>.container>img {
+header > .container > img {
   height: 45px;
   padding: 0 10px;
   cursor: pointer;
 }
 
-header>.container .icon {
+header > .container .icon {
   height: 40px;
   cursor: pointer;
 }
-
 
 header .logo {
   height: 40px;
 }
 
-header>.container>.member {
+header > .container > .member {
   height: 35px;
   width: 35px;
   background-size: cover;
@@ -66,22 +65,22 @@ header>.container>.member {
   border-radius: 50%;
 }
 
-header>.container>.log_out {
+header > .container > .log_out {
   color: white;
   cursor: pointer;
 }
 
-header>.container>.log_out:hover {
-  color: #FFE20E;
+header > .container > .log_out:hover {
+  color: #ffe20e;
   font-weight: 700;
 }
 
-header>.container>.add_card {
+header > .container > .add_card {
   margin-right: auto;
   cursor: pointer;
 }
 
-header>.container>.search_bar {
+header > .container > .search_bar {
   background-color: white;
   height: 60%;
   border-radius: 50px;
@@ -90,30 +89,30 @@ header>.container>.search_bar {
   margin-right: 15px;
 }
 
-header>.container>.search_bar * {
+header > .container > .search_bar * {
   padding: 0 3px;
 }
 
-header>.container>.search_bar>input {
+header > .container > .search_bar > input {
   font-size: 16px;
   max-width: 171px;
 }
 
-header>.container>.search_bar_mobile {
+header > .container > .search_bar_mobile {
   display: none;
 }
 
 /* ----------- Header RWD ---------- */
 @media screen and (max-width: 650px) {
-  header>.container {
+  header > .container {
     width: 100%;
   }
 
-  header>.container * {
+  header > .container * {
     padding: 0 5px;
   }
 
-  header>.container img {
+  header > .container img {
     height: 40px;
   }
 
@@ -121,27 +120,27 @@ header>.container>.search_bar_mobile {
     margin-left: 5px;
   }
 
-  header>.container>.member {
+  header > .container > .member {
     margin: 0 15px 0 0;
   }
 
-  header>.container>.log_out {
+  header > .container > .log_out {
     margin-left: 0;
   }
 
-  header>.container>.add_card>p {
+  header > .container > .add_card > p {
     display: none;
   }
 
-  header>.container>.search_bar {
+  header > .container > .search_bar {
     display: none;
   }
 
-  header>.container>.search_bar_mobile {
+  header > .container > .search_bar_mobile {
     display: flex;
   }
 
-  header>.container>.search_bar_mobile>.search_bar_mobile_input {
+  header > .container > .search_bar_mobile > .search_bar_mobile_input {
     z-index: 10;
     position: fixed;
     top: 55px;
@@ -156,14 +155,13 @@ header>.container>.search_bar_mobile {
     display: flex;
   }
 
-  .search_bar_mobile_input>input {
+  .search_bar_mobile_input > input {
     border-bottom: 2px solid rgb(181, 228, 255);
     font-size: 16px;
     padding: 5px;
     width: calc(95vw - 50px);
     border-radius: 0;
   }
-
 }
 
 /* ----------- Background ---------- */
@@ -176,7 +174,7 @@ header>.container>.search_bar_mobile {
   z-index: -1;
 }
 
-.background>.background_triangle {
+.background > .background_triangle {
   width: 0;
   height: 0;
   border-style: solid;
@@ -184,7 +182,7 @@ header>.container>.search_bar_mobile {
   border-color: transparent transparent transparent rgb(231, 247, 255);
 }
 
-.background>.background_square {
+.background > .background_square {
   height: 80px;
   width: 100vw;
   background-color: rgb(231, 247, 255);
@@ -201,7 +199,7 @@ header>.container>.search_bar_mobile {
   left: 0;
   right: 0;
   top: 0;
-  z-Index: 999;
+  z-index: 999;
 }
 
 .popup-content {
@@ -217,36 +215,36 @@ header>.container>.search_bar_mobile {
   font-size: 12px;
 }
 
-.modal>.header {
+.modal > .header {
   width: 100%;
   height: 200px;
-  background-color: #7BCEFF;
+  background-color: #7bceff;
   font-size: 18px;
   text-align: center;
   padding: 5px;
   border-radius: 10px 10px 0 0;
 }
 
-.modal>.header>img {
+.modal > .header > img {
   height: 70%;
   width: 100%;
   transform: rotate(-8deg);
   padding-bottom: 10px;
 }
 
-.modal>.content {
+.modal > .content {
   width: 100%;
   padding: 10px 5px;
 }
 
-.modal>.actions {
+.modal > .actions {
   width: 100%;
   padding: 10px 5px;
   margin: auto;
   text-align: center;
 }
 
-.modal>.actions>button {
+.modal > .actions > button {
   width: 90%;
   height: 40px;
   margin: 5% auto;
@@ -261,19 +259,19 @@ header>.container>.search_bar_mobile {
   border-radius: 5px;
 }
 
-.modal>.actions>button:first-child {
+.modal > .actions > button:first-child {
   background-color: #254ea6;
 }
 
-.modal>.actions>button:nth-child(2) {
+.modal > .actions > button:nth-child(2) {
   background-color: #d84134;
 }
 
-.modal>.actions>button:nth-child(3) {
+.modal > .actions > button:nth-child(3) {
   background-color: #686868;
 }
 
-.modal>.actions>button>img {
+.modal > .actions > button > img {
   height: 100%;
   width: 27%;
 }
