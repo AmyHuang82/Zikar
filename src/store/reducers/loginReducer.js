@@ -5,13 +5,12 @@ const defaultState = {
     login: false,
     user_name: '',
     user_id: '',
-    user_photo: ''
-  }
-}
+    user_photo: '',
+  },
+};
 
 function loginReducer(state = defaultState, action) {
   switch (action.type) {
-
     case LOGIN_TO_WEB:
       return {
         ...state,
@@ -19,9 +18,11 @@ function loginReducer(state = defaultState, action) {
           login: true,
           user_name: action.user.displayName,
           user_id: action.user.uid,
-          user_photo: action.user.photoURL ? action.user.photoURL : '/image/user.svg'
-        }
-      }
+          user_photo: action.user.photoURL
+            ? action.user.photoURL
+            : '/image/user.svg',
+        },
+      };
 
     case LOGOUT:
       return {
@@ -30,12 +31,12 @@ function loginReducer(state = defaultState, action) {
           login: false,
           user_name: '',
           user_id: '',
-          user_photo: ''
-        }
-      }
+          user_photo: '',
+        },
+      };
 
     default:
-      return state
+      return state;
   }
 }
 

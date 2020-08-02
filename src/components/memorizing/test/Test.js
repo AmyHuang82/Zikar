@@ -17,8 +17,8 @@ class Test extends React.Component {
       questionCount: '',
       answer: '',
       roundStart: false,
-      doneTest: props.doneTest
-    }
+      doneTest: props.doneTest,
+    };
     // 創建一個ref來儲存textInput的DOM元素
     this.textInput = React.createRef();
     this.focusTextInput = this.focusTextInput.bind(this);
@@ -38,10 +38,13 @@ class Test extends React.Component {
     // 紀錄正確的index與目前文字的熟悉度
     let newArray = [];
     for (let i = 0; i < this.props.collection.content.length; i++) {
-      newArray.push({ index: i, familiarity: this.props.collection.content[i].familiarity });
+      newArray.push({
+        index: i,
+        familiarity: this.props.collection.content[i].familiarity,
+      });
     }
     // 去除熟悉度已經是100的詞語
-    newArray = newArray.filter(item => item.familiarity < 100);
+    newArray = newArray.filter((item) => item.familiarity < 100);
     // 計算剩下的詞語差100還有多少，複製剩下的次數
     let randomArray = [];
     if (newArray.length > 0) {
@@ -65,7 +68,7 @@ class Test extends React.Component {
       this.setState({
         randomIndexArray: randomArray,
         questionCount: 0,
-        roundStart: true
+        roundStart: true,
       });
     }
   }
@@ -81,14 +84,19 @@ class Test extends React.Component {
     let newData = this.props.collection;
     let form = new FormData(e.target);
 
-    if (form.get('answer').toUpperCase() === newData.content[index].word.toUpperCase()) {
+    if (
+      form.get('answer').toUpperCase() ===
+      newData.content[index].word.toUpperCase()
+    ) {
       if (newData.content[index].familiarity < 100) {
-        newData.content[index].familiarity = newData.content[index].familiarity + 20;
+        newData.content[index].familiarity =
+          newData.content[index].familiarity + 20;
       }
       this.setState({ output: '答對了' });
     } else {
       if (newData.content[index].familiarity > 0) {
-        newData.content[index].familiarity = newData.content[index].familiarity - 20;
+        newData.content[index].familiarity =
+          newData.content[index].familiarity - 20;
       }
       this.setState({ output: '答錯了' });
     }
@@ -103,11 +111,15 @@ class Test extends React.Component {
     if (this.state.randomIndexArray.length < 5) {
       numberOfQuestion = this.state.randomIndexArray.length - 1;
     } else {
-      numberOfQuestion = 4
+      numberOfQuestion = 4;
     }
 
     if (this.state.questionCount < numberOfQuestion) {
-      this.setState(prevState => ({ questionCount: prevState.questionCount + 1, answer: '', output: '' }));
+      this.setState((prevState) => ({
+        questionCount: prevState.questionCount + 1,
+        answer: '',
+        output: '',
+      }));
     } else {
       this.setState({ roundStart: false, answer: '', output: '' });
     }
@@ -127,7 +139,9 @@ class Test extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps && this.props.collection !== null) {
-      let arrayCheck = this.props.collection.content.filter(item => item.familiarity === 100);
+      let arrayCheck = this.props.collection.content.filter(
+        (item) => item.familiarity === 100
+      );
       if (arrayCheck.length === this.props.collection.content.length) {
         this.setState({ doneTest: true });
       }
@@ -166,40 +180,70 @@ class Test extends React.Component {
       for (let i = 0; i < this.props.collection.content.length; i++) {
         averageFamiliarity += this.props.collection.content[i].familiarity;
       }
-      averageFamiliarity = Math.floor(averageFamiliarity / this.props.collection.content.length);
+      averageFamiliarity = Math.floor(
+        averageFamiliarity / this.props.collection.content.length
+      );
 
       if (this.props.collection.user_id !== user_uid) {
         notSelf = true;
       }
     }
 
-    if (notSelf || !this.props.login.login) return <Redirect to='/' />
+    if (notSelf || !this.props.login.login) return <Redirect to="/" />;
 
     return (
-      <div className='content'>
-        <Link className='back_to_collection' to={'/Collection/' + this.props.match.params.id}></Link>
-        <div className='test_area'>
-          <div className='test_guide' style={{ display: this.state.allNewRound ? 'block' : 'none' }}>
+      <div className="content">
+        <Link
+          className="back_to_collection"
+          to={'/Collection/' + this.props.match.params.id}
+        ></Link>
+        <div className="test_area">
+          <div
+            className="test_guide"
+            style={{ display: this.state.allNewRound ? 'block' : 'none' }}
+          >
             <h1>測驗說明</h1>
             <p>每次測驗將隨機出現 1-5 題</p>
-            <p>每答對一題熟悉程度<span style={{ color: 'green' }}> +20%</span></p>
-            <p>每答錯一題熟悉程度<span style={{ color: 'red' }}>  -20%</span></p>
+            <p>
+              每答對一題熟悉程度<span style={{ color: 'green' }}> +20%</span>
+            </p>
+            <p>
+              每答錯一題熟悉程度<span style={{ color: 'red' }}> -20%</span>
+            </p>
             <button onClick={this.testStart}>開始測驗</button>
           </div>
 
-          <div className='continue_test' style={{ display: this.state.allNewRound ? 'none' : 'block' }}>
+          <div
+            className="continue_test"
+            style={{ display: this.state.allNewRound ? 'none' : 'block' }}
+          >
             <div style={{ display: this.state.roundStart ? 'none' : 'block' }}>
               <h1>目前進度</h1>
-              <p className='familiarity_description'>熟悉程度平均</p>
-              <p className='average_percent'>{averageFamiliarity}%</p>
-              <button onClick={this.testStart} style={{ display: this.state.doneTest ? 'none' : 'block' }}>繼續測驗</button>
+              <p className="familiarity_description">熟悉程度平均</p>
+              <p className="average_percent">{averageFamiliarity}%</p>
+              <button
+                onClick={this.testStart}
+                style={{ display: this.state.doneTest ? 'none' : 'block' }}
+              >
+                繼續測驗
+              </button>
 
-              <p style={{ display: this.state.doneTest ? 'block' : 'none' }}>恭喜！已熟悉所有字卡</p>
-              <button onClick={this.restartTest} style={{ display: this.state.doneTest ? 'block' : 'none' }}>重置測驗</button>
+              <p style={{ display: this.state.doneTest ? 'block' : 'none' }}>
+                恭喜！已熟悉所有字卡
+              </p>
+              <button
+                onClick={this.restartTest}
+                style={{ display: this.state.doneTest ? 'block' : 'none' }}
+              >
+                重置測驗
+              </button>
             </div>
           </div>
 
-          <div className='test' style={{ display: this.state.roundStart ? 'block' : 'none' }}>
+          <div
+            className="test"
+            style={{ display: this.state.roundStart ? 'block' : 'none' }}
+          >
             <TestInput
               ouputDiasplay={ouputDiasplay}
               count={this.state.questionCount}
@@ -219,7 +263,7 @@ class Test extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -232,11 +276,13 @@ const mapStateToProps = (state, ownProps) => {
   let allNewRound = false;
   let doneTest = false;
   if (collection !== null) {
-    let arrayCheck = collection.content.filter(item => item.familiarity === 0);
+    let arrayCheck = collection.content.filter(
+      (item) => item.familiarity === 0
+    );
     if (arrayCheck.length === collection.content.length) {
       allNewRound = true;
     }
-    arrayCheck = collection.content.filter(item => item.familiarity === 100);
+    arrayCheck = collection.content.filter((item) => item.familiarity === 100);
     if (arrayCheck.length === collection.content.length) {
       doneTest = true;
     }
@@ -246,21 +292,19 @@ const mapStateToProps = (state, ownProps) => {
     collection: collection,
     allNewRound: allNewRound,
     doneTest: doneTest,
-    login: state.login.loginState
-  }
-}
+    login: state.login.loginState,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateCollection: (collection, id) => {
       dispatch(updateCollection(collection, id));
-    }
-  }
-}
+    },
+  };
+};
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([
-    { collection: 'collection' }
-  ])
+  firestoreConnect([{ collection: 'collection' }])
 )(Test);

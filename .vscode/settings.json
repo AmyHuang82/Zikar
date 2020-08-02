@@ -1,0 +1,8 @@
+// The settings in this file will overwrite default and user settings.
+// Prerequisite: install extension recommendations in extensions.json
+{
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

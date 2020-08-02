@@ -17,51 +17,71 @@ class Search extends React.Component {
 
     let keyword = this.props.match.params.keyword;
     if (collectionInfo !== undefined) {
-      collectionInfo = collectionInfo.filter(item => item.user_id === user_uid || item.public);
+      collectionInfo = collectionInfo.filter(
+        (item) => item.user_id === user_uid || item.public
+      );
       //用toUpperCase全大寫和trim去除空格，讓搜尋更直觀
-      collectionInfo = collectionInfo.filter(item => item.title.toUpperCase().trim().includes(keyword.toUpperCase()) || item.author.toUpperCase().trim().includes(keyword.toUpperCase()) || item.definition_lan.text.trim().includes(keyword) || item.word_lan.text.trim().includes(keyword));
+      collectionInfo = collectionInfo.filter(
+        (item) =>
+          item.title.toUpperCase().trim().includes(keyword.toUpperCase()) ||
+          item.author.toUpperCase().trim().includes(keyword.toUpperCase()) ||
+          item.definition_lan.text.trim().includes(keyword) ||
+          item.word_lan.text.trim().includes(keyword)
+      );
       if (collectionInfo.length === 0) {
         searchEmpty = true;
         pageLocation = '';
       } else {
-        pageLocation = <div className='page_location page_active'>搜尋結果（{collectionInfo.length}）</div>;
+        pageLocation = (
+          <div className="page_location page_active">
+            搜尋結果（{collectionInfo.length}）
+          </div>
+        );
       }
     }
 
     return (
-      <div className='content'>
+      <div className="content">
         {pageLocation}
-        {
-          collectionInfo && collectionInfo.map((collection, index) => {
-            return <Collection
-              key={index}
-              title={collection.title}
-              contentLength={collection.content.length}
-              wordLan={collection.word_lan.text}
-              defLan={collection.definition_lan.text}
-              author={collection.author}
-              id={collection.id}
-              public={collection.public}
-              user_photo={collection.user_photo}
-            />
-          })
-        }
-        <h2 className='search_none' style={{ display: searchEmpty ? 'block' : 'none' }}>抱歉！無此關鍵字字卡集<br />請使用其他關鍵字試試看</h2>
+        {collectionInfo &&
+          collectionInfo.map((collection, index) => {
+            return (
+              <Collection
+                key={index}
+                title={collection.title}
+                contentLength={collection.content.length}
+                wordLan={collection.word_lan.text}
+                defLan={collection.definition_lan.text}
+                author={collection.author}
+                id={collection.id}
+                public={collection.public}
+                user_photo={collection.user_photo}
+              />
+            );
+          })}
+        <h2
+          className="search_none"
+          style={{ display: searchEmpty ? 'block' : 'none' }}
+        >
+          抱歉！無此關鍵字字卡集
+          <br />
+          請使用其他關鍵字試試看
+        </h2>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     collectionInfo: state.firestore.ordered.collection,
-    login: state.login.loginState
-  }
-}
+    login: state.login.loginState,
+  };
+};
 
 export default compose(
   connect(mapStateToProps, null),
   firestoreConnect([
-    { collection: 'collection', orderBy: ['timestamp', 'desc'] }
+    { collection: 'collection', orderBy: ['timestamp', 'desc'] },
   ])
 )(Search);

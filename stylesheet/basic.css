@@ -73,14 +73,13 @@ input::placeholder {
   border-bottom: 2px solid #979797;
 }
 
-
 .content input::placeholder {
   color: silver;
   font-weight: 300;
 }
 
 .content input:focus {
-  border-bottom: 3px solid #FFE20E;
+  border-bottom: 3px solid #ffe20e;
 }
 
 /* ---------- select通用css設定 ---------- */

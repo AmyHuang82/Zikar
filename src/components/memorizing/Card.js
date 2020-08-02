@@ -8,8 +8,8 @@ class Card extends React.Component {
       showing_lan: props.word_lan,
       open: '',
       pic_showing: false,
-      speakBackground: '0'
-    }
+      speakBackground: '0',
+    };
     this.flipCard = this.flipCard.bind(this);
     this.speak = this.speak.bind(this);
     this.keyHandle = this.keyHandle.bind(this);
@@ -17,12 +17,19 @@ class Card extends React.Component {
 
   flipCard() {
     if (this.state.showing === this.props.word) {
-      this.setState({ showing: this.props.definition, showing_lan: this.props.definition_lan });
+      this.setState({
+        showing: this.props.definition,
+        showing_lan: this.props.definition_lan,
+      });
       if (this.props.picture !== '') {
         this.setState({ pic_showing: true });
       }
     } else {
-      this.setState({ showing: this.props.word, showing_lan: this.props.word_lan, pic_showing: false });
+      this.setState({
+        showing: this.props.word,
+        showing_lan: this.props.word_lan,
+        pic_showing: false,
+      });
     }
     this.setState({ open: 'open' });
     setTimeout(() => {
@@ -35,7 +42,7 @@ class Card extends React.Component {
     const synth = window.speechSynthesis;
     if (synth.speaking) {
       // 正在講話不重複執行
-      return
+      return;
     } else {
       this.setState({ speakBackground: '-35px' });
       const speakText = new SpeechSynthesisUtterance(this.state.showing);
@@ -43,7 +50,7 @@ class Card extends React.Component {
       synth.speak(speakText);
       speakText.onend = () => {
         this.setState({ speakBackground: '0' });
-      }
+      };
     }
   }
 
@@ -57,7 +64,11 @@ class Card extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.word !== prevProps.word) {
-      this.setState({ showing: this.props.word, showing_lan: this.props.word_lan, pic_showing: '' });
+      this.setState({
+        showing: this.props.word,
+        showing_lan: this.props.word_lan,
+        pic_showing: '',
+      });
     }
     if (this.state.showing !== prevState.showing) {
       this.speak();
@@ -84,20 +95,40 @@ class Card extends React.Component {
     }
 
     return (
-      <div className={`show_card ${this.state.open} ${this.props.nextAnimation}`} >
-        <div className='card_flip_area' onClick={this.flipCard} >
-          <div style={{ display: this.state.pic_showing ? 'block' : 'none' }} className='img_wrap'>
+      <div
+        className={`show_card ${this.state.open} ${this.props.nextAnimation}`}
+      >
+        <div className="card_flip_area" onClick={this.flipCard}>
+          <div
+            style={{ display: this.state.pic_showing ? 'block' : 'none' }}
+            className="img_wrap"
+          >
             <img src={this.props.picture} />
           </div>
-          <p className='text-align-center'>{this.state.showing}</p>
-          <div className='paging'>{this.props.currentIndex + 1}/{this.props.length}</div>
-          <div className='show_card_hover' style={{ color: color, display: this.props.notSelf ? 'none' : 'block' }}><span>熟悉程度：</span>{this.props.familiarity}%</div>
+          <p className="text-align-center">{this.state.showing}</p>
+          <div className="paging">
+            {this.props.currentIndex + 1}/{this.props.length}
+          </div>
+          <div
+            className="show_card_hover"
+            style={{
+              color: color,
+              display: this.props.notSelf ? 'none' : 'block',
+            }}
+          >
+            <span>熟悉程度：</span>
+            {this.props.familiarity}%
+          </div>
         </div>
-        <div className='card_feature'>
-          <div onClick={this.speak} className='speak' style={{ backgroundPositionX: this.state.speakBackground }}></div>
+        <div className="card_feature">
+          <div
+            onClick={this.speak}
+            className="speak"
+            style={{ backgroundPositionX: this.state.speakBackground }}
+          ></div>
         </div>
       </div>
-    )
+    );
   }
 }
 
