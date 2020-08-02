@@ -8,11 +8,6 @@
     "watch": "webpack --watch",
     "build": "NODE_ENV=production webpack"
   },
-  "git": {
-    "scripts": {
-      "pre-push": "surge --project ./ --domain zikar.surge.sh"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
