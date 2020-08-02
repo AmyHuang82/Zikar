@@ -4,8 +4,8 @@ class MakingCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      previewImgToggle: false
-    }
+      previewImgToggle: false,
+    };
     this.textInput = React.createRef();
     this.focusTextInput = this.focusTextInput.bind(this);
     this.wordInputHandler = this.wordInputHandler.bind(this);
@@ -58,32 +58,77 @@ class MakingCard extends React.Component {
   render() {
     let pictureStatus;
     if (this.props.pictureName === '') {
-      pictureStatus = <label onChange={this.uploadImgHandler} className='add_image' title='增加圖片'> <input type='file' style={{ display: 'none' }} accept='image/*' /> </label>;
+      pictureStatus = (
+        <label
+          onChange={this.uploadImgHandler}
+          className="add_image"
+          title="增加圖片"
+        >
+          <input type="file" style={{ display: 'none' }} accept="image/*" />
+        </label>
+      );
     } else if (this.props.pictureName === 'loading') {
-      pictureStatus = <div className='loading_image'></div>;
+      pictureStatus = <div className="loading_image"></div>;
     } else {
-      pictureStatus = <div onClick={this.previewImg} className='preview_image' style={{ backgroundImage: `url(${this.props.pictureURL})` }} title='預覽圖片'></div>;
+      pictureStatus = (
+        <div
+          onClick={this.previewImg}
+          className="preview_image"
+          style={{ backgroundImage: `url(${this.props.pictureURL})` }}
+          title="預覽圖片"
+        ></div>
+      );
     }
 
     return (
-      <div className='making_card ease'>
-        <div className='popup-overlay' style={{ display: this.state.previewImgToggle ? 'flex' : 'none' }}>
-          <div className='deletecheck-popup' style={{ height: '330px' }}>
+      <div className="making_card ease">
+        <div
+          className="popup-overlay"
+          style={{ display: this.state.previewImgToggle ? 'flex' : 'none' }}
+        >
+          <div className="deletecheck-popup" style={{ height: '330px' }}>
             <p>圖片預覽</p>
-            <div style={{ zIndex: 5, border: '1px dashed silver', width: '80%', paddingBottom: '80%' }} className='img_wrap'>
+            <div
+              style={{
+                zIndex: 5,
+                border: '1px dashed silver',
+                width: '80%',
+                paddingBottom: '80%',
+              }}
+              className="img_wrap"
+            >
               <img src={this.props.pictureURL} />
             </div>
-            <button className='cancel' onClick={this.previewImg}>取消</button>
-            <button className='confirm' onClick={this.deleteImgHandler}>刪除</button>
-            <div className='deletecheck-popup-background'></div>
+            <button className="cancel" onClick={this.previewImg}>
+              取消
+            </button>
+            <button className="confirm" onClick={this.deleteImgHandler}>
+              刪除
+            </button>
+            <div className="deletecheck-popup-background"></div>
           </div>
         </div>
-        <input placeholder='詞語' ref={this.textInput} onChange={this.wordInputHandler} value={this.props.word} style={{ borderBottom: this.props.empty }} />
-        <input placeholder='定義' onChange={this.defInputHandler} value={this.props.definition} style={{ borderBottom: this.props.empty }} />
+        <input
+          placeholder="詞語"
+          ref={this.textInput}
+          onChange={this.wordInputHandler}
+          value={this.props.word}
+          style={{ borderBottom: this.props.empty }}
+        />
+        <input
+          placeholder="定義"
+          onChange={this.defInputHandler}
+          value={this.props.definition}
+          style={{ borderBottom: this.props.empty }}
+        />
         {pictureStatus}
-        <div onClick={this.deleteCardHandler} className='delete_card' title='刪除字卡'></div>
+        <div
+          onClick={this.deleteCardHandler}
+          className="delete_card"
+          title="刪除字卡"
+        ></div>
       </div>
-    )
+    );
   }
 }
 

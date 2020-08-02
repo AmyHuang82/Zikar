@@ -26,7 +26,7 @@
   font-size: 18px;
   text-align: center;
   font-weight: 300;
-  border-bottom: 3px solid #FFE20E;
+  border-bottom: 3px solid #ffe20e;
   padding-bottom: 5px;
 }
 
@@ -59,12 +59,12 @@
 }
 
 .collection:hover {
-  border-bottom: 3px solid #FF6D14;
+  border-bottom: 3px solid #ff6d14;
 }
 
-.collection>h2 {
+.collection > h2 {
   color: rgb(1, 192, 192);
-  border-bottom: 3px solid #FFE20E;
+  border-bottom: 3px solid #ffe20e;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -140,7 +140,7 @@
   margin-left: auto;
 }
 
-.collection>.words_number {
+.collection > .words_number {
   font-size: 14px;
   color: #979797;
   text-align: left;

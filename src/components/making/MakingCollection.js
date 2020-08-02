@@ -3,7 +3,11 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { addNewCollection, updateCollection, resetSubmitStatus } from '../../store/actions/collectionActions';
+import {
+  addNewCollection,
+  updateCollection,
+  resetSubmitStatus,
+} from '../../store/actions/collectionActions';
 import { storage } from '../../firebase';
 import MakingCard from './MakingCard';
 import { read } from 'xlsx';
@@ -20,22 +24,24 @@ class MakingCollection extends React.Component {
         user_photo: this.props.login.user_photo,
         user_id: this.props.login.user_id,
         author: this.props.login.user_name,
-        content: [{
-          word: '',
-          definition: '',
-          familiarity: 0,
-          pictureURL: '',
-          pictureName: '',
-          empty: ''
-        },
-        {
-          word: '',
-          definition: '',
-          familiarity: 0,
-          pictureURL: '',
-          pictureName: '',
-          empty: ''
-        }]
+        content: [
+          {
+            word: '',
+            definition: '',
+            familiarity: 0,
+            pictureURL: '',
+            pictureName: '',
+            empty: '',
+          },
+          {
+            word: '',
+            definition: '',
+            familiarity: 0,
+            pictureURL: '',
+            pictureName: '',
+            empty: '',
+          },
+        ],
       },
       borderBottom: '',
       submitOK: '',
@@ -52,9 +58,9 @@ class MakingCollection extends React.Component {
         { lan: 'es-ES', text: '西班牙文' },
         { lan: 'it-IT', text: '義大利文' },
         { lan: 'pt-BR', text: '葡萄牙文' },
-        { lan: 'ru-RU', text: '俄羅斯文' }
-      ]
-    }
+        { lan: 'ru-RU', text: '俄羅斯文' },
+      ],
+    };
 
     this.textInput = React.createRef();
     this.focusTextInput = this.focusTextInput.bind(this);
@@ -81,9 +87,9 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        title: e.target.value
+        title: e.target.value,
       },
-      borderBottom: ''
+      borderBottom: '',
     });
   }
 
@@ -92,22 +98,22 @@ class MakingCollection extends React.Component {
       this.setState({
         collection: {
           ...this.state.collection,
-          public: true
-        }
+          public: true,
+        },
       });
     } else {
       this.setState({
         collection: {
           ...this.state.collection,
-          public: false
-        }
+          public: false,
+        },
       });
     }
   }
 
   changeWordLan(e) {
     let text;
-    this.state.language.forEach(item => {
+    this.state.language.forEach((item) => {
       if (item.lan === e.target.value) {
         text = item.text;
       }
@@ -115,14 +121,14 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        word_lan: { lan: e.target.value, text: text }
-      }
+        word_lan: { lan: e.target.value, text: text },
+      },
     });
   }
 
   changeDefinitionLan(e) {
     let text;
-    this.state.language.forEach(item => {
+    this.state.language.forEach((item) => {
       if (item.lan === e.target.value) {
         text = item.text;
       }
@@ -130,8 +136,8 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        definition_lan: { lan: e.target.value, text: text }
-      }
+        definition_lan: { lan: e.target.value, text: text },
+      },
     });
   }
 
@@ -144,8 +150,8 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        content: newContentData
-      }
+        content: newContentData,
+      },
     });
   }
 
@@ -158,8 +164,8 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        content: newContentData
-      }
+        content: newContentData,
+      },
     });
   }
 
@@ -170,16 +176,18 @@ class MakingCollection extends React.Component {
       this.setState({
         collection: {
           ...this.state.collection,
-          content: [...this.state.collection.content,
-          {
-            word: '',
-            definition: '',
-            familiarity: 0,
-            pictureURL: '',
-            pictureName: '',
-            empty: ''
-          }]
-        }
+          content: [
+            ...this.state.collection.content,
+            {
+              word: '',
+              definition: '',
+              familiarity: 0,
+              pictureURL: '',
+              pictureName: '',
+              empty: '',
+            },
+          ],
+        },
       });
     }
   }
@@ -191,8 +199,8 @@ class MakingCollection extends React.Component {
       this.setState({
         collection: {
           ...this.state.collection,
-          content: newContentData
-        }
+          content: newContentData,
+        },
       });
     }
   }
@@ -232,27 +240,46 @@ class MakingCollection extends React.Component {
 
           // 如果方向不是正的就把它導正
           switch (orientation) {
-            case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-            case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-            case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-            case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-            case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-            case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-            case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-            default: break;
+            case 2:
+              ctx.transform(-1, 0, 0, 1, width, 0);
+              break;
+            case 3:
+              ctx.transform(-1, 0, 0, -1, width, height);
+              break;
+            case 4:
+              ctx.transform(1, 0, 0, -1, 0, height);
+              break;
+            case 5:
+              ctx.transform(0, 1, 1, 0, 0, 0);
+              break;
+            case 6:
+              ctx.transform(0, 1, -1, 0, height, 0);
+              break;
+            case 7:
+              ctx.transform(0, -1, -1, 0, height, width);
+              break;
+            case 8:
+              ctx.transform(0, -1, 1, 0, 0, width);
+              break;
+            default:
+              break;
           }
 
           // 繪製圖片
           ctx.drawImage(img, 0, 0, width, height);
-          ctx.canvas.toBlob((blob) => {
-            const compressFile = new File([blob], oringinFile.name, {
-              type: 'image/jpeg',
-              lastModified: Date.now()
-            });
-            this.uploadImg(card, compressFile);
-          }, 'image/jpeg', 1);
-        }
-      }
+          ctx.canvas.toBlob(
+            (blob) => {
+              const compressFile = new File([blob], oringinFile.name, {
+                type: 'image/jpeg',
+                lastModified: Date.now(),
+              });
+              this.uploadImg(card, compressFile);
+            },
+            'image/jpeg',
+            1
+          );
+        };
+      };
     });
   }
 
@@ -260,35 +287,33 @@ class MakingCollection extends React.Component {
     // 取得圖片目前的旋轉方向
     let reader = new FileReader();
     reader.onload = function (e) {
-
       let view = new DataView(e.target.result);
-      if (view.getUint16(0, false) !== 0xFFD8) {
+      if (view.getUint16(0, false) !== 0xffd8) {
         return callback(-2);
       }
-      let length = view.byteLength, offset = 2;
+      let length = view.byteLength,
+        offset = 2;
       while (offset < length) {
         if (view.getUint16(offset + 2, false) <= 8) return callback(-1);
         let marker = view.getUint16(offset, false);
         offset += 2;
-        if (marker === 0xFFE1) {
-          if (view.getUint32(offset += 2, false) !== 0x45786966) {
+        if (marker === 0xffe1) {
+          if (view.getUint32((offset += 2), false) !== 0x45786966) {
             return callback(-1);
           }
 
-          let little = view.getUint16(offset += 6, false) === 0x4949;
+          let little = view.getUint16((offset += 6), false) === 0x4949;
           offset += view.getUint32(offset + 4, little);
           let tags = view.getUint16(offset, little);
           offset += 2;
           for (let i = 0; i < tags; i++) {
-            if (view.getUint16(offset + (i * 12), little) === 0x0112) {
-              return callback(view.getUint16(offset + (i * 12) + 8, little));
+            if (view.getUint16(offset + i * 12, little) === 0x0112) {
+              return callback(view.getUint16(offset + i * 12 + 8, little));
             }
           }
-        }
-        else if ((marker & 0xFF00) !== 0xFF00) {
+        } else if ((marker & 0xff00) !== 0xff00) {
           break;
-        }
-        else {
+        } else {
           offset += view.getUint16(offset, false);
         }
       }
@@ -302,14 +327,15 @@ class MakingCollection extends React.Component {
     // 在檔名加上時間以免檔名相同檔案被覆蓋
     let name = new Date().getTime() + image.name;
     const uplaodTask = storage.ref(`images/${name}`).put(image);
-    uplaodTask.on('state_changed',
+    uplaodTask.on(
+      'state_changed',
       () => {
         newContentData[card.label].pictureName = 'loading';
         this.setState({
           collection: {
             ...this.state.collection,
-            content: newContentData
-          }
+            content: newContentData,
+          },
         });
       },
       (error) => {
@@ -317,18 +343,22 @@ class MakingCollection extends React.Component {
         console.log(error);
       },
       () => {
-        storage.ref('images').child(name).getDownloadURL().then(url => {
-          newContentData[card.label].pictureURL = url;
-          newContentData[card.label].pictureName = name;
-          this.setState({
-            collection: {
-              ...this.state.collection,
-              content: newContentData
-            }
+        storage
+          .ref('images')
+          .child(name)
+          .getDownloadURL()
+          .then((url) => {
+            newContentData[card.label].pictureURL = url;
+            newContentData[card.label].pictureName = name;
+            this.setState({
+              collection: {
+                ...this.state.collection,
+                content: newContentData,
+              },
+            });
           });
-        })
       }
-    )
+    );
   }
 
   deleteImg(card) {
@@ -338,8 +368,8 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        content: newContentData
-      }
+        content: newContentData,
+      },
     });
     let id = this.props.match.params.id;
     if (id === 'new') {
@@ -349,17 +379,21 @@ class MakingCollection extends React.Component {
 
   deleteImgFromStorage(pictureName) {
     let imageRef = storage.ref('images').child(pictureName);
-    imageRef.delete().then(() => {
-      console.log('圖片從資料庫刪除成功');
-    }).catch((error) => {
-      alert('發生問題請再試一次');
-      console.log(error);
-    });
+    imageRef
+      .delete()
+      .then(() => {
+        console.log('圖片從資料庫刪除成功');
+      })
+      .catch((error) => {
+        alert('發生問題請再試一次');
+        console.log(error);
+      });
   }
 
   uploadXlsx(e) {
     let newContentData = [];
-    let files = e.target.files, f = files[0];
+    let files = e.target.files,
+      f = files[0];
     if (files[0]) {
       let reader = new FileReader();
       reader.onload = (e) => {
@@ -377,14 +411,14 @@ class MakingCollection extends React.Component {
             familiarity: 0,
             pictureURL: '',
             pictureName: '',
-            empty: ''
+            empty: '',
           });
         }
         this.setState({
           collection: {
             ...this.state.collection,
-            content: newContentData
-          }
+            content: newContentData,
+          },
         });
       };
       reader.readAsArrayBuffer(f);
@@ -405,8 +439,8 @@ class MakingCollection extends React.Component {
     this.setState({
       collection: {
         ...this.state.collection,
-        content: content
-      }
+        content: content,
+      },
     });
 
     if (this.state.collection.title === '') {
@@ -423,7 +457,10 @@ class MakingCollection extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.id !== 'new' && this.props.editCollection !== null) {
+    if (
+      this.props.match.params.id !== 'new' &&
+      this.props.editCollection !== null
+    ) {
       this.setState({ collection: this.props.editCollection });
     }
     this.props.resetSubmitStatus();
@@ -432,7 +469,10 @@ class MakingCollection extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       this.setState({ submitOK: this.props.submitStatus });
-      if (this.props.match.params.id !== 'new' && this.props.editCollection !== null) {
+      if (
+        this.props.match.params.id !== 'new' &&
+        this.props.editCollection !== null
+      ) {
         this.setState({ collection: this.props.editCollection });
       }
     }
@@ -454,52 +494,80 @@ class MakingCollection extends React.Component {
     }
 
     // 建立完成、未登入或訪客模式都重新導向到首頁
-    if (this.state.submitOK === '建立' || !this.props.login.login || this.props.login.user_id === 'anonymous') {
-      return <Redirect to='/' />
+    if (
+      this.state.submitOK === '建立' ||
+      !this.props.login.login ||
+      this.props.login.user_id === 'anonymous'
+    ) {
+      return <Redirect to="/" />;
     } else if (this.state.submitOK === '更新') {
-      return <Redirect to={'/Collection/' + this.props.match.params.id} />
+      return <Redirect to={'/Collection/' + this.props.match.params.id} />;
     }
 
     return (
-      <div className='content'>
-        <div className='collection_info'>
-          <input placeholder='字卡集標題' ref={this.textInput} onChange={this.changeTitle} style={{ borderBottom: this.state.borderBottom }} value={this.state.collection.title} />
-          <div className='select-box'>
+      <div className="content">
+        <div className="collection_info">
+          <input
+            placeholder="字卡集標題"
+            ref={this.textInput}
+            onChange={this.changeTitle}
+            style={{ borderBottom: this.state.borderBottom }}
+            value={this.state.collection.title}
+          />
+          <div className="select-box">
             <select onChange={this.changePublicState} value={publicState}>
-              <option value='open'>公開</option>
-              <option value='close'>不公開</option>
+              <option value="open">公開</option>
+              <option value="close">不公開</option>
             </select>
           </div>
         </div>
 
-        <div className='add-from-file'>
-          <label onChange={this.uploadXlsx}> + 從 xlsx 檔案匯入<span style={{ color: 'silver' }}>（請將詞語放置 A 欄，定義放置 B 欄）</span>
-            <input type='file' style={{ display: 'none' }} accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' />
+        <div className="add-from-file">
+          <label onChange={this.uploadXlsx}>
+            + 從 xlsx 檔案匯入
+            <span style={{ color: 'silver' }}>
+              （請將詞語放置 A 欄，定義放置 B 欄）
+            </span>
+            <input
+              type="file"
+              style={{ display: 'none' }}
+              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            />
           </label>
         </div>
 
-        <div className='card_info'>
-          <div className='select-box'>
-            <select onChange={this.changeWordLan} value={this.state.collection.word_lan.lan}>
-              {
-                this.state.language.map((item, index) => {
-                  return <option key={index} value={item.lan}>{item.text}</option>
-                })
-              }
+        <div className="card_info">
+          <div className="select-box">
+            <select
+              onChange={this.changeWordLan}
+              value={this.state.collection.word_lan.lan}
+            >
+              {this.state.language.map((item, index) => {
+                return (
+                  <option key={index} value={item.lan}>
+                    {item.text}
+                  </option>
+                );
+              })}
             </select>
           </div>
-          <div className='select-box'>
-            <select onChange={this.changeDefinitionLan} value={this.state.collection.definition_lan.lan}>
-              {
-                this.state.language.map((item, index) => {
-                  return <option key={index} value={item.lan}>{item.text}</option>
-                })
-              }
+          <div className="select-box">
+            <select
+              onChange={this.changeDefinitionLan}
+              value={this.state.collection.definition_lan.lan}
+            >
+              {this.state.language.map((item, index) => {
+                return (
+                  <option key={index} value={item.lan}>
+                    {item.text}
+                  </option>
+                );
+              })}
             </select>
           </div>
-          {
-            this.state.collection.content.map((content, index) => {
-              return <MakingCard
+          {this.state.collection.content.map((content, index) => {
+            return (
+              <MakingCard
                 key={index}
                 label={index}
                 word={content.word}
@@ -513,14 +581,26 @@ class MakingCollection extends React.Component {
                 compressImg={this.compressImg}
                 deleteImg={this.deleteImg}
               />
-            })
-          }
-          <div className='add_card' onClick={this.addNewCard}><span> + 新增單詞卡</span></div>
+            );
+          })}
+          <div className="add_card" onClick={this.addNewCard}>
+            <span> + 新增單詞卡</span>
+          </div>
         </div>
-        <button onClick={this.submitCollection} style={{ display: submitType ? 'block' : 'none' }}>建立</button>
-        <button onClick={this.submitCollection} style={{ display: submitType ? 'none' : 'block' }}>更新</button>
+        <button
+          onClick={this.submitCollection}
+          style={{ display: submitType ? 'block' : 'none' }}
+        >
+          建立
+        </button>
+        <button
+          onClick={this.submitCollection}
+          style={{ display: submitType ? 'none' : 'block' }}
+        >
+          更新
+        </button>
       </div>
-    )
+    );
   }
 }
 
@@ -531,9 +611,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     editCollection: collection,
     login: state.login.loginState,
-    submitStatus: state.collection.submitStatus
-  }
-}
+    submitStatus: state.collection.submitStatus,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -544,14 +624,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateCollection(collection, id, typeStr));
     },
     resetSubmitStatus: () => {
-      dispatch(resetSubmitStatus())
-    }
-  }
-}
+      dispatch(resetSubmitStatus());
+    },
+  };
+};
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([
-    { collection: 'collection' }
-  ])
+  firestoreConnect([{ collection: 'collection' }])
 )(MakingCollection);
