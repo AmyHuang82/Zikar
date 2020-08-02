@@ -4,8 +4,7 @@
   "description": "https://zikar.surge.sh",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
+    "dev": "webpack-dev-server",
     "build": "NODE_ENV=production webpack"
   },
   "keywords": [],
