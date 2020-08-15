@@ -4,15 +4,17 @@
   "description": "https://zikar.surge.sh",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
-    "build": "NODE_ENV=production webpack"
+    "dev": "webpack-dev-server",
+    "build": "NODE_ENV=production webpack",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "firebase": "^5.11.1",
+    "lodash": "^4.17.19",
+    "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^5.1.2",
@@ -21,13 +23,14 @@
     "redux": "^4.0.4",
     "redux-firestore": "^0.7.4",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.4.0",
+    "styled-components": "^5.1.1",
     "xlsx": "^0.14.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
+    "@storybook/react": "^5.3.19",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
