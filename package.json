@@ -13,6 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "^5.11.1",
+    "lodash": "^4.17.19",
+    "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^5.1.2",
@@ -21,7 +23,7 @@
     "redux": "^4.0.4",
     "redux-firestore": "^0.7.4",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.4.0",
+    "styled-components": "^5.1.1",
     "xlsx": "^0.14.5"
   },
   "devDependencies": {
