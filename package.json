@@ -11,8 +11,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=10.x <=10.16"
+  },
   "dependencies": {
-    "firebase": "^5.11.1",
+    "firebase": "^8.6.5",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
